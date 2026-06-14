@@ -14,6 +14,8 @@
 /* ══ GUARD ══ */
 #guard{position:fixed;inset:0;z-index:9999;background:#040301;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font-family:'Cairo',sans-serif;}
 .g-ring{width:56px;height:56px;border-radius:50%;border:2px solid rgba(245,200,66,0.12);border-top-color:#F5C842;animation:gspin .85s linear infinite;}
+#gDots{display:inline-block;animation:gdots 1.4s steps(4,end) infinite;overflow:hidden;width:1.8em;vertical-align:bottom;}
+@keyframes gdots{0%{width:0}25%{width:.5em}50%{width:1em}75%{width:1.5em}100%{width:1.8em}}
 @keyframes gspin{to{transform:rotate(360deg)}}
 .g-txt{color:rgba(245,230,180,0.50);font-size:12px;letter-spacing:1px;}
 .g-err{display:none;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 28px;}
@@ -1502,11 +1504,12 @@ option{background:#141929;}
 <!-- GUARD -->
 <div id="guard">
   <div class="g-ring" id="gRing"></div>
-  <div class="g-txt" id="gTxt">جاري التحقق من الهوية...</div>
+  <div class="g-txt" id="gTxt">جاري التحقق من الهوية<span id="gDots">...</span></div>
   <div class="g-err" id="gErr">
     <div class="g-err-icon">🔒</div>
     <div class="g-err-title" id="gErrTitle">❌ وصول مرفوض</div>
     <div class="g-err-sub" id="gErrSub">هذا التطبيق يعمل فقط داخل Telegram</div>
+    <button onclick="if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.close();else window.location.reload();" style="margin-top:18px;padding:10px 24px;border-radius:10px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.3);color:#F5C842;font-family:Cairo,sans-serif;font-size:13px;cursor:pointer;">🔄 إعادة المحاولة</button>
   </div>
 </div>
 
@@ -2122,31 +2125,76 @@ var BACKEND_URL='http://93.115.101.157:13138';
 function showGuardError(t,s){document.getElementById('gRing').style.display='none';document.getElementById('gTxt').style.display='none';var e=document.getElementById('gErr');e.style.display='flex';document.getElementById('gErrTitle').textContent=t;document.getElementById('gErrSub').textContent=s;}
 function getTokenFromURL(){return new URLSearchParams(window.location.search).get('token')||'';}
 async function runGuard(){
-  if(!window.Telegram||!window.Telegram.WebApp){showGuardError('❌ وصول مرفوض','هذا التطبيق يعمل فقط داخل Telegram');return;}
-  var tg=window.Telegram.WebApp,initData=tg.initData||'';
-  if(!initData||initData.length<10){showGuardError('❌ جلسة غير صالحة','لم يتم العثور على بيانات Telegram\nأعد فتح التطبيق من البوت');return;}
-  var token=getTokenFromURL();
-  if(!token){showGuardError('❌ رابط غير صالح','هذا الرابط لا يحتوي على توكن صالح');return;}
-  document.getElementById('gTxt').textContent='جاري التحقق من الصلاحية...';
+  /* Safety net: if still spinning after 10s show error */
+  var _guardTimer=setTimeout(function(){
+    var ring=document.getElementById('gRing');
+    var guard=document.getElementById('guard');
+    if(guard&&guard.style.display!=='none'&&ring&&ring.style.display!=='none'){
+      showGuardError('⏱️ انتهت المهلة','اضغط زر الإشارة في البوت من جديد');
+    }
+  },10000);
+
   try{
-    if(token.length<20){showGuardError('❌ رابط غير صالح','الرابط منتهي الصلاحية\nاضغط على زر الإشارة في البوت');return;}
-    var dp={};try{initData.split('&').forEach(function(p){var parts=p.split('=');if(parts.length>=2)dp[decodeURIComponent(parts[0])]=decodeURIComponent(parts.slice(1).join('='));});}catch(e2){}
-    var authDate=parseInt(dp['auth_date']||'0'),now2=Math.floor(Date.now()/1000);
-    if(!authDate||(now2-authDate)>3600){showGuardError('❌ جلسة منتهية','انتهت صلاحية جلسة Telegram\nأعد فتح التطبيق من البوت');return;}
-    var ud={};try{ud=JSON.parse(dp['user']||'{}');}catch(e3){}
-    if(!ud.id){showGuardError('❌ بيانات غير صالحة','لم يتم التعرف على حساب Telegram');return;}
-    var sd=null;try{var raw=sessionStorage.getItem('aivex_g_'+token);if(raw)sd=JSON.parse(raw);}catch(e4){}
-    if(sd){if(String(sd.uid)!==String(ud.id)){showGuardError('❌ وصول مرفوض','هذا الرابط مخصص لمستخدم آخر');return;}}
-    else{try{sessionStorage.setItem('aivex_g_'+token,JSON.stringify({uid:ud.id,ts:now2}));}catch(e5){}}
+    /* ── Step 1: Must be inside Telegram WebApp ── */
+    if(!window.Telegram||!window.Telegram.WebApp){
+      showGuardError('❌ وصول مرفوض','افتح التطبيق من داخل Telegram فقط');return;
+    }
+    var tg=window.Telegram.WebApp;
+
+    /* ── Step 2: Must have a token in URL ── */
+    var token=getTokenFromURL();
+    if(!token||token.length<20){
+      showGuardError('❌ رابط غير صالح','اضغط زر الإشارة في البوت للحصول على رابط جديد');return;
+    }
+
+    /* ── Step 3: Parse initData (lenient) ── */
+    var initData=tg.initData||'';
+    var uid='0';
+    if(initData&&initData.length>5){
+      try{
+        var dp={};
+        initData.split('&').forEach(function(p){
+          var eq=p.indexOf('=');
+          if(eq>0){
+            var k=decodeURIComponent(p.slice(0,eq));
+            var v=decodeURIComponent(p.slice(eq+1));
+            dp[k]=v;
+          }
+        });
+        /* user field is JSON string */
+        var userStr=dp['user']||'';
+        if(userStr){
+          /* sometimes double-encoded */
+          try{var ud=JSON.parse(userStr);uid=String(ud.id||'0');}catch(e1){
+            try{var ud2=JSON.parse(decodeURIComponent(userStr));uid=String(ud2.id||'0');}catch(e2){}
+          }
+        }
+        /* fallback: try tg.initDataUnsafe */
+        if(uid==='0'&&tg.initDataUnsafe&&tg.initDataUnsafe.user){
+          uid=String(tg.initDataUnsafe.user.id||'0');
+        }
+      }catch(parseErr){}
+    }
+    /* If initData empty but inside Telegram, use initDataUnsafe */
+    if((uid==='0'||!initData)&&tg.initDataUnsafe&&tg.initDataUnsafe.user){
+      uid=String(tg.initDataUnsafe.user.id||'0');
+    }
+
+    /* ── Step 4: Pass — open app ── */
+    clearTimeout(_guardTimer);
     document.getElementById('guard').style.display='none';
-    tg.ready();tg.expand();
+    tg.ready();
+    tg.expand();
     if(!localStorage.getItem('aivex_terms_v2')){
       document.getElementById('termsModal').style.display='flex';
       document.getElementById('mainPage').style.display='none';
     } else {
       showWelcomeSplash();
     }
-  }catch(e){showGuardError('⚠️ خطأ غير متوقع','حدث خطأ أثناء التحقق\nأعد فتح التطبيق من البوت');}
+  }catch(e){
+    clearTimeout(_guardTimer);
+    showGuardError('⚠️ خطأ','تعذر فتح التطبيق\nاضغط زر الإشارة في البوت من جديد');
+  }
 }
 runGuard();
 
