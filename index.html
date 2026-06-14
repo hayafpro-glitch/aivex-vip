@@ -2,11 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" id="metaThemeColor" content="#040301">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Aivex Gold">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aivex VIP | Trade AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 <style>
@@ -14,8 +10,6 @@
 /* ══ GUARD ══ */
 #guard{position:fixed;inset:0;z-index:9999;background:#040301;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font-family:'Cairo',sans-serif;}
 .g-ring{width:56px;height:56px;border-radius:50%;border:2px solid rgba(245,200,66,0.12);border-top-color:#F5C842;animation:gspin .85s linear infinite;}
-#gDots{display:inline-block;animation:gdots 1.4s steps(4,end) infinite;overflow:hidden;width:1.8em;vertical-align:bottom;}
-@keyframes gdots{0%{width:0}25%{width:.5em}50%{width:1em}75%{width:1.5em}100%{width:1.8em}}
 @keyframes gspin{to{transform:rotate(360deg)}}
 .g-txt{color:rgba(245,230,180,0.50);font-size:12px;letter-spacing:1px;}
 .g-err{display:none;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 28px;}
@@ -175,7 +169,7 @@ body.light-mode .stats-bar{background:var(--bg2);}
   padding:9px 4px;
 }
 .stat-sep{width:1px;align-self:stretch;background:var(--border);flex-shrink:0;margin:8px 0;}
-.stat-val{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;color:var(--gold);letter-spacing:.5px;white-space:nowrap;line-height:1;transition:transform .2s ease,opacity .2s ease;}
+.stat-val{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;color:var(--gold);letter-spacing:.5px;white-space:nowrap;line-height:1;}
 .stat-lbl{font-size:8.5px;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;margin-top:1px;}
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -188,14 +182,6 @@ body{
   position:relative;
   overflow-x:hidden;
   transition:background .4s ease,color .3s ease;
-}
-
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
-  }
 }
 
 /* AIVEX gold background texture */
@@ -891,7 +877,7 @@ option{background:#141929;}
   gap:0;
   overflow:hidden;
   opacity:0;
-  transition:opacity .5s cubic-bezier(.4,0,.2,1);
+  transition:opacity .35s ease;
   pointer-events:none;
 }
 #welcomeSplash.visible{opacity:1;pointer-events:all;}
@@ -1502,14 +1488,13 @@ option{background:#141929;}
 </div>
 
 <!-- GUARD -->
-<div id="guard" style="display:none;">
+<div id="guard">
   <div class="g-ring" id="gRing"></div>
-  <div class="g-txt" id="gTxt">جاري التحقق من الهوية<span id="gDots">...</span></div>
+  <div class="g-txt" id="gTxt">جاري التحقق من الهوية...</div>
   <div class="g-err" id="gErr">
     <div class="g-err-icon">🔒</div>
     <div class="g-err-title" id="gErrTitle">❌ وصول مرفوض</div>
     <div class="g-err-sub" id="gErrSub">هذا التطبيق يعمل فقط داخل Telegram</div>
-    <button onclick="if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.close();else window.location.reload();" style="margin-top:18px;padding:10px 24px;border-radius:10px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.3);color:#F5C842;font-family:Cairo,sans-serif;font-size:13px;cursor:pointer;">🔄 إعادة المحاولة</button>
   </div>
 </div>
 
@@ -1571,11 +1556,11 @@ option{background:#141929;}
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
-      <div class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع" role="button" aria-label="تبديل الوضع بين الليلي والنهاري" tabindex="0">
+      <div class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع">
         <span class="t-icon" id="tIconMoon">🌙</span>
         <span class="t-icon hide" id="tIconSun">☀️</span>
       </div>
-      <div class="lang-tog" role="group" aria-label="اختيار اللغة">
+      <div class="lang-tog">
         <div class="lopt active" id="l-ar" onclick="setLang('ar')">عربي</div>
         <div class="lopt" id="l-en" onclick="setLang('en')">EN</div>
       </div>
@@ -1584,11 +1569,11 @@ option{background:#141929;}
 
   <!-- TAB NAVIGATION -->
   <div class="tab-nav">
-    <button class="tab-btn active" id="tab-signals" role="tab" aria-label="تاب الإشارات" onclick="switchTab('signals')">
+    <button class="tab-btn active" id="tab-signals" onclick="switchTab('signals')">
       <span class="tab-icon">📊</span>
       <span data-ar="إشارات الأزواج" data-en="Pair Signals">إشارات الأزواج</span>
     </button>
-    <button class="tab-btn" id="tab-ai" role="tab" aria-label="تاب تحليل الذكاء الاصطناعي" onclick="vipSwitchAi()">
+    <button class="tab-btn" id="tab-ai" onclick="vipSwitchAi()">
       <span class="tab-icon">📸</span>
       <span data-ar="تحليل الصورة 🔒" data-en="Image Analysis 🔒">تحليل الصورة 🔒</span>
     </button>
@@ -1701,7 +1686,7 @@ option{background:#141929;}
       <label class="flabel" data-ar="اختر الزوج" data-en="Select Pair">اختر الزوج</label>
     </div>
     <div class="swrap">
-      <select id="s-pair" aria-label="اختيار زوج العملة" onchange="pairChange()">
+      <select id="s-pair" onchange="pairChange()">
         <optgroup id="og-otc" label="── OTC ──">
           <option>EUR/USD OTC</option><option>GBP/USD OTC</option><option>USD/JPY OTC</option>
           <option>AUD/USD OTC</option><option>USD/CAD OTC</option><option>EUR/GBP OTC</option>
@@ -1730,7 +1715,7 @@ option{background:#141929;}
       <label class="flabel" data-ar="الإطار الزمني" data-en="Timeframe">الإطار الزمني</label>
     </div>
     <div class="swrap">
-      <select id="s-tf" aria-label="اختيار الإطار الزمني" onchange="onTfChange()">
+      <select id="s-tf" onchange="onTfChange()">
         <option value="3s"  data-ar="3 ثواني"  data-en="3 sec">3 ثواني</option>
         <option value="5s"  data-ar="5 ثواني"  data-en="5 sec">5 ثواني</option>
         <option value="10s" data-ar="10 ثواني" data-en="10 sec">10 ثواني</option>
@@ -2125,18 +2110,31 @@ var BACKEND_URL='http://93.115.101.157:13138';
 function showGuardError(t,s){document.getElementById('gRing').style.display='none';document.getElementById('gTxt').style.display='none';var e=document.getElementById('gErr');e.style.display='flex';document.getElementById('gErrTitle').textContent=t;document.getElementById('gErrSub').textContent=s;}
 function getTokenFromURL(){return new URLSearchParams(window.location.search).get('token')||'';}
 async function runGuard(){
+  if(!window.Telegram||!window.Telegram.WebApp){showGuardError('❌ وصول مرفوض','هذا التطبيق يعمل فقط داخل Telegram');return;}
+  var tg=window.Telegram.WebApp,initData=tg.initData||'';
+  if(!initData||initData.length<10){showGuardError('❌ جلسة غير صالحة','لم يتم العثور على بيانات Telegram\nأعد فتح التطبيق من البوت');return;}
+  var token=getTokenFromURL();
+  if(!token){showGuardError('❌ رابط غير صالح','هذا الرابط لا يحتوي على توكن صالح');return;}
+  document.getElementById('gTxt').textContent='جاري التحقق من الصلاحية...';
   try{
-    var tg=window.Telegram&&window.Telegram.WebApp?window.Telegram.WebApp:null;
-    if(tg){tg.ready();tg.expand();}
-  }catch(e){}
-  var guard=document.getElementById('guard');
-  if(guard)guard.style.display='none';
-  if(!localStorage.getItem('aivex_terms_v2')){
-    document.getElementById('termsModal').style.display='flex';
-    document.getElementById('mainPage').style.display='none';
-  } else {
-    showWelcomeSplash();
-  }
+    if(token.length<20){showGuardError('❌ رابط غير صالح','الرابط منتهي الصلاحية\nاضغط على زر الإشارة في البوت');return;}
+    var dp={};try{initData.split('&').forEach(function(p){var parts=p.split('=');if(parts.length>=2)dp[decodeURIComponent(parts[0])]=decodeURIComponent(parts.slice(1).join('='));});}catch(e2){}
+    var authDate=parseInt(dp['auth_date']||'0'),now2=Math.floor(Date.now()/1000);
+    if(!authDate||(now2-authDate)>3600){showGuardError('❌ جلسة منتهية','انتهت صلاحية جلسة Telegram\nأعد فتح التطبيق من البوت');return;}
+    var ud={};try{ud=JSON.parse(dp['user']||'{}');}catch(e3){}
+    if(!ud.id){showGuardError('❌ بيانات غير صالحة','لم يتم التعرف على حساب Telegram');return;}
+    var sd=null;try{var raw=sessionStorage.getItem('aivex_g_'+token);if(raw)sd=JSON.parse(raw);}catch(e4){}
+    if(sd){if(String(sd.uid)!==String(ud.id)){showGuardError('❌ وصول مرفوض','هذا الرابط مخصص لمستخدم آخر');return;}}
+    else{try{sessionStorage.setItem('aivex_g_'+token,JSON.stringify({uid:ud.id,ts:now2}));}catch(e5){}}
+    document.getElementById('guard').style.display='none';
+    tg.ready();tg.expand();
+    if(!localStorage.getItem('aivex_terms_v2')){
+      document.getElementById('termsModal').style.display='flex';
+      document.getElementById('mainPage').style.display='none';
+    } else {
+      showWelcomeSplash();
+    }
+  }catch(e){showGuardError('⚠️ خطأ غير متوقع','حدث خطأ أثناء التحقق\nأعد فتح التطبيق من البوت');}
 }
 runGuard();
 
@@ -2415,8 +2413,7 @@ function toggleIndPanel(){/* indicators hidden from users */}
 
 /* ══ SIGNAL UI ══ */
 function renderSignalCircle(sig,result){
-
-  haptic([20,10,20,10,40]);  var isBuy=sig.dir==='buy';
+  var isBuy=sig.dir==='buy';
 
   /* hide idle, show wrap */
   document.getElementById('idleCard').style.display='none';
@@ -2553,8 +2550,7 @@ function hideWarnStrip(){if(warnHideTimeout)clearTimeout(warnHideTimeout);if(war
 
 /* ══ MAIN SIGNAL ══ */
 async function doSignal(){
-
-  haptic([12]);  closeConsensusCard();
+  closeConsensusCard();
   if(busy)return;
   var cp=document.getElementById('s-pair').value,tfv=document.getElementById('s-tf').value;
   if(isLocked(cp)){showWarnStrip(cp);return;}
@@ -2838,7 +2834,7 @@ function showWelcomeSplash(){
       splash.style.display='none';
       launchMain();
     },380);
-  },2800);
+  },3200);
 }
 
 function launchMain(){
@@ -2956,7 +2952,7 @@ function vipSwitchAi(){
 }
 
 /* check access */
-async async function checkVipAccess(){
+async function checkVipAccess(){
   var tgId=document.getElementById('vipTgInput').value.trim();
   var pass=document.getElementById('vipPassInput').value.trim();
   if(!tgId||!pass){setVipMsg('أدخل Telegram ID وكلمة المرور','err');return;}
@@ -2971,14 +2967,14 @@ async async function checkVipAccess(){
     var rec=users[tgId];
     if(!rec){
       setVipMsg('⛔ غير مصرح لك — تواصل مع الأدمن','err');
-    } else if((rec.password!==pass&&rec.password!==(await hashStr(pass)))){
+    } else if(rec.password!==pass){
       setVipMsg('⛔ كلمة المرور غير صحيحة','err');
     } else if(Date.now()>rec.expires){
       setVipMsg('⏰ انتهت صلاحية وصولك — تواصل مع الأدمن','err');
     } else {
       /* ✅ granted */
       vipAuthed=true;
-      try{var passHash=await hashStr(pass);localStorage.setItem('aivex_vip_id',tgId);localStorage.setItem('aivex_vip_pass',passHash);}catch(e){}
+      try{localStorage.setItem('aivex_vip_id',tgId);localStorage.setItem('aivex_vip_pass',pass);}catch(e){}
       setVipMsg('✅ مرحباً بك!','ok');
       setTimeout(function(){
         showVipContent(tgId,rec.expires);
@@ -3041,17 +3037,15 @@ function showVipWelcomeBar(id,exp){showVipContent(id,exp);}
 
 /* logout */
 function vipLogout(){
-  var msg=lang==='ar'?'هل تريد تسجيل الخروج؟':'Logout from VIP?';
-  if(!confirm(msg))return;
-  haptic([15,10,15]);
   vipAuthed=false;
   try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
-  var ov=document.getElementById('vipLockOverlay');
   var ct=document.getElementById('aiContentArea');
-  if(ov)ov.style.display='flex';
+  var ov=document.getElementById('vipLockOverlay');
   if(ct)ct.style.display='none';
-  var sb=document.getElementById('vipStatusBar');
-  if(sb)sb.style.display='none';
+  if(ov)ov.style.display='flex';
+  document.getElementById('vipTgInput').value='';
+  document.getElementById('vipPassInput').value='';
+  setVipMsg('','');
   switchTab('signals');
 }
 
@@ -3063,7 +3057,7 @@ async function vipAutoLogin(){
   try{
     var data=await vipFetchBin();
     var rec=(data.vip_users||{})[savedId];
-    if(rec&&(rec.password===savedPass||rec.password===(await hashStr(savedPass)))&&Date.now()<rec.expires){
+    if(rec&&rec.password===savedPass&&Date.now()<rec.expires){
       vipAuthed=true;
       showVipContent(savedId,rec.expires);
     } else {
@@ -3210,29 +3204,10 @@ function initApp(){
     initTheme();
   },200);
 }
-/* ══ UTILITIES ══ */
-async function hashStr(str){
-  try{
-    var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-  }catch(e){return str;}/* fallback: return plain if crypto unavailable */
-}
-
-function haptic(pattern){
-  try{if(navigator.vibrate)navigator.vibrate(pattern||[18,10,18]);}catch(e){}
-}
-
 /* ══ THEME TOGGLE ══ */
 function initTheme(){
   var saved=safeStorage.get('aivex_theme')||'dark';
   applyTheme(saved,false);
-  /* keyboard support */
-  var btn=document.getElementById('themeToggleBtn');
-  if(btn){
-    btn.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleTheme();}
-    });
-  }
 }
 function toggleTheme(){
   var isLight=document.body.classList.contains('light-mode');
@@ -3245,18 +3220,15 @@ function applyTheme(mode,animate){
   var moon=document.getElementById('tIconMoon');
   var sun=document.getElementById('tIconSun');
   var btn=document.getElementById('themeToggleBtn');
-  var metaColor=document.getElementById('metaThemeColor');
   if(animate&&btn){btn.style.transform='scale(0.85)';setTimeout(function(){btn.style.transform='';},200);}
   if(mode==='light'){
     body.classList.add('light-mode');
-    if(moon){moon.classList.add('hide');}
+    if(moon){moon.classList.add('hide');} 
     if(sun){sun.classList.remove('hide');}
-    if(metaColor)metaColor.content='#1A1E26';
   } else {
     body.classList.remove('light-mode');
-    if(moon){moon.classList.remove('hide');}
+    if(moon){moon.classList.remove('hide');} 
     if(sun){sun.classList.add('hide');}
-    if(metaColor)metaColor.content='#040301';
   }
 }
 
@@ -3298,53 +3270,21 @@ function applyTheme(mode,animate){
 var _statToday=0,_statBuy=0,_statSell=0,_statAccSum=0,_statAccCnt=0;
 function recordStatSignal(dir,acc){
   _statToday++;
-  if(dir==='buy'||dir==='BUY')_statBuy++;else _statSell++;
+  if(dir==='buy')_statBuy++;else _statSell++;
   var a=parseFloat(acc);if(a>0){_statAccSum+=a;_statAccCnt++;}
-  updateStatsBar(true);
+  updateStatsBar();
 }
-function updateStatsBar(animate){
+function updateStatsBar(){
   var avg=_statAccCnt?Math.round(_statAccSum/_statAccCnt):0;
-  var vals=[
-    ['statTodayCount',_statToday],
-    ['statBuyCount',_statBuy],
-    ['statSellCount',_statSell],
-    ['statAvgAcc',avg>0?avg+'%':'--%']
-  ];
-  vals.forEach(function(v){
-    var el=document.getElementById(v[0]);
-    if(!el)return;
-    if(animate){
-      el.style.transform='scale(1.25)';el.style.opacity='0.6';
-      setTimeout(function(){el.textContent=v[1];el.style.transform='';el.style.opacity='';},120);
-    } else {
-      el.textContent=v[1];
-    }
-  });
+  var el=function(id){return document.getElementById(id);};
+  if(el('statTodayCount'))el('statTodayCount').textContent=_statToday;
+  if(el('statBuyCount'))el('statBuyCount').textContent=_statBuy;
+  if(el('statSellCount'))el('statSellCount').textContent=_statSell;
+  if(el('statAvgAcc'))el('statAvgAcc').textContent=avg>0?avg+'%':'--%';
 }
 
 
 </script>
 <div id="vipAdminTrigger" style="position:fixed;bottom:0;left:0;width:44px;height:44px;z-index:200;opacity:0;cursor:default;" onclick="vipAdminTriggerClick()"></div>
-<script>
-if('serviceWorker' in navigator){
-  var swCode=`
-self.addEventListener('install',function(e){self.skipWaiting();});
-self.addEventListener('activate',function(e){e.waitUntil(clients.claim());});
-self.addEventListener('fetch',function(e){
-  if(e.request.method!=='GET')return;
-  e.respondWith(
-    fetch(e.request).catch(function(){
-      return new Response('<html><body style="background:#040301;color:#F5C842;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;"><div><div style="font-size:2em;">🔮</div><div style="margin-top:12px;">Aivex Gold</div><div style="font-size:.75em;color:rgba(245,200,66,.5);margin-top:6px;">تحقق من الاتصال بالإنترنت</div></div></body></html>',{headers:{"Content-Type":"text/html"}});
-    })
-  );
-});
-`;
-  try{
-    var blob=new Blob([swCode],{type:'application/javascript'});
-    var swUrl=URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(function(){});
-  }catch(e){}
-}
-</script>
 </body>
 </html>
