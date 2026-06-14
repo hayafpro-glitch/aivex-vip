@@ -58,68 +58,68 @@
 
 /* ══ LIGHT MODE — DARK SILVER / SLATE TONES (compatible) ══ */
 body.light-mode{
-  --bg:#1A1E26;
-  --bg2:#222730;
-  --bg3:#272C36;
-  --bg4:#2D333F;
-  --surface:rgba(180,190,210,0.03);
-  --surface2:rgba(180,190,210,0.05);
+  --bg:#14171D;
+  --bg2:#1C2028;
+  --bg3:#22262E;
+  --bg4:#282D38;
+  --surface:rgba(180,195,220,0.04);
+  --surface2:rgba(180,195,220,0.07);
 
-  --buy:#00C986;
-  --buy-dim:rgba(0,201,134,0.08);
-  --buy-border:rgba(0,201,134,0.28);
-  --buy-glow:rgba(0,201,134,0.12);
+  --buy:#00D492;
+  --buy-dim:rgba(0,212,146,0.09);
+  --buy-border:rgba(0,212,146,0.32);
+  --buy-glow:rgba(0,212,146,0.14);
 
-  --sell:#F44;
-  --sell-dim:rgba(255,68,68,0.08);
-  --sell-border:rgba(255,68,68,0.28);
-  --sell-glow:rgba(255,68,68,0.12);
+  --sell:#F45060;
+  --sell-dim:rgba(244,80,96,0.09);
+  --sell-border:rgba(244,80,96,0.32);
+  --sell-glow:rgba(244,80,96,0.14);
 
-  --accent:#A0AABD;
-  --accent2:#7A8599;
-  --accent-dim:rgba(160,170,189,0.08);
-  --accent-border:rgba(160,170,189,0.22);
+  --accent:#A8BAD0;
+  --accent2:#7A90AA;
+  --accent-dim:rgba(168,186,208,0.09);
+  --accent-border:rgba(168,186,208,0.26);
 
-  --gold:#B8C4D8;--gold2:#8A96AA;--gold-pale:#D0D8E8;
-  --gold-dim:rgba(184,196,216,0.08);--gold-border:rgba(184,196,216,0.18);--gold-border2:rgba(184,196,216,0.30);
+  --gold:#C8D8EC;--gold2:#96AACC;--gold-pale:#E2EAF8;
+  --gold-dim:rgba(200,216,236,0.09);--gold-border:rgba(200,216,236,0.22);--gold-border2:rgba(200,216,236,0.38);
 
-  --amber:#9DB0CC;
-  --amber-border:rgba(157,176,204,0.25);
+  --amber:#A8C0DA;
+  --amber-border:rgba(168,192,218,0.30);
 
-  --border:rgba(184,196,216,0.08);
-  --border2:rgba(184,196,216,0.14);
+  --border:rgba(200,216,236,0.10);
+  --border2:rgba(200,216,236,0.18);
 
-  --text:#D8E0EE;
-  --text2:rgba(216,224,238,0.55);
-  --text3:rgba(216,224,238,0.28);
-  --text4:rgba(216,224,238,0.10);
+  --text:#E4EDF8;
+  --text2:rgba(228,237,248,0.62);
+  --text3:rgba(228,237,248,0.32);
+  --text4:rgba(228,237,248,0.12);
 }
 
 /* Light (dark silver) mode — targeted overrides */
 body.light-mode{background:var(--bg);}
 body.light-mode::before{
   background:
-    linear-gradient(rgba(184,196,216,0.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(184,196,216,0.018) 1px,transparent 1px),
-    radial-gradient(ellipse 65% 45% at 85% 0%,rgba(100,120,160,0.12) 0%,transparent 60%),
-    radial-gradient(ellipse 45% 50% at 0% 100%,rgba(80,100,140,0.08) 0%,transparent 55%);
+    linear-gradient(rgba(200,216,236,0.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,216,236,0.022) 1px,transparent 1px),
+    radial-gradient(ellipse 65% 45% at 85% 0%,rgba(120,150,200,0.14) 0%,transparent 60%),
+    radial-gradient(ellipse 45% 50% at 0% 100%,rgba(90,120,170,0.10) 0%,transparent 55%);
   background-size:52px 52px,52px 52px,100% 100%,100% 100%;
 }
 body.light-mode select{background:var(--bg3);color:var(--text);}
-body.light-mode option{background:#272C36;color:#D8E0EE;}
+body.light-mode option{background:#22262E;color:#E4EDF8;}
 body.light-mode .tab-btn{background:var(--bg2);}
-body.light-mode .sig-display,body.light-mode .sig-card-idle{background:rgba(34,39,48,0.80);}
-body.light-mode .consensus-card{background:linear-gradient(160deg,rgba(34,39,48,0.95),rgba(39,44,54,0.90));}
-body.light-mode .disc-modal-box,body.light-mode #termsModal .tm-inner{background:linear-gradient(180deg,#222730,#272C36);}
-body.light-mode .logo-name{background:linear-gradient(135deg,#C8D4E8 0%,#8A96AA 50%,#B0BCCC 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-body.light-mode .logo-vip{color:#8A96AA;}
-body.light-mode .cc-title{background:linear-gradient(90deg,rgba(216,224,238,0.55),rgba(184,196,216,0.90),rgba(216,224,238,0.55));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-body.light-mode #welcomeSplash{background:#1A1E26;}
+body.light-mode .sig-display,body.light-mode .sig-card-idle{background:rgba(28,32,40,0.85);}
+body.light-mode .consensus-card{background:linear-gradient(160deg,rgba(28,32,40,0.95),rgba(34,38,46,0.90));}
+body.light-mode .disc-modal-box,body.light-mode #termsModal .tm-inner{background:linear-gradient(180deg,#1C2028,#22262E);}
+body.light-mode .logo-name{background:linear-gradient(135deg,#DEE8F8 0%,#A0B4CC 50%,#C0D0E4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+body.light-mode .logo-vip{color:#8FA4BB;}
+body.light-mode .cc-title{background:linear-gradient(90deg,rgba(228,237,248,0.60),rgba(200,216,236,0.92),rgba(228,237,248,0.55));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+body.light-mode #welcomeSplash{background:#14171D;}
 body.light-mode .ao-box{background:var(--bg3);}
-body.light-mode .ai-analyzer-section{background:rgba(34,39,48,0.55);}
+body.light-mode .ai-analyzer-section{background:rgba(28,32,40,0.60);}
 body.light-mode .ind-panel{background:var(--bg2);}
 body.light-mode .vip-lock-overlay-inner{background:linear-gradient(160deg,var(--bg2),var(--bg3));}
-body.light-mode .hdr{background:rgba(26,30,38,0.92);}
+body.light-mode .hdr{background:rgba(20,23,29,0.94);}
 body.light-mode .stats-bar{background:var(--bg2);}
 
 /* ══ THEME TOGGLE BUTTON ══ */
@@ -2281,7 +2281,7 @@ function computeAll(data,tfv,pair){
   var bestCandle=null;if(candlePatterns.length>0){var al=candlePatterns.filter(function(p){return p.dir===(dir==='buy'?'BUY':'SELL');});bestCandle=(al.length>0?al:candlePatterns).sort(function(a,b){return b.weight-a.weight;})[0];}
   return{dir:dir,strength:strength,buyW:buyW,sellW:sellW,buyCount:buyCount,sellCount:sellCount,total:sigs.length,consensusPct:consensusPct,adxVal:adxVal,isQuiet:isQuiet,candlePatterns:candlePatterns,bestCandle:bestCandle,candleAligned:candleAligned,isStrong:!isQuiet&&consensusPct>=minCons&&strength>=64,profile:profile,sessionInfo:sessInfo,isOTC:isOTC,_rsi:_rsi,_stoch:_stoch,_cci:_cci,_emaDir:_emaDir,_bbDir:_bbDir,_adxObj:_adxObj,_stDir:_stDir,_psarDir:_psarDir,_macdDir:_macdDir};}
 
-function calcAccuracy(result,tfv,isLive){if(!result)return null;var consScore=Math.max(0,Math.min(1,(result.consensusPct-0.5)*2)),adxScore=Math.min((result.adxVal||20)/55,1),strScore=Math.max(0,Math.min(1,(result.strength-50)/50));var tfW={'3s':0,'5s':0.5,'10s':1,'15s':1.5,'30s':2,'1':3,'2':4,'3':5,'5':6,'10':7,'15':7.5,'30':8,'60':9},tfBonus=tfW[tfv]||0;var candleBonus=result.bestCandle&&result.candleAligned?(result.bestCandle.weight>2.0?5:3):0;var sessBonus=result.sessionInfo?({'premium':4,'good':2,'normal':0,'low':-4}[result.sessionInfo.quality]||0):0;var otcBonus=result.isOTC&&result.consensusPct>=0.70?3:result.isOTC&&result.consensusPct>=0.68?1:0;var acc=73+(consScore*11)+(adxScore*7)+(strScore*5)+tfBonus+candleBonus+(isLive?3:0)-((result.profile?result.profile.vol:0.5)*4)+sessBonus+otcBonus;if(result.isQuiet)acc-=4;if(!result.candleAligned&&result.candlePatterns&&result.candlePatterns.length>0)acc-=2;return parseFloat(Math.min(96,Math.max(78,acc)).toFixed(1));}
+function calcAccuracy(result,tfv,isLive){if(!result)return null;var consScore=Math.max(0,Math.min(1,(result.consensusPct-0.5)*2)),adxScore=Math.min((result.adxVal||20)/55,1),strScore=Math.max(0,Math.min(1,(result.strength-50)/50));var tfW={'3s':0,'5s':0.5,'10s':1,'15s':1.5,'30s':2,'1':3,'2':4,'3':5,'5':6,'10':7,'15':7.5,'30':8,'60':9},tfBonus=tfW[tfv]||0;var candleBonus=result.bestCandle&&result.candleAligned?(result.bestCandle.weight>2.0?5:3):0;var sessBonus=result.sessionInfo?({'premium':4,'good':2,'normal':0,'low':-4}[result.sessionInfo.quality]||0):0;var otcBonus=result.isOTC&&result.consensusPct>=0.70?3:result.isOTC&&result.consensusPct>=0.68?1:0;var acc=73+(consScore*11)+(adxScore*7)+(strScore*5)+tfBonus+candleBonus+(isLive?3:0)-((result.profile?result.profile.vol:0.5)*4)+sessBonus+otcBonus;if(result.isQuiet)acc-=4;if(!result.candleAligned&&result.candlePatterns&&result.candlePatterns.length>0)acc-=2;return parseFloat(Math.min(96,Math.max(80,acc)).toFixed(1));}
 
 function getBestTimeframe(result,pair){
   /* rank timeframes by how well they match the current signal strength and pair type */
@@ -2602,7 +2602,7 @@ function switchTab(tab){
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('tabpage-'+tab).classList.add('active');
   document.getElementById('tab-'+tab).classList.add('active');
-  /* Reset AI state whenever leaving AI tab */
+  /* Reset AI state whenever switching tabs */
   resetAiTab();
 }
 
@@ -2647,7 +2647,7 @@ function onAiImageSelected(input){
 function removeAiImage(){
   aiImageBase64=null;aiImageMime=null;
   document.getElementById('aiPreviewWrap').classList.remove('show');
-  document.getElementById('aiUploadArea').style.display='flex';
+  document.getElementById('aiUploadArea').style.display='block';
   document.getElementById('aiAnalyzeBtn').disabled=true;
   document.getElementById('aiFileInput').value='';
   document.getElementById('aiResult').classList.remove('show');
@@ -2832,7 +2832,7 @@ function showWelcomeSplash(){
       splash.style.display='none';
       launchMain();
     },380);
-  },8000);
+  },3200);
 }
 
 function launchMain(){
