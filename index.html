@@ -2602,10 +2602,8 @@ function switchTab(tab){
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('tabpage-'+tab).classList.add('active');
   document.getElementById('tab-'+tab).classList.add('active');
-  /* Reset AI state when going back to signals */
-  if(tab==='signals'){
-    resetAiTab();
-  }
+  /* Reset AI state whenever leaving AI tab */
+  resetAiTab();
 }
 
 function resetAiTab(){
@@ -2649,7 +2647,7 @@ function onAiImageSelected(input){
 function removeAiImage(){
   aiImageBase64=null;aiImageMime=null;
   document.getElementById('aiPreviewWrap').classList.remove('show');
-  document.getElementById('aiUploadArea').style.display='block';
+  document.getElementById('aiUploadArea').style.display='flex';
   document.getElementById('aiAnalyzeBtn').disabled=true;
   document.getElementById('aiFileInput').value='';
   document.getElementById('aiResult').classList.remove('show');
@@ -2834,7 +2832,7 @@ function showWelcomeSplash(){
       splash.style.display='none';
       launchMain();
     },380);
-  },3200);
+  },8000);
 }
 
 function launchMain(){
