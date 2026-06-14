@@ -2155,7 +2155,7 @@ async function runGuard(){
     var sd=null;try{var raw=sessionStorage.getItem('aivex_g_'+token);if(raw)sd=JSON.parse(raw);}catch(e4){}
     if(sd){if(String(sd.uid)!==String(ud.id)){showGuardError('❌ وصول مرفوض','هذا الرابط مخصص لمستخدم آخر');return;}}
     else{try{sessionStorage.setItem('aivex_g_'+token,JSON.stringify({uid:ud.id,ts:now2}));}catch(e5){}}
-    document.getElementById('gTxt').textContent='جاري تحضير المنصة...';
+    document.getElementById('gTxt').textContent='جاري تحقق من الهوية ...';
     revealApp(function(){
       tg.ready();tg.expand();
       if(!localStorage.getItem('aivex_terms_v2')){
