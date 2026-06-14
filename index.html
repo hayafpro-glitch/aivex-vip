@@ -2143,7 +2143,7 @@ async function runGuard(){
   var tg=window.Telegram.WebApp,initData=tg.initData||'';
   if(!initData||initData.length<10){showGuardError('❌ جلسة غير صالحة','لم يتم العثور على بيانات Telegram\nأعد فتح التطبيق من البوت');return;}
   var token=getTokenFromURL();
-  if(!token){showGuardError('❌ رابط غير صالح','هذا الرابط لا يحتوي على توكن صالح');return;}
+  if(!token){showGuardError('❌ أنت محضور تواصل معا فريق AIVEX اذا كنت تعتقد ان هاذا خطاء','هذا الرابط لا يحتوي على تصريح صالح');return;}
   document.getElementById('gTxt').textContent='جاري التحقق من الصلاحية...';
   try{
     if(token.length<20){showGuardError('❌ رابط غير صالح','الرابط منتهي الصلاحية\nاضغط على زر الإشارة في البوت');return;}
