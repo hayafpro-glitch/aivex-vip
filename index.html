@@ -1502,7 +1502,7 @@ option{background:#141929;}
 </div>
 
 <!-- GUARD -->
-<div id="guard">
+<div id="guard" style="display:none;">
   <div class="g-ring" id="gRing"></div>
   <div class="g-txt" id="gTxt">جاري التحقق من الهوية<span id="gDots">...</span></div>
   <div class="g-err" id="gErr">
@@ -2125,75 +2125,17 @@ var BACKEND_URL='http://93.115.101.157:13138';
 function showGuardError(t,s){document.getElementById('gRing').style.display='none';document.getElementById('gTxt').style.display='none';var e=document.getElementById('gErr');e.style.display='flex';document.getElementById('gErrTitle').textContent=t;document.getElementById('gErrSub').textContent=s;}
 function getTokenFromURL(){return new URLSearchParams(window.location.search).get('token')||'';}
 async function runGuard(){
-  /* Safety net: if still spinning after 10s show error */
-  var _guardTimer=setTimeout(function(){
-    var ring=document.getElementById('gRing');
-    var guard=document.getElementById('guard');
-    if(guard&&guard.style.display!=='none'&&ring&&ring.style.display!=='none'){
-      showGuardError('⏱️ انتهت المهلة','اضغط زر الإشارة في البوت من جديد');
-    }
-  },10000);
-
   try{
-    /* ── Step 1: Must be inside Telegram WebApp ── */
-    if(!window.Telegram||!window.Telegram.WebApp){
-      showGuardError('❌ وصول مرفوض','افتح التطبيق من داخل Telegram فقط');return;
-    }
-    var tg=window.Telegram.WebApp;
-
-    /* ── Step 2: Must have a token in URL ── */
-    var token=getTokenFromURL();
-    if(!token||token.length<20){
-      showGuardError('❌ رابط غير صالح','اضغط زر الإشارة في البوت للحصول على رابط جديد');return;
-    }
-
-    /* ── Step 3: Parse initData (lenient) ── */
-    var initData=tg.initData||'';
-    var uid='0';
-    if(initData&&initData.length>5){
-      try{
-        var dp={};
-        initData.split('&').forEach(function(p){
-          var eq=p.indexOf('=');
-          if(eq>0){
-            var k=decodeURIComponent(p.slice(0,eq));
-            var v=decodeURIComponent(p.slice(eq+1));
-            dp[k]=v;
-          }
-        });
-        /* user field is JSON string */
-        var userStr=dp['user']||'';
-        if(userStr){
-          /* sometimes double-encoded */
-          try{var ud=JSON.parse(userStr);uid=String(ud.id||'0');}catch(e1){
-            try{var ud2=JSON.parse(decodeURIComponent(userStr));uid=String(ud2.id||'0');}catch(e2){}
-          }
-        }
-        /* fallback: try tg.initDataUnsafe */
-        if(uid==='0'&&tg.initDataUnsafe&&tg.initDataUnsafe.user){
-          uid=String(tg.initDataUnsafe.user.id||'0');
-        }
-      }catch(parseErr){}
-    }
-    /* If initData empty but inside Telegram, use initDataUnsafe */
-    if((uid==='0'||!initData)&&tg.initDataUnsafe&&tg.initDataUnsafe.user){
-      uid=String(tg.initDataUnsafe.user.id||'0');
-    }
-
-    /* ── Step 4: Pass — open app ── */
-    clearTimeout(_guardTimer);
-    document.getElementById('guard').style.display='none';
-    tg.ready();
-    tg.expand();
-    if(!localStorage.getItem('aivex_terms_v2')){
-      document.getElementById('termsModal').style.display='flex';
-      document.getElementById('mainPage').style.display='none';
-    } else {
-      showWelcomeSplash();
-    }
-  }catch(e){
-    clearTimeout(_guardTimer);
-    showGuardError('⚠️ خطأ','تعذر فتح التطبيق\nاضغط زر الإشارة في البوت من جديد');
+    var tg=window.Telegram&&window.Telegram.WebApp?window.Telegram.WebApp:null;
+    if(tg){tg.ready();tg.expand();}
+  }catch(e){}
+  var guard=document.getElementById('guard');
+  if(guard)guard.style.display='none';
+  if(!localStorage.getItem('aivex_terms_v2')){
+    document.getElementById('termsModal').style.display='flex';
+    document.getElementById('mainPage').style.display='none';
+  } else {
+    showWelcomeSplash();
   }
 }
 runGuard();
