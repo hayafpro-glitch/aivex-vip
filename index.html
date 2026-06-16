@@ -2938,6 +2938,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 var vipAdminTaps=0,vipAdminTimer=null;
 var vipAuthed=false;
+var vipExpTimer=null;
 
 /* fetch bin */
 async function vipFetchBin(){
@@ -3050,8 +3051,9 @@ function showVipContent(id,exp){
 
   /* auto-logout on expire */
   var remaining=exp-Date.now();
+  if(vipExpTimer){clearTimeout(vipExpTimer);vipExpTimer=null;}
   if(remaining>0){
-    setTimeout(function(){
+    vipExpTimer=setTimeout(function(){
       if(vipAuthed){
         vipAuthed=false;
         try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
