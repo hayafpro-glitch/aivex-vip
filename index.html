@@ -2751,15 +2751,25 @@ async function runAiAnalysis(){
       '- CONFIDENCE between 65 and 92'
     ].join('\n');
 
+    var imgMime='image/jpeg',imgData=aiImageBase64;
+    if(aiImageBase64.startsWith('data:')){
+      var p0=aiImageBase64.split(',');
+      imgMime=p0[0].replace('data:','').replace(';base64','');
+      imgData=p0[1];
+    }
+
     var resp=await fetch('https://aivex-proxy.hyafalwsaby374.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt:prompt,image:aiImageBase64})
+      body:JSON.stringify({prompt:prompt,image:imgData,mime:imgMime})
     });
 
     var data=await resp.json();
-    var text=(data.result||data.text||data.response||'').trim();
-    if(!text)throw new Error('لا يوجد رد من السيرفر: '+JSON.stringify(data));
+    if(data.error)throw new Error('Worker: '+data.error);
+    if(data.gemini_error)throw new Error('Gemini: '+data.gemini_error);
+    if(data.gemini_raw)throw new Error('Raw: '+data.gemini_raw);
+    var text=(data.result||'').trim();
+    if(!text)throw new Error('فاضي: '+JSON.stringify(data));
 
     /* ── Parse ── */
     var dir='neutral',reason='',conf=75,duration='',candleSize='';
@@ -2831,15 +2841,13 @@ async function runAiAnalysis(){
   }catch(err){
     result.className='ai-result show neutral';
     document.getElementById('aiResultDir').className='ai-result-dir neutral';
-    document.getElementById('aiResultDir').textContent='⚠️ خطأ';
-    var errMsg=(err&&err.message?err.message:String(err));
-    document.getElementById('aiResultReason').textContent=errMsg;
+    document.getElementById('aiResultDir').textContent='⚠️';
+    document.getElementById('aiResultReason').textContent='خطأ في الاتصال — تأكد من الانترنت وحاول مجدداً\n'+(err&&err.message?err.message:'');
     document.getElementById('aiResultConf').textContent='--%';
     var dw=document.getElementById('aiResultDuration');
     if(dw)dw.style.display='none';
-    var dbg=document.getElementById('aivex-debug-box');
-    if(!dbg){dbg=document.createElement('div');dbg.id='aivex-debug-box';dbg.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#1a0000;color:#ff6b6b;font-size:11px;padding:12px;max-height:45vh;overflow-y:auto;border-top:2px solid #ff0000;font-family:monospace;white-space:pre-wrap;word-break:break-all;';document.body.appendChild(dbg);}
-    dbg.textContent='=== DEBUG ===\n'+errMsg+'\n\nStack: '+(err&&err.stack?err.stack:'N/A');
+    var mw=document.getElementById('aiResultMeta');
+    if(mw)mw.style.display='none';
   }
 
   btn.disabled=false;btn.classList.remove('loading');
