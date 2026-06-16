@@ -2938,7 +2938,6 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 var vipAdminTaps=0,vipAdminTimer=null;
 var vipAuthed=false;
-var vipExpTimer=null;
 
 /* fetch bin */
 async function vipFetchBin(){
@@ -2992,7 +2991,6 @@ async function checkVipAccess(){
   btn.disabled=true;
   document.getElementById('vipEnterLbl').textContent='⏳ جاري التحقق...';
   setVipMsg('يتم التحقق من صلاحيتك...','loading');
-  var success=false;
   try{
     var data=await vipFetchBin();
     var users=data.vip_users||{};
@@ -3006,7 +3004,6 @@ async function checkVipAccess(){
       setVipMsg('⏰ انتهت صلاحية وصولك — تواصل مع الأدمن','err');
     } else {
       /* ✅ granted */
-      success=true;
       vipAuthed=true;
       try{localStorage.setItem('aivex_vip_id',tgId);localStorage.setItem('aivex_vip_pass',pass);}catch(e){}
       setVipMsg('✅ مرحباً بك!','ok');
@@ -3015,7 +3012,7 @@ async function checkVipAccess(){
       },700);
     }
   }catch(e){
-    if(!success)setVipMsg('⚠️ خطأ في الاتصال، حاول مجدداً','err');
+    setVipMsg('⚠️ خطأ في الاتصال، حاول مجدداً','err');
   }
   btn.disabled=false;
   document.getElementById('vipEnterLbl').textContent='🚀 دخول';
@@ -3028,6 +3025,13 @@ function setVipMsg(msg,cls){
 
 /* show welcome bar inside AI tab */
 function showVipContent(id,exp){
+  exp=parseInt(exp||0);
+  /* إذا الصلاحية منتهية لا تعرض شيء */
+  if(!exp||Date.now()>exp){
+    try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
+    vipAuthed=false;
+    return;
+  }
   /* hide lock, show content */
   var ov=document.getElementById('vipLockOverlay');
   var ct=document.getElementById('aiContentArea');
@@ -3055,9 +3059,8 @@ function showVipContent(id,exp){
 
   /* auto-logout on expire */
   var remaining=exp-Date.now();
-  if(vipExpTimer){clearTimeout(vipExpTimer);vipExpTimer=null;}
   if(remaining>0){
-    vipExpTimer=setTimeout(function(){
+    setTimeout(function(){
       if(vipAuthed){
         vipAuthed=false;
         try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
@@ -3211,7 +3214,7 @@ async function vipLoadUsers(){
     list.innerHTML='';
     keys.forEach(function(id){
       var rec=users[id];
-      var active=Date.now()<parseInt(rec.expires||0);
+      var active=Date.now()<rec.expires;
       var row=document.createElement('div');
       row.className='vip-user-row';
       row.innerHTML=
