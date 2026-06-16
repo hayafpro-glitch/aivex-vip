@@ -1167,7 +1167,7 @@ option{background:#141929;}
   border-color:rgba(245,200,66,0.55);
   background:rgba(245,200,66,0.05);
 }
-.ai-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.ai-upload-area input[type=file]{display:none;}
 .ai-upload-icon{font-size:28px;margin-bottom:8px;}
 .ai-upload-txt{font-size:12px;color:var(--text2);letter-spacing:.5px;}
 .ai-upload-sub{font-size:10px;color:var(--text3);letter-spacing:.4px;margin-top:3px;}
@@ -1556,6 +1556,9 @@ option{background:#141929;}
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
+      <div class="theme-toggle-btn" id="historyBtn" onclick="openSignalHistory()" title="سجل الإشارات">
+        <span class="t-icon" style="position:static;">📜</span>
+      </div>
       <div class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع">
         <span class="t-icon" id="tIconMoon">🌙</span>
         <span class="t-icon hide" id="tIconSun">☀️</span>
@@ -1577,6 +1580,22 @@ option{background:#141929;}
       <span class="tab-icon">📸</span>
       <span data-ar="تحليل الصورة 🔒" data-en="Image Analysis 🔒">تحليل الصورة 🔒</span>
     </button>
+  </div>
+
+  <!-- SIGNAL HISTORY MODAL -->
+  <div id="historyModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(4,3,1,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
+    <div style="width:100%;max-width:420px;max-height:78vh;display:flex;flex-direction:column;background:var(--bg3);border:1px solid var(--gold-border2);border-radius:18px;overflow:hidden;box-shadow:0 16px 60px rgba(0,0,0,.70);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--gold);flex-shrink:0;">
+        <span>📜 سجل الإشارات</span>
+        <button onclick="closeSignalHistory()" style="background:transparent;border:none;color:var(--text2);font-size:16px;cursor:pointer;">✕</button>
+      </div>
+      <div id="historyList" style="padding:14px 14px 18px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:11px;color:var(--text2);text-align:center;padding:18px 0;">لا توجد إشارات مسجلة بعد</div>
+      </div>
+      <div style="padding:12px 14px;border-top:1px solid var(--border);flex-shrink:0;">
+        <button onclick="clearSignalHistory()" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--sell-border);cursor:pointer;background:var(--sell-dim);color:var(--sell);font-family:Cairo,sans-serif;font-size:12px;font-weight:700;">🗑️ مسح السجل</button>
+      </div>
+    </div>
   </div>
 
   <!-- ADMIN VIP MODAL -->
@@ -1977,10 +1996,10 @@ option{background:#141929;}
       <div class="ai-analyzer-badge">VIP</div>
     </div>
     <div style="padding:14px;">
-      <div class="ai-upload-area" id="aiUploadArea">
-        <input type="file" id="aiFileInput" accept="image/*" onchange="onAiImageSelected(this)">
+      <div class="ai-upload-area" id="aiUploadArea" onclick="aiTriggerUpload()">
+        <input type="file" id="aiFileInput" accept="image/*" style="display:none;" onchange="onAiImageSelected(this)">
         <div class="ai-upload-icon">📊</div>
-        <div class="ai-upload-txt" data-ar="ارفع صورة الشارت" data-en="Upload chart image">ارفع صورة الشارت</div>
+        <div class="ai-upload-txt" data-ar="اضغط لرفع صورة الشارت" data-en="Tap to upload chart image">اضغط لرفع صورة الشارت</div>
         <div class="ai-upload-sub" data-ar="من Pocket Option أو أي منصة أخرى" data-en="From Pocket Option or any platform">من Pocket Option أو أي منصة أخرى</div>
       </div>
       <div class="ai-preview-wrap" id="aiPreviewWrap">
@@ -2107,14 +2126,24 @@ option{background:#141929;}
 
 /* ══ GUARD v2.0 ══ */
 var BACKEND_URL='http://93.115.101.157:13138';
+var GUARD_MIN_DISPLAY_MS=8000;
+var guardStartTs=Date.now();
 function showGuardError(t,s){document.getElementById('gRing').style.display='none';document.getElementById('gTxt').style.display='none';var e=document.getElementById('gErr');e.style.display='flex';document.getElementById('gErrTitle').textContent=t;document.getElementById('gErrSub').textContent=s;}
 function getTokenFromURL(){return new URLSearchParams(window.location.search).get('token')||'';}
+function revealApp(cb){
+  var elapsed=Date.now()-guardStartTs;
+  var remaining=Math.max(0,GUARD_MIN_DISPLAY_MS-elapsed);
+  setTimeout(function(){
+    document.getElementById('guard').style.display='none';
+    cb();
+  },remaining);
+}
 async function runGuard(){
   if(!window.Telegram||!window.Telegram.WebApp){showGuardError('❌ وصول مرفوض','هذا التطبيق يعمل فقط داخل Telegram');return;}
   var tg=window.Telegram.WebApp,initData=tg.initData||'';
   if(!initData||initData.length<10){showGuardError('❌ جلسة غير صالحة','لم يتم العثور على بيانات Telegram\nأعد فتح التطبيق من البوت');return;}
   var token=getTokenFromURL();
-  if(!token){showGuardError('❌ رابط غير صالح','هذا الرابط لا يحتوي على توكن صالح');return;}
+  if(!token){showGuardError('❌ أنت محضور تواصل معا فريق AIVEX اذا كنت تعتقد ان هاذا خطاء','هذا الرابط لا يحتوي على تصريح صالح');return;}
   document.getElementById('gTxt').textContent='جاري التحقق من الصلاحية...';
   try{
     if(token.length<20){showGuardError('❌ رابط غير صالح','الرابط منتهي الصلاحية\nاضغط على زر الإشارة في البوت');return;}
@@ -2126,14 +2155,16 @@ async function runGuard(){
     var sd=null;try{var raw=sessionStorage.getItem('aivex_g_'+token);if(raw)sd=JSON.parse(raw);}catch(e4){}
     if(sd){if(String(sd.uid)!==String(ud.id)){showGuardError('❌ وصول مرفوض','هذا الرابط مخصص لمستخدم آخر');return;}}
     else{try{sessionStorage.setItem('aivex_g_'+token,JSON.stringify({uid:ud.id,ts:now2}));}catch(e5){}}
-    document.getElementById('guard').style.display='none';
-    tg.ready();tg.expand();
-    if(!localStorage.getItem('aivex_terms_v2')){
-      document.getElementById('termsModal').style.display='flex';
-      document.getElementById('mainPage').style.display='none';
-    } else {
-      showWelcomeSplash();
-    }
+    document.getElementById('gTxt').textContent='جاري تحقق من الهوية ...';
+    revealApp(function(){
+      tg.ready();tg.expand();
+      if(!localStorage.getItem('aivex_terms_v2')){
+        document.getElementById('termsModal').style.display='flex';
+        document.getElementById('mainPage').style.display='none';
+      } else {
+        showWelcomeSplash();
+      }
+    });
   }catch(e){showGuardError('⚠️ خطأ غير متوقع','حدث خطأ أثناء التحقق\nأعد فتح التطبيق من البوت');}
 }
 runGuard();
@@ -2627,6 +2658,14 @@ var aiImageBase64=null,aiImageMime=null;
 
 function toggleAiAnalyzer(){}
 
+function aiTriggerUpload(){
+  var fi=document.getElementById('aiFileInput');
+  if(!fi)return;
+  /* reset value so same file can be re-selected */
+  try{fi.value='';}catch(e){}
+  fi.click();
+}
+
 function onAiImageSelected(input){
   var file=input.files&&input.files[0];
   if(!file)return;
@@ -2635,11 +2674,21 @@ function onAiImageSelected(input){
     var dataUrl=e.target.result;
     aiImageBase64=dataUrl.split(',')[1];
     aiImageMime=file.type||'image/jpeg';
-    document.getElementById('aiPreviewImg').src=dataUrl;
-    document.getElementById('aiPreviewWrap').classList.add('show');
-    document.getElementById('aiUploadArea').style.display='none';
-    document.getElementById('aiAnalyzeBtn').disabled=false;
-    document.getElementById('aiResult').classList.remove('show');
+    var img=document.getElementById('aiPreviewImg');
+    if(img)img.src=dataUrl;
+    var pw=document.getElementById('aiPreviewWrap');
+    if(pw){pw.style.display='block';pw.classList.add('show');}
+    var ua=document.getElementById('aiUploadArea');
+    if(ua)ua.style.display='none';
+    var ab=document.getElementById('aiAnalyzeBtn');
+    if(ab)ab.disabled=false;
+    var res=document.getElementById('aiResult');
+    if(res)res.classList.remove('show');
+    var nc=document.getElementById('aiNotChart');
+    if(nc)nc.classList.remove('show');
+  };
+  reader.onerror=function(){
+    alert('فشل قراءة الصورة، حاول مرة أخرى');
   };
   reader.readAsDataURL(file);
 }
@@ -2782,13 +2831,15 @@ async function runAiAnalysis(){
   }catch(err){
     result.className='ai-result show neutral';
     document.getElementById('aiResultDir').className='ai-result-dir neutral';
-    document.getElementById('aiResultDir').textContent='⚠️';
-    document.getElementById('aiResultReason').textContent='خطأ في الاتصال — تأكد من الانترنت وحاول مجدداً\n'+(err&&err.message?err.message:'');
+    document.getElementById('aiResultDir').textContent='⚠️ خطأ';
+    var errMsg=(err&&err.message?err.message:String(err));
+    document.getElementById('aiResultReason').textContent=errMsg;
     document.getElementById('aiResultConf').textContent='--%';
     var dw=document.getElementById('aiResultDuration');
     if(dw)dw.style.display='none';
-    var mw=document.getElementById('aiResultMeta');
-    if(mw)mw.style.display='none';
+    var dbg=document.getElementById('aivex-debug-box');
+    if(!dbg){dbg=document.createElement('div');dbg.id='aivex-debug-box';dbg.style.cssText='position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#1a0000;color:#ff6b6b;font-size:11px;padding:12px;max-height:45vh;overflow-y:auto;border-top:2px solid #ff0000;font-family:monospace;white-space:pre-wrap;word-break:break-all;';document.body.appendChild(dbg);}
+    dbg.textContent='=== DEBUG ===\n'+errMsg+'\n\nStack: '+(err&&err.stack?err.stack:'N/A');
   }
 
   btn.disabled=false;btn.classList.remove('loading');
@@ -2910,8 +2961,9 @@ var vipAuthed=false;
 
 /* fetch bin */
 async function vipFetchBin(){
-  var r=await fetch(VIP_URL+'/latest',{
-    headers:{'X-Master-Key':VIP_KEY,'X-Bin-Meta':'false'}
+  var r=await fetch(VIP_URL+'/latest?_='+Date.now(),{
+    headers:{'X-Master-Key':VIP_KEY,'X-Bin-Meta':'false'},
+    cache:'no-store'
   });
   if(!r.ok)throw new Error('fetch '+r.status);
   var j=await r.json();
@@ -2963,11 +3015,12 @@ async function checkVipAccess(){
     var data=await vipFetchBin();
     var users=data.vip_users||{};
     var rec=users[tgId];
+    var expTs=rec?parseInt(rec.expires||0):0;
     if(!rec){
       setVipMsg('⛔ غير مصرح لك — تواصل مع الأدمن','err');
     } else if(rec.password!==pass){
       setVipMsg('⛔ كلمة المرور غير صحيحة','err');
-    } else if(Date.now()>rec.expires){
+    } else if(Date.now()>expTs){
       setVipMsg('⏰ انتهت صلاحية وصولك — تواصل مع الأدمن','err');
     } else {
       /* ✅ granted */
@@ -2975,7 +3028,7 @@ async function checkVipAccess(){
       try{localStorage.setItem('aivex_vip_id',tgId);localStorage.setItem('aivex_vip_pass',pass);}catch(e){}
       setVipMsg('✅ مرحباً بك!','ok');
       setTimeout(function(){
-        showVipContent(tgId,rec.expires);
+        showVipContent(tgId,expTs);
       },700);
     }
   }catch(e){
@@ -2992,6 +3045,13 @@ function setVipMsg(msg,cls){
 
 /* show welcome bar inside AI tab */
 function showVipContent(id,exp){
+  exp=parseInt(exp||0);
+  /* إذا الصلاحية منتهية لا تعرض شيء */
+  if(!exp||Date.now()>exp){
+    try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
+    vipAuthed=false;
+    return;
+  }
   /* hide lock, show content */
   var ov=document.getElementById('vipLockOverlay');
   var ct=document.getElementById('aiContentArea');
@@ -3017,18 +3077,25 @@ function showVipContent(id,exp){
     },5000);
   }
 
-  /* auto-logout on expire */
+  /* auto-logout on expire — آمن مع مدد طويلة */
   var remaining=exp-Date.now();
   if(remaining>0){
-    setTimeout(function(){
-      if(vipAuthed){
-        vipAuthed=false;
-        try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
-        if(ct)ct.style.display='none';
-        if(ov)ov.style.display='flex';
-        setVipMsg('⏰ انتهت مدة وصولك — تواصل مع الأدمن','err');
+    var MAX_TIMEOUT=2000000000; /* ~23 يوم — حد JavaScript الآمن */
+    function scheduleLogout(ms){
+      if(ms<=0){
+        if(vipAuthed){
+          vipAuthed=false;
+          try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
+          if(ct)ct.style.display='none';
+          if(ov)ov.style.display='flex';
+          setVipMsg('⏰ انتهت مدة وصولك — تواصل مع الأدمن','err');
+        }
+        return;
       }
-    },remaining);
+      var chunk=Math.min(ms,MAX_TIMEOUT);
+      setTimeout(function(){scheduleLogout(ms-chunk);},chunk);
+    }
+    scheduleLogout(remaining);
   }
 }
 function showVipWelcomeBar(id,exp){showVipContent(id,exp);}
@@ -3055,9 +3122,10 @@ async function vipAutoLogin(){
   try{
     var data=await vipFetchBin();
     var rec=(data.vip_users||{})[savedId];
-    if(rec&&rec.password===savedPass&&Date.now()<rec.expires){
+    var expTs=rec?parseInt(rec.expires||0):0;
+    if(rec&&rec.password===savedPass&&Date.now()<expTs){
       vipAuthed=true;
-      showVipContent(savedId,rec.expires);
+      showVipContent(savedId,expTs);
     } else {
       try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
     }
@@ -3071,11 +3139,43 @@ async function vipAutoLogin(){
 });
 
 /* ── SECRET ADMIN TRIGGER (5 taps bottom-left corner) ── */
+var ADMIN_MASTER_PASS='AivexOwner2026!'; // غيّرها لكلمة مرور قوية خاصة بك
+var ADMIN_UNLOCK_KEY='aivex_admin_unlocked';
+var ADMIN_LOCK_KEY='aivex_admin_lock_until';
+var ADMIN_FAIL_KEY='aivex_admin_fails';
 function vipAdminTriggerClick(){
   vipAdminTaps++;
   if(vipAdminTimer)clearTimeout(vipAdminTimer);
   vipAdminTimer=setTimeout(function(){vipAdminTaps=0;},1500);
-  if(vipAdminTaps>=5){vipAdminTaps=0;openVipAdmin();}
+  if(vipAdminTaps>=5){vipAdminTaps=0;requestAdminAccess();}
+}
+function requestAdminAccess(){
+  /* lockout check */
+  var lockUntil=parseInt(safeStorage.get(ADMIN_LOCK_KEY)||'0');
+  if(lockUntil&&Date.now()<lockUntil){
+    var mins=Math.ceil((lockUntil-Date.now())/60000);
+    alert('🔒 تم تجاوز عدد المحاولات. حاول بعد '+mins+' دقيقة.');
+    return;
+  }
+  /* already unlocked this session */
+  if(sessionStorage.getItem(ADMIN_UNLOCK_KEY)==='1'){openVipAdmin();return;}
+  var input=prompt('🔒 أدخل كلمة مرور المالك للوصول إلى لوحة التحكم:');
+  if(input===null)return;
+  if(input===ADMIN_MASTER_PASS){
+    sessionStorage.setItem(ADMIN_UNLOCK_KEY,'1');
+    safeStorage.set(ADMIN_FAIL_KEY,'0');
+    openVipAdmin();
+  }else{
+    var fails=parseInt(safeStorage.get(ADMIN_FAIL_KEY)||'0')+1;
+    safeStorage.set(ADMIN_FAIL_KEY,String(fails));
+    if(fails>=5){
+      safeStorage.set(ADMIN_LOCK_KEY,String(Date.now()+15*60000));
+      safeStorage.set(ADMIN_FAIL_KEY,'0');
+      alert('🔒 كلمة مرور خاطئة. تم القفل لمدة 15 دقيقة.');
+    }else{
+      alert('❌ كلمة مرور خاطئة. ('+fails+'/5)');
+    }
+  }
 }
 function openVipAdmin(){
   var modal=document.getElementById('vipAdminModal');
@@ -3230,38 +3330,59 @@ function applyTheme(mode,animate){
   }
 }
 
-
-/* ══ THEME TOGGLE ══ */
-function initTheme(){
-  var saved=safeStorage.get('aivex_theme')||'dark';
-  applyTheme(saved,false);
-}
-function toggleTheme(){
-  var isLight=document.body.classList.contains('light-mode');
-  var next=isLight?'dark':'light';
-  applyTheme(next,true);
-  safeStorage.set('aivex_theme',next);
-}
-function applyTheme(mode,animate){
-  var body=document.body;
-  var moon=document.getElementById('tIconMoon');
-  var sun=document.getElementById('tIconSun');
-  var btn=document.getElementById('themeToggleBtn');
-  if(animate&&btn){btn.style.transform='scale(0.85)';setTimeout(function(){btn.style.transform='';},200);}
-  if(mode==='light'){
-    body.classList.add('light-mode');
-    if(moon){moon.classList.add('hide');} 
-    if(sun){sun.classList.remove('hide');}
-  } else {
-    body.classList.remove('light-mode');
-    if(moon){moon.classList.remove('hide');} 
-    if(sun){sun.classList.add('hide');}
-  }
-}
-
 /* ══ SIGNAL HISTORY ══ */
-
-
+var SIGNAL_HISTORY_KEY='aivex_signal_history';
+var SIGNAL_HISTORY_MAX=20;
+function loadSignalHistory(){
+  try{var raw=safeStorage.get(SIGNAL_HISTORY_KEY);return raw?JSON.parse(raw):[];}catch(e){return [];}
+}
+function saveSignalHistoryEntry(entry){
+  try{
+    var list=loadSignalHistory();
+    list.unshift(entry);
+    if(list.length>SIGNAL_HISTORY_MAX)list=list.slice(0,SIGNAL_HISTORY_MAX);
+    safeStorage.set(SIGNAL_HISTORY_KEY,JSON.stringify(list));
+  }catch(e){}
+}
+function openSignalHistory(){
+  renderSignalHistory();
+  document.getElementById('historyModal').style.display='flex';
+}
+function closeSignalHistory(){
+  document.getElementById('historyModal').style.display='none';
+}
+document.getElementById('historyModal').addEventListener('click',function(e){
+  if(e.target===this)closeSignalHistory();
+});
+function clearSignalHistory(){
+  if(!confirm('مسح سجل الإشارات بالكامل؟'))return;
+  try{safeStorage.remove?safeStorage.remove(SIGNAL_HISTORY_KEY):safeStorage.set(SIGNAL_HISTORY_KEY,JSON.stringify([]));}catch(e){}
+  renderSignalHistory();
+}
+function renderSignalHistory(){
+  var box=document.getElementById('historyList');
+  var list=loadSignalHistory();
+  if(!list.length){
+    box.innerHTML='<div style="font-size:11px;color:var(--text2);text-align:center;padding:18px 0;">لا توجد إشارات مسجلة بعد</div>';
+    return;
+  }
+  box.innerHTML='';
+  list.forEach(function(item){
+    var isBuy=item.dir==='buy';
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:var(--surface2);border:1px solid '+(isBuy?'var(--buy-border)':'var(--sell-border)')+';';
+    row.innerHTML=
+      '<div style="display:flex;flex-direction:column;gap:2px;">'
+        +'<div style="font-size:12.5px;font-weight:800;color:var(--text);">'+item.pair+'</div>'
+        +'<div style="font-size:10px;color:var(--text3);">'+item.time+'</div>'
+      +'</div>'
+      +'<div style="display:flex;align-items:center;gap:8px;">'
+        +'<span style="font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:8px;color:'+(isBuy?'var(--buy)':'var(--sell)')+';background:'+(isBuy?'var(--buy-dim)':'var(--sell-dim)')+';">'+(isBuy?'شراء ▲':'بيع ▼')+'</span>'
+        +'<span style="font-size:11px;font-weight:800;color:var(--gold);">'+item.acc+'%</span>'
+      +'</div>';
+    box.appendChild(row);
+  });
+}
 
 
 /* ══ STATS COUNTERS (in-memory, no history storage) ══ */
@@ -3271,6 +3392,14 @@ function recordStatSignal(dir,acc){
   if(dir==='buy')_statBuy++;else _statSell++;
   var a=parseFloat(acc);if(a>0){_statAccSum+=a;_statAccCnt++;}
   updateStatsBar();
+  try{
+    saveSignalHistoryEntry({
+      pair:activePair,
+      dir:dir,
+      acc:acc,
+      time:new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})+' - '+new Date().toLocaleDateString('ar-EG')
+    });
+  }catch(e){}
 }
 function updateStatsBar(){
   var avg=_statAccCnt?Math.round(_statAccSum/_statAccCnt):0;
