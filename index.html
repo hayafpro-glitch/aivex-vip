@@ -2751,15 +2751,25 @@ async function runAiAnalysis(){
       '- CONFIDENCE between 65 and 92'
     ].join('\n');
 
+    /* ── فصل mime و base64 ── */
+    var imgMime='image/jpeg',imgData=aiImageBase64;
+    if(aiImageBase64.startsWith('data:')){
+      var p0=aiImageBase64.split(',');
+      imgMime=p0[0].replace('data:','').replace(';base64','');
+      imgData=p0[1];
+    }
+
     var resp=await fetch('https://aivex-proxy.hyafalwsaby374.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt:prompt,image:aiImageBase64})
+      body:JSON.stringify({prompt:prompt,image:imgData,mime:imgMime})
     });
 
+    if(!resp.ok)throw new Error('Worker error: '+resp.status);
     var data=await resp.json();
-    var text=(data.result||data.text||data.response||'').trim();
-    if(!text)throw new Error('لا يوجد رد من السيرفر: '+JSON.stringify(data));
+    if(data.error)throw new Error(data.error);
+    var text=(data.result||'').trim();
+    if(!text)throw new Error('رد فارغ من السيرفر');
 
     /* ── Parse ── */
     var dir='neutral',reason='',conf=75,duration='',candleSize='';
