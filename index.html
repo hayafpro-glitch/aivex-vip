@@ -2996,18 +2996,11 @@ async function checkVipAccess(){
     var users=data.vip_users||{};
     var rec=users[tgId];
     var expTs=rec?parseInt(rec.expires||0):0;
-    var now=Date.now();
-
-    /* ══ DEBUG — احذف هذا لاحقاً ══ */
-    var dbg='ID:'+tgId+'\nexpires:'+expTs+'\nnow:'+now+'\nدقائق متبقية:'+Math.round((expTs-now)/60000)+'\npassMatch:'+(rec&&rec.password===pass);
-    alert('🔍 DEBUG\n'+dbg);
-    /* ══ END DEBUG ══ */
-
     if(!rec){
       setVipMsg('⛔ غير مصرح لك — تواصل مع الأدمن','err');
     } else if(rec.password!==pass){
       setVipMsg('⛔ كلمة المرور غير صحيحة','err');
-    } else if(now>expTs){
+    } else if(Date.now()>expTs){
       setVipMsg('⏰ انتهت صلاحية وصولك — تواصل مع الأدمن','err');
     } else {
       /* ✅ granted */
@@ -3064,18 +3057,25 @@ function showVipContent(id,exp){
     },5000);
   }
 
-  /* auto-logout on expire */
+  /* auto-logout on expire — آمن مع مدد طويلة */
   var remaining=exp-Date.now();
   if(remaining>0){
-    setTimeout(function(){
-      if(vipAuthed){
-        vipAuthed=false;
-        try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
-        if(ct)ct.style.display='none';
-        if(ov)ov.style.display='flex';
-        setVipMsg('⏰ انتهت مدة وصولك — تواصل مع الأدمن','err');
+    var MAX_TIMEOUT=2000000000; /* ~23 يوم — حد JavaScript الآمن */
+    function scheduleLogout(ms){
+      if(ms<=0){
+        if(vipAuthed){
+          vipAuthed=false;
+          try{localStorage.removeItem('aivex_vip_id');localStorage.removeItem('aivex_vip_pass');}catch(e){}
+          if(ct)ct.style.display='none';
+          if(ov)ov.style.display='flex';
+          setVipMsg('⏰ انتهت مدة وصولك — تواصل مع الأدمن','err');
+        }
+        return;
       }
-    },remaining);
+      var chunk=Math.min(ms,MAX_TIMEOUT);
+      setTimeout(function(){scheduleLogout(ms-chunk);},chunk);
+    }
+    scheduleLogout(remaining);
   }
 }
 function showVipWelcomeBar(id,exp){showVipContent(id,exp);}
