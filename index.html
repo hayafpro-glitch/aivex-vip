@@ -2996,11 +2996,18 @@ async function checkVipAccess(){
     var users=data.vip_users||{};
     var rec=users[tgId];
     var expTs=rec?parseInt(rec.expires||0):0;
+    var now=Date.now();
+
+    /* ══ DEBUG — احذف هذا لاحقاً ══ */
+    var dbg='ID:'+tgId+'\nexpires:'+expTs+'\nnow:'+now+'\nدقائق متبقية:'+Math.round((expTs-now)/60000)+'\npassMatch:'+(rec&&rec.password===pass);
+    alert('🔍 DEBUG\n'+dbg);
+    /* ══ END DEBUG ══ */
+
     if(!rec){
       setVipMsg('⛔ غير مصرح لك — تواصل مع الأدمن','err');
     } else if(rec.password!==pass){
       setVipMsg('⛔ كلمة المرور غير صحيحة','err');
-    } else if(Date.now()>expTs){
+    } else if(now>expTs){
       setVipMsg('⏰ انتهت صلاحية وصولك — تواصل مع الأدمن','err');
     } else {
       /* ✅ granted */
