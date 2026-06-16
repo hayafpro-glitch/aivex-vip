@@ -1167,18 +1167,17 @@ option{background:#141929;}
   border-color:rgba(245,200,66,0.55);
   background:rgba(245,200,66,0.05);
 }
-.ai-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.ai-upload-area input[type=file]{display:none;}
 .ai-upload-icon{font-size:28px;margin-bottom:8px;}
 .ai-upload-txt{font-size:12px;color:var(--text2);letter-spacing:.5px;}
 .ai-upload-sub{font-size:10px;color:var(--text3);letter-spacing:.4px;margin-top:3px;}
 
 /* Preview */
-.ai-preview-wrap{display:none;margin-bottom:12px;text-align:center;position:relative;border-radius:12px;overflow:hidden;}
+.ai-preview-wrap{display:none;margin-bottom:12px;text-align:center;position:relative;}
 .ai-preview-wrap.show{display:block;}
 .ai-preview-img{
-  width:100%;max-height:220px;object-fit:contain;
+  width:100%;max-height:200px;object-fit:contain;
   border-radius:10px;border:1px solid rgba(245,200,66,0.15);
-  display:block;
 }
 .ai-preview-remove{
   position:absolute;top:6px;right:6px;
@@ -1186,45 +1185,8 @@ option{background:#141929;}
   background:rgba(244,63,94,0.85);
   border:none;color:#fff;font-size:13px;
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  line-height:1;z-index:10;
+  line-height:1;
 }
-
-/* Scanner overlay */
-.ai-scanner-overlay{
-  position:absolute;inset:0;z-index:5;pointer-events:none;
-  border-radius:10px;overflow:hidden;display:none;
-}
-.ai-scanner-overlay.active{display:block;}
-.ai-scanner-line{
-  position:absolute;left:0;right:0;height:2px;top:0;
-  background:linear-gradient(90deg,transparent,rgba(245,200,66,0.9),rgba(245,200,66,1),rgba(245,200,66,0.9),transparent);
-  box-shadow:0 0 12px 4px rgba(245,200,66,0.5);
-  animation:scanMove 1.6s linear infinite;
-}
-.ai-scanner-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(245,200,66,0.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(245,200,66,0.06) 1px,transparent 1px);
-  background-size:24px 24px;
-}
-.ai-scanner-corner{position:absolute;width:14px;height:14px;border-color:rgba(245,200,66,0.9);border-style:solid;}
-.ai-scanner-corner.tl{top:4px;left:4px;border-width:2px 0 0 2px;}
-.ai-scanner-corner.tr{top:4px;right:4px;border-width:2px 2px 0 0;}
-.ai-scanner-corner.bl{bottom:4px;left:4px;border-width:0 0 2px 2px;}
-.ai-scanner-corner.br{bottom:4px;right:4px;border-width:0 2px 2px 0;}
-@keyframes scanMove{0%{top:-2px;}100%{top:100%;}}
-
-/* Not-a-chart error */
-.ai-not-chart{
-  display:none;padding:14px;border-radius:12px;
-  background:rgba(244,63,94,0.08);
-  border:1px solid rgba(244,63,94,0.25);
-  text-align:center;margin-bottom:10px;
-}
-.ai-not-chart.show{display:block;}
-.ai-not-chart-icon{font-size:28px;margin-bottom:6px;}
-.ai-not-chart-txt{font-size:12px;color:var(--sell);font-weight:700;letter-spacing:.5px;}
 
 /* Analyze button */
 .ai-analyze-btn{
@@ -2034,27 +1996,15 @@ option{background:#141929;}
       <div class="ai-analyzer-badge">VIP</div>
     </div>
     <div style="padding:14px;">
-      <div class="ai-upload-area" id="aiUploadArea">
-        <input type="file" id="aiFileInput" accept="image/*" onchange="onAiImageSelected(this)">
+      <div class="ai-upload-area" id="aiUploadArea" onclick="aiTriggerUpload()">
+        <input type="file" id="aiFileInput" accept="image/*" style="display:none;" onchange="onAiImageSelected(this)">
         <div class="ai-upload-icon">📊</div>
-        <div class="ai-upload-txt" data-ar="ارفع صورة الشارت" data-en="Upload chart image">ارفع صورة الشارت</div>
+        <div class="ai-upload-txt" data-ar="اضغط لرفع صورة الشارت" data-en="Tap to upload chart image">اضغط لرفع صورة الشارت</div>
         <div class="ai-upload-sub" data-ar="من Pocket Option أو أي منصة أخرى" data-en="From Pocket Option or any platform">من Pocket Option أو أي منصة أخرى</div>
       </div>
       <div class="ai-preview-wrap" id="aiPreviewWrap">
         <img id="aiPreviewImg" class="ai-preview-img" src="" alt="chart">
-        <div class="ai-scanner-overlay" id="aiScannerOverlay">
-          <div class="ai-scanner-grid"></div>
-          <div class="ai-scanner-line"></div>
-          <div class="ai-scanner-corner tl"></div>
-          <div class="ai-scanner-corner tr"></div>
-          <div class="ai-scanner-corner bl"></div>
-          <div class="ai-scanner-corner br"></div>
-        </div>
         <button class="ai-preview-remove" onclick="removeAiImage()">✕</button>
-      </div>
-      <div class="ai-not-chart" id="aiNotChart">
-        <div class="ai-not-chart-icon">🚫</div>
-        <div class="ai-not-chart-txt">هذه ليست صورة شارت تداول<br><span style="font-size:10px;opacity:.7;">ارفع صورة شارت من Pocket Option أو أي منصة تداول</span></div>
       </div>
       <button class="ai-analyze-btn" id="aiAnalyzeBtn" onclick="runAiAnalysis()" disabled>
         <span id="aiAnalyzeLbl" data-ar="🧠 تحليل الصورة" data-en="🧠 Analyze Image">🧠 تحليل الصورة</span>
@@ -2708,6 +2658,14 @@ var aiImageBase64=null,aiImageMime=null;
 
 function toggleAiAnalyzer(){}
 
+function aiTriggerUpload(){
+  var fi=document.getElementById('aiFileInput');
+  if(!fi)return;
+  /* reset value so same file can be re-selected */
+  try{fi.value='';}catch(e){}
+  fi.click();
+}
+
 function onAiImageSelected(input){
   var file=input.files&&input.files[0];
   if(!file)return;
@@ -2716,11 +2674,21 @@ function onAiImageSelected(input){
     var dataUrl=e.target.result;
     aiImageBase64=dataUrl.split(',')[1];
     aiImageMime=file.type||'image/jpeg';
-    document.getElementById('aiPreviewImg').src=dataUrl;
-    document.getElementById('aiPreviewWrap').classList.add('show');
-    document.getElementById('aiUploadArea').style.display='none';
-    document.getElementById('aiAnalyzeBtn').disabled=false;
-    document.getElementById('aiResult').classList.remove('show');
+    var img=document.getElementById('aiPreviewImg');
+    if(img)img.src=dataUrl;
+    var pw=document.getElementById('aiPreviewWrap');
+    if(pw){pw.style.display='block';pw.classList.add('show');}
+    var ua=document.getElementById('aiUploadArea');
+    if(ua)ua.style.display='none';
+    var ab=document.getElementById('aiAnalyzeBtn');
+    if(ab)ab.disabled=false;
+    var res=document.getElementById('aiResult');
+    if(res)res.classList.remove('show');
+    var nc=document.getElementById('aiNotChart');
+    if(nc)nc.classList.remove('show');
+  };
+  reader.onerror=function(){
+    alert('فشل قراءة الصورة، حاول مرة أخرى');
   };
   reader.readAsDataURL(file);
 }
@@ -2732,20 +2700,6 @@ function removeAiImage(){
   document.getElementById('aiAnalyzeBtn').disabled=true;
   document.getElementById('aiFileInput').value='';
   document.getElementById('aiResult').classList.remove('show');
-  var nc=document.getElementById('aiNotChart');if(nc)nc.classList.remove('show');
-  aiStopScanner();
-}
-
-var GEMINI_KEY='AQ.Ab8RN6KuuZCR-oorTw0fJS4WJnthguaaliVLo7_xy4ycdcVT1w';
-var GEMINI_URL='https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+GEMINI_KEY;
-
-function aiStartScanner(){
-  var ov=document.getElementById('aiScannerOverlay');
-  if(ov)ov.classList.add('active');
-}
-function aiStopScanner(){
-  var ov=document.getElementById('aiScannerOverlay');
-  if(ov)ov.classList.remove('active');
 }
 
 async function runAiAnalysis(){
@@ -2753,106 +2707,108 @@ async function runAiAnalysis(){
   var btn=document.getElementById('aiAnalyzeBtn');
   var lbl=document.getElementById('aiAnalyzeLbl');
   var result=document.getElementById('aiResult');
-  var notChart=document.getElementById('aiNotChart');
-
   btn.disabled=true;btn.classList.add('loading');
   lbl.textContent='⏳ جاري التحليل...';
   result.classList.remove('show');
-  notChart.classList.remove('show');
-  aiStartScanner();
 
   try{
+    /* ── Prompt متخصص تحليل شموع ── */
     var prompt=[
-      'You are an expert binary options chart analyst.',
+      'You are a professional binary options chart analyst. Your job is to analyze candle patterns ONLY.',
+      'Do NOT try to read text from the image. Focus only on visual candle patterns.',
       '',
-      'STEP 1 — VERIFY: Is this image a trading chart (candlestick, line, bar chart from any trading platform)?',
-      'If NOT a trading chart, respond ONLY with: NOT_A_CHART',
+      'ANALYZE THESE VISUAL ELEMENTS:',
+      '1. CANDLE COLORS: Count the last 5 candles — how many green (up) vs red (down)?',
+      '2. TREND: Is the overall price moving UP, DOWN, or SIDEWAYS?',
+      '3. LAST CANDLE: What is the last candle? Big green = strong BUY. Big red = strong SELL.',
+      '4. PATTERN: Do you see any of these patterns?',
+      '   - Several red candles in a row → SELL signal',
+      '   - Several green candles in a row → BUY signal',
+      '   - V-shape bottom → BUY reversal',
+      '   - Inverted-V top → SELL reversal',
+      '   - Doji or indecision candles → uncertain',
+      '5. INDICATOR (if visible at bottom): Low line = oversold = BUY. High line = overbought = SELL.',
       '',
-      'STEP 2 — If it IS a chart, analyze it and respond in EXACTLY this format:',
-      'IS_CHART: yes',
+      'CANDLE SIZE ESTIMATION:',
+      'Look at the time counter visible on chart (like 00:15 or 01:00 or 00:30).',
+      'This tells you the candle duration:',
+      '- Shows seconds under 60 (like 00:15, 00:30) = short candles = use 1 minute trade',
+      '- Shows around 1 minute (01:00) = medium candles = use 2 minute trade',
+      '- Shows 5 minutes or more = long candles = use 5 minute trade',
+      '',
+      'NOW respond in EXACTLY this format — one line each — no brackets — real values only:',
       'DIRECTION: BUY',
-      'REASON: [one sentence in Arabic explaining the candle pattern you see]',
+      'REASON: [one Arabic sentence — what candle pattern you see]',
       'CONFIDENCE: 78',
       'TRADE_DURATION: 1 minute',
+      'CANDLE_SIZE: short',
       '',
       'RULES:',
-      '- DIRECTION must be BUY or SELL only',
+      '- DIRECTION must be BUY or SELL — avoid NEUTRAL',
       '- REASON must be in Arabic',
-      '- CONFIDENCE between 65 and 92',
-      '- TRADE_DURATION: 30 seconds OR 1 minute OR 2 minutes OR 5 minutes',
-      '- Base duration on candle size visible in chart'
+      '- TRADE_DURATION must be ONE value: 30 seconds OR 1 minute OR 2 minutes OR 5 minutes',
+      '- Base TRADE_DURATION on what you see in the time counter',
+      '- CONFIDENCE between 65 and 92'
     ].join('\n');
 
-    var body={
-      contents:[{
-        parts:[
-          {text:prompt},
-          {inline_data:{mime_type:aiImageMime||'image/jpeg',data:aiImageBase64}}
-        ]
-      }],
-      generationConfig:{temperature:0.2,maxOutputTokens:300}
-    };
-
-    var resp=await fetch(GEMINI_URL,{
+    var resp=await fetch('https://aivex-proxy.hyafalwsaby374.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(body)
+      body:JSON.stringify({prompt:prompt,image:aiImageBase64})
     });
 
-    if(!resp.ok){
-      var errJson=await resp.json().catch(function(){return{};});
-      throw new Error('Gemini '+resp.status+': '+(errJson.error&&errJson.error.message||resp.statusText));
-    }
-
     var data=await resp.json();
-    var text=((data.candidates||[])[0]||{});
-    text=((text.content||{}).parts||[])[0];
-    text=(text&&text.text||'').trim();
+    var text=(data.result||data.text||data.response||'').trim();
+    if(!text)throw new Error('لا يوجد رد من السيرفر: '+JSON.stringify(data));
 
-    if(!text)throw new Error('لا يوجد رد من Gemini');
+    /* ── Parse ── */
+    var dir='neutral',reason='',conf=75,duration='',candleSize='';
 
-    /* تحقق: هل شارت؟ */
-    if(text.includes('NOT_A_CHART')||text.toLowerCase().includes('not_a_chart')){
-      aiStopScanner();
-      notChart.classList.add('show');
-      btn.disabled=false;btn.classList.remove('loading');
-      lbl.textContent='🧠 تحليل صورة جديدة';
-      return;
-    }
-
-    /* Parse */
-    var dir='neutral',reason='',conf=75,duration='';
     text.split('\n').forEach(function(line){
       var colon=line.indexOf(':');
       if(colon===-1)return;
       var key=line.substring(0,colon).trim().toUpperCase().replace(/[^A-Z_]/g,'');
       var val=line.substring(colon+1).trim().replace(/\[|\]/g,'');
       if(!val)return;
-      if(key==='DIRECTION'){
+      if(key==='DIRECTION'||key==='DIR'){
         var v=val.toLowerCase();
         if(v.includes('buy')||v.includes('شراء'))dir='buy';
         else if(v.includes('sell')||v.includes('بيع'))dir='sell';
+        else dir='neutral';
       }
-      else if(key==='REASON'){reason=val;}
-      else if(key==='CONFIDENCE'){
+      else if(key==='REASON'||key==='ANALYSIS'){reason=val;}
+      else if(key==='CONFIDENCE'||key==='CONF'){
         var m=val.match(/\d+/);
         if(m)conf=Math.min(92,Math.max(65,parseInt(m[0])));
       }
-      else if(key==='TRADE_DURATION'||key==='TRADEDURATION'){
-        var d=val.toLowerCase();
-        if(d.includes('30'))duration='30 ثانية';
-        else if(d.includes('1'))duration='1 دقيقة';
-        else if(d.includes('2'))duration='2 دقيقة';
-        else if(d.includes('5'))duration='5 دقائق';
+      else if(key==='TRADE_DURATION'||key==='DURATION'){
+        /* translate to Arabic */
+        var d=val.toLowerCase().trim();
+        if(d.includes('30 sec')||d==='30s'||d.includes('30 ثانية'))duration='30 ثانية';
+        else if(d.includes('1 min')||d==='1m'||d.includes('1 دقيقة'))duration='1 دقيقة';
+        else if(d.includes('2 min')||d==='2m'||d.includes('2 دقيقة'))duration='2 دقيقة';
+        else if(d.includes('3 min')||d==='3m')duration='3 دقائق';
+        else if(d.includes('5 min')||d==='5m')duration='5 دقائق';
+        else if(d.includes('15 min'))duration='15 دقيقة';
         else duration=val;
       }
+      else if(key==='CANDLE_SIZE'){candleSize=val.toLowerCase();}
     });
 
-    if(!duration)duration='1 دقيقة';
-    if(!reason)reason=dir==='buy'?'الشموع الأخيرة خضراء مع زخم صاعد':dir==='sell'?'الشموع الأخيرة حمراء مع ضغط بيعي':'السوق في حالة تذبذب';
+    /* ── Fallbacks ── */
+    if(!duration){
+      if(candleSize==='short')duration='1 دقيقة';
+      else if(candleSize==='medium')duration='2 دقيقة';
+      else if(candleSize==='long')duration='5 دقائق';
+      else duration='1 دقيقة';
+    }
+    if(!reason){
+      reason=dir==='buy'?'الشموع الأخيرة خضراء مع زخم صاعد':
+             dir==='sell'?'الشموع الأخيرة حمراء مع ضغط بيعي':
+             'السوق في حالة تذبذب';
+    }
 
-    /* Render */
-    aiStopScanner();
+    /* ── Render ── */
     result.className='ai-result show '+dir;
     var dirEl=document.getElementById('aiResultDir');
     if(dir==='buy'){dirEl.className='ai-result-dir buy';dirEl.textContent='▲ شراء';}
@@ -2860,22 +2816,28 @@ async function runAiAnalysis(){
     else{dirEl.className='ai-result-dir neutral';dirEl.textContent='◆ محايد';}
     document.getElementById('aiResultReason').textContent=reason;
     document.getElementById('aiResultConf').textContent=conf+'%';
+
+    /* duration */
     var durWrap=document.getElementById('aiResultDuration');
     var durVal=document.getElementById('aiResultDur');
-    if(durWrap&&durVal){
-      if(dir!=='neutral'){durVal.textContent=duration;durWrap.style.display='flex';}
-      else{durWrap.style.display='none';}
+    if(durWrap&&durVal&&dir!=='neutral'){
+      durVal.textContent=duration||'1 دقيقة';
+      durWrap.style.display='flex';
+    } else if(durWrap){
+      durWrap.style.display='none';
     }
+    /* no dead code */
 
   }catch(err){
-    aiStopScanner();
     result.className='ai-result show neutral';
     document.getElementById('aiResultDir').className='ai-result-dir neutral';
     document.getElementById('aiResultDir').textContent='⚠️';
-    document.getElementById('aiResultReason').textContent='خطأ في الاتصال — '+(err&&err.message?err.message:'حاول مجدداً');
+    document.getElementById('aiResultReason').textContent='خطأ في الاتصال — تأكد من الانترنت وحاول مجدداً\n'+(err&&err.message?err.message:'');
     document.getElementById('aiResultConf').textContent='--%';
     var dw=document.getElementById('aiResultDuration');
     if(dw)dw.style.display='none';
+    var mw=document.getElementById('aiResultMeta');
+    if(mw)mw.style.display='none';
   }
 
   btn.disabled=false;btn.classList.remove('loading');
