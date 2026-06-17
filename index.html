@@ -2289,7 +2289,7 @@ function filterPairs(q){
   results.innerHTML=filtered.map(function(p){
     var flag=getPairFlag(p);
     var cat=getPairCategory(p);
-    return '<div class="pair-result-item" onclick="selectPairFromSearch(''+p+'')">'+
+    return '<div class="pair-result-item" onclick="selectPairFromSearch(this.dataset.pair)" data-pair="'+p+'">'+
       '<span class="pair-result-flag">'+flag+'</span>'+
       '<span class="pair-result-name">'+p+'</span>'+
       '<span class="pair-result-cat">'+cat+'</span>'+
