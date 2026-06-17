@@ -9,14 +9,14 @@
 
 
 
-/* ══ ACTIVE PAIR CARD ══ */
-.active-pair-card{display:flex;align-items:center;gap:14px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:16px;padding:14px 16px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
+/* ══ ACTIVE PAIR CARD (compact) ══ */
+.active-pair-card{display:flex;align-items:center;gap:9px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
 .active-pair-card:active{background:var(--gold-dim);border-color:var(--gold);}
-.apc-flags{font-size:26px;line-height:1;flex-shrink:0;}
+.apc-flags{font-size:17px;line-height:1;flex-shrink:0;}
 .apc-info{flex:1;}
-.apc-name{font-size:16px;font-weight:800;color:var(--text);letter-spacing:.5px;}
-.apc-cat{font-size:11px;color:var(--text3);font-weight:500;margin-top:2px;letter-spacing:.8px;}
-.apc-arrow{font-size:18px;color:var(--gold);opacity:.7;}
+.apc-name{font-size:13px;font-weight:800;color:var(--text);letter-spacing:.3px;}
+.apc-cat{font-size:9px;color:var(--text3);font-weight:500;margin-top:1px;letter-spacing:.6px;}
+.apc-arrow{font-size:14px;color:var(--gold);opacity:.7;}
 
 /* ══ TF GRID ══ */
 .tf-grid{width:100%;}
@@ -47,43 +47,18 @@
 .pm-tabs{display:flex;gap:8px;padding:0 16px 10px;flex-shrink:0;}
 .pm-tab{flex:1;padding:9px;border-radius:12px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
 .pm-tab.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
-.pm-list{flex:1;overflow-y:auto;padding:0 12px 20px;}
-.pm-item{display:flex;align-items:center;gap:14px;padding:13px 12px;border-radius:14px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--border);}
+.pm-list{flex:1;overflow-y:auto;padding:0 10px 16px;}
+.pm-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--border);}
 .pm-item:active,.pm-item:hover{background:var(--gold-dim);}
 .pm-item.selected{background:var(--gold-dim);border-color:var(--gold-border2);}
-.pm-item-flags{font-size:22px;line-height:1;flex-shrink:0;}
+.pm-item-flags{font-size:16px;line-height:1;flex-shrink:0;}
 .pm-item-info{flex:1;}
-.pm-item-name{font-size:14px;font-weight:700;color:var(--text);}
-.pm-item-sub{font-size:11px;color:var(--text3);margin-top:2px;letter-spacing:.5px;}
-.pm-item-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.pm-item-name{font-size:12px;font-weight:700;color:var(--text);}
+.pm-item-sub{font-size:9px;color:var(--text3);margin-top:1px;letter-spacing:.4px;}
+.pm-item-check{width:16px;height:16px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .pm-item.selected .pm-item-check{background:var(--gold);border-color:var(--gold);}
-.pm-item.selected .pm-item-check::after{content:'✓';font-size:11px;color:#040301;font-weight:900;}
+.pm-item.selected .pm-item-check::after{content:'✓';font-size:9px;color:#040301;font-weight:900;}
 .pm-no-result{text-align:center;padding:30px;color:var(--text3);font-size:13px;}
-
-/* ══ BOTTOM STATS SECTION ══ */
-.bottom-stats-section{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;display:none;}
-.bottom-stats-section.visible{display:block;}
-.bss-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px;}
-.bss-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
-.bss-card{background:var(--bg3);border-radius:12px;padding:12px 8px;text-align:center;border:1px solid var(--border);}
-.bss-val{font-size:20px;font-weight:900;color:var(--text);line-height:1;}
-.bss-val.buy{color:var(--buy);}
-.bss-val.sell{color:var(--sell);}
-.bss-val.gold{color:var(--gold);}
-.bss-lbl{font-size:10px;color:var(--text3);margin-top:4px;font-weight:600;}
-.bss-popular{background:var(--bg3);border-radius:14px;padding:14px;border:1px solid var(--border);}
-.bss-pop-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:10px;}
-.bss-pop-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);}
-.bss-pop-item:last-child{border-bottom:none;}
-.bss-pop-tf{margin-right:auto;font-size:11px;background:var(--gold-dim);color:var(--gold);padding:2px 8px;border-radius:6px;border:1px solid var(--gold-border);}
-
-/* ══ BOTTOM NAV ══ */
-.bottom-nav{display:flex;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:6px;gap:6px;margin-bottom:12px;}
-.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;border-radius:12px;border:none;background:transparent;cursor:pointer;transition:all .18s;}
-.bn-btn.active{background:var(--gold-dim);border:1px solid var(--gold-border);}
-.bn-icon{font-size:18px;line-height:1;}
-.bn-lbl{font-size:11px;font-weight:700;color:var(--text3);font-family:Cairo,sans-serif;}
-.bn-btn.active .bn-lbl{color:var(--gold);}
 
 
 /* ══ PREMIUM SELECT STYLING ══ */
@@ -1799,23 +1774,24 @@ option{background:#141929;}
     </div>
     <!-- hidden select for JS compatibility -->
     <select id="s-pair" onchange="pairChange()" style="display:none;">
-      <optgroup label="OTC">
+      <optgroup label="OTC" id="og-otc">
         <option>EUR/USD OTC</option><option>GBP/USD OTC</option><option>USD/JPY OTC</option>
         <option>AUD/USD OTC</option><option>USD/CAD OTC</option><option>EUR/GBP OTC</option>
         <option>EUR/JPY OTC</option><option>GBP/JPY OTC</option><option>AUD/NZD OTC</option>
-        <option>USD/RUB OTC</option><option>CAD/JPY OTC</option><option>CHF/JPY OTC</option>
+        <option>USD/CHF OTC</option><option>CAD/JPY OTC</option><option>CHF/JPY OTC</option>
         <option>EUR/CHF OTC</option><option>AUD/CAD OTC</option><option>NZD/JPY OTC</option>
-        <option>AUD/JPY OTC</option><option>NZD/USD OTC</option><option>USD/CHF OTC</option>
-        <option>GBP/CHF OTC</option><option>EUR/AUD OTC</option>
       </optgroup>
-      <optgroup label="REAL">
+      <optgroup label="REAL" id="og-real">
         <option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option>
         <option>USD/CHF</option><option>AUD/USD</option><option>USD/CAD</option>
         <option>NZD/USD</option><option>GBP/JPY</option><option>EUR/JPY</option>
-        <option>AUD/JPY</option><option>EUR/GBP</option><option>XAU/USD</option>
-        <option>BTC/USD</option><option>ETH/USD</option><option>GBP/CHF</option>
+        <option>AUD/JPY</option><option>EUR/GBP</option><option>GBP/CHF</option>
         <option>EUR/CHF</option><option>AUD/NZD</option><option>CAD/JPY</option>
-        <option>CHF/JPY</option><option>AUD/CAD</option>
+        <option>CHF/JPY</option><option>AUD/CAD</option><option>NZD/JPY</option>
+        <option>EUR/CAD</option><option>GBP/CAD</option><option>EUR/NZD</option>
+        <option>GBP/NZD</option><option>USD/MXN</option><option>USD/SGD</option>
+        <option>XAU/USD</option><option>XAG/USD</option><option>BTC/USD</option>
+        <option>ETH/USD</option><option>LTC/USD</option><option>SOL/USD</option>
       </optgroup>
     </select>
   </div>
@@ -1837,6 +1813,10 @@ option{background:#141929;}
         <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
         <button class="tf-btn active" data-tf="5" onclick="selectTf('5')">M5</button>
         <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
+        <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
+        <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
+        <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
+        <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
       </div>
       <!-- Real timeframes (shown for real pairs, min 1min) -->
       <div class="tf-group" id="tfGroupReal" style="display:none;">
@@ -1848,6 +1828,8 @@ option{background:#141929;}
         <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
         <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
         <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
+        <button class="tf-btn" data-tf="120" onclick="selectTf('120')">H2</button>
+        <button class="tf-btn" data-tf="240" onclick="selectTf('240')">H4</button>
       </div>
     </div>
     <!-- hidden select for JS compatibility -->
@@ -1858,6 +1840,7 @@ option{background:#141929;}
       <option value="3">3</option><option value="5" selected>5</option>
       <option value="10">10</option><option value="15">15</option>
       <option value="30">30</option><option value="60">60</option>
+      <option value="120">120</option><option value="240">240</option>
     </select>
   </div>
 
@@ -2051,7 +2034,6 @@ option{background:#141929;}
   <div class="chart-sec fi d5" id="chartSec">
     <div class="chart-head">
       <div class="chart-ttl" data-ar="الرسم البياني" data-en="Chart">الرسم البياني</div>
-      <div class="chart-badge" id="cbadge">EUR/USD OTC</div>
     </div>
     <div style="position:relative;">
       <div id="chartbox"></div>
@@ -2165,49 +2147,6 @@ option{background:#141929;}
   </div><!-- /aiContentArea -->
 
   </div><!-- /tabpage-ai -->
-
-  <!-- BOTTOM NAV STATS -->
-  <div class="bottom-stats-section fi" id="bottomStats">
-    <div class="bss-title">📊 إحصائيات اليوم</div>
-    <div class="bss-grid">
-      <div class="bss-card">
-        <div class="bss-val" id="bssSignals">0</div>
-        <div class="bss-lbl">إشارات</div>
-      </div>
-      <div class="bss-card">
-        <div class="bss-val buy" id="bssBuy">0</div>
-        <div class="bss-lbl">شراء</div>
-      </div>
-      <div class="bss-card">
-        <div class="bss-val sell" id="bssSell">0</div>
-        <div class="bss-lbl">بيع</div>
-      </div>
-      <div class="bss-card">
-        <div class="bss-val gold" id="bssAcc">--%</div>
-        <div class="bss-lbl">الدقة</div>
-      </div>
-    </div>
-    <div class="bss-popular">
-      <div class="bss-pop-title">🔥 أكثر الأزواج استخداماً</div>
-      <div class="bss-pop-list" id="bssPopList">
-        <div class="bss-pop-item"><span>🇪🇺🇺🇸</span><span>EUR/USD OTC</span><span class="bss-pop-tf">M5</span></div>
-        <div class="bss-pop-item"><span>🇬🇧🇺🇸</span><span>GBP/USD OTC</span><span class="bss-pop-tf">M1</span></div>
-        <div class="bss-pop-item"><span>🇺🇸🇯🇵</span><span>USD/JPY OTC</span><span class="bss-pop-tf">M3</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM NAV BAR -->
-  <div class="bottom-nav">
-    <button class="bn-btn active" id="bn-signals" onclick="bnSwitch('signals')">
-      <span class="bn-icon">📊</span>
-      <span class="bn-lbl">إشارات</span>
-    </button>
-    <button class="bn-btn" id="bn-stats" onclick="bnSwitch('stats')">
-      <span class="bn-icon">📈</span>
-      <span class="bn-lbl">إحصائيات</span>
-    </button>
-  </div>
 
   <!-- SOCIAL -->
   <div class="social-section fi">
@@ -2374,16 +2313,12 @@ function getPairCategory(pair){
 }
 var ALL_PAIRS_LIST=[
   'EUR/USD OTC','GBP/USD OTC','USD/JPY OTC','AUD/USD OTC','USD/CAD OTC','EUR/GBP OTC',
-  'EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/RUB OTC','CAD/JPY OTC','CHF/JPY OTC',
-  'EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC','AUD/JPY OTC','NZD/USD OTC','USD/CHF OTC',
-  'GBP/CHF OTC','EUR/AUD OTC',
+  'EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/CHF OTC','CAD/JPY OTC','CHF/JPY OTC',
+  'EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC',
   'EUR/USD','GBP/USD','USD/JPY','USD/CHF','AUD/USD','USD/CAD','NZD/USD','GBP/JPY',
   'EUR/JPY','AUD/JPY','EUR/GBP','GBP/CHF','EUR/CHF','AUD/NZD','CAD/JPY','CHF/JPY',
-  'AUD/CAD','NZD/JPY','USD/MXN','USD/SGD','EUR/CAD','GBP/CAD','EUR/NZD','GBP/NZD',
-  'USD/PLN','USD/TRY','USD/ZAR',
-  'BTC/USD','ETH/USD','LTC/USD','XRP/USD','SOL/USD','BNB/USD','ADA/USD','DOGE/USD',
-  'XAU/USD','XAG/USD','WTI/USD','BRT/USD',
-  'APPLE OTC','TESLA OTC','AMAZON OTC','GOOGLE OTC','META OTC','NVIDIA OTC','MICROSOFT OTC'
+  'AUD/CAD','NZD/JPY','EUR/CAD','GBP/CAD','EUR/NZD','GBP/NZD','USD/MXN','USD/SGD',
+  'XAU/USD','XAG/USD','BTC/USD','ETH/USD','LTC/USD','SOL/USD'
 ];
 function filterPairs(q){
   var input=document.getElementById('pairSearchInput');
@@ -2444,17 +2379,12 @@ var OTC_PAIRS_LIST=[
   {p:'EUR/JPY OTC',f:'🇪🇺🇯🇵',s:'OTC MARKET'},
   {p:'GBP/JPY OTC',f:'🇬🇧🇯🇵',s:'OTC MARKET'},
   {p:'AUD/NZD OTC',f:'🇦🇺🇳🇿',s:'OTC MARKET'},
-  {p:'USD/RUB OTC',f:'🇺🇸🇷🇺',s:'OTC MARKET'},
+  {p:'USD/CHF OTC',f:'🇺🇸🇨🇭',s:'OTC MARKET'},
   {p:'CAD/JPY OTC',f:'🇨🇦🇯🇵',s:'OTC MARKET'},
   {p:'CHF/JPY OTC',f:'🇨🇭🇯🇵',s:'OTC MARKET'},
   {p:'EUR/CHF OTC',f:'🇪🇺🇨🇭',s:'OTC MARKET'},
   {p:'AUD/CAD OTC',f:'🇦🇺🇨🇦',s:'OTC MARKET'},
-  {p:'NZD/JPY OTC',f:'🇳🇿🇯🇵',s:'OTC MARKET'},
-  {p:'AUD/JPY OTC',f:'🇦🇺🇯🇵',s:'OTC MARKET'},
-  {p:'NZD/USD OTC',f:'🇳🇿🇺🇸',s:'OTC MARKET'},
-  {p:'USD/CHF OTC',f:'🇺🇸🇨🇭',s:'OTC MARKET'},
-  {p:'GBP/CHF OTC',f:'🇬🇧🇨🇭',s:'OTC MARKET'},
-  {p:'EUR/AUD OTC',f:'🇪🇺🇦🇺',s:'OTC MARKET'}
+  {p:'NZD/JPY OTC',f:'🇳🇿🇯🇵',s:'OTC MARKET'}
 ];
 var REAL_PAIRS_LIST=[
   {p:'EUR/USD',f:'🇪🇺🇺🇸',s:'REAL MARKET'},
@@ -2468,15 +2398,25 @@ var REAL_PAIRS_LIST=[
   {p:'EUR/JPY',f:'🇪🇺🇯🇵',s:'REAL MARKET'},
   {p:'AUD/JPY',f:'🇦🇺🇯🇵',s:'REAL MARKET'},
   {p:'EUR/GBP',f:'🇪🇺🇬🇧',s:'REAL MARKET'},
-  {p:'XAU/USD',f:'🥇',s:'REAL MARKET'},
-  {p:'BTC/USD',f:'₿',s:'REAL MARKET'},
-  {p:'ETH/USD',f:'⟠',s:'REAL MARKET'},
   {p:'GBP/CHF',f:'🇬🇧🇨🇭',s:'REAL MARKET'},
   {p:'EUR/CHF',f:'🇪🇺🇨🇭',s:'REAL MARKET'},
   {p:'AUD/NZD',f:'🇦🇺🇳🇿',s:'REAL MARKET'},
   {p:'CAD/JPY',f:'🇨🇦🇯🇵',s:'REAL MARKET'},
   {p:'CHF/JPY',f:'🇨🇭🇯🇵',s:'REAL MARKET'},
-  {p:'AUD/CAD',f:'🇦🇺🇨🇦',s:'REAL MARKET'}
+  {p:'AUD/CAD',f:'🇦🇺🇨🇦',s:'REAL MARKET'},
+  {p:'NZD/JPY',f:'🇳🇿🇯🇵',s:'REAL MARKET'},
+  {p:'EUR/CAD',f:'🇪🇺🇨🇦',s:'REAL MARKET'},
+  {p:'GBP/CAD',f:'🇬🇧🇨🇦',s:'REAL MARKET'},
+  {p:'EUR/NZD',f:'🇪🇺🇳🇿',s:'REAL MARKET'},
+  {p:'GBP/NZD',f:'🇬🇧🇳🇿',s:'REAL MARKET'},
+  {p:'USD/MXN',f:'🇺🇸🇲🇽',s:'REAL MARKET'},
+  {p:'USD/SGD',f:'🇺🇸🇸🇬',s:'REAL MARKET'},
+  {p:'XAU/USD',f:'🥇',s:'REAL MARKET'},
+  {p:'XAG/USD',f:'🥈',s:'REAL MARKET'},
+  {p:'BTC/USD',f:'₿',s:'REAL MARKET'},
+  {p:'ETH/USD',f:'⟠',s:'REAL MARKET'},
+  {p:'LTC/USD',f:'Ł',s:'REAL MARKET'},
+  {p:'SOL/USD',f:'◎',s:'REAL MARKET'}
 ];
 var pmCurrentCat='OTC';
 var pmSearchQ='';
@@ -2584,36 +2524,6 @@ function updateTfGroupForPair(pair){
   }
 }
 
-/* ══ BOTTOM NAV ══ */
-function bnSwitch(tab){
-  document.querySelectorAll('.bn-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('bn-'+tab).classList.add('active');
-  var statsSection=document.getElementById('bottomStats');
-  if(tab==='stats'){
-    statsSection.classList.add('visible');
-    updateBottomStats();
-  } else {
-    statsSection.classList.remove('visible');
-  }
-}
-
-function updateBottomStats(){
-  var h=[];try{h=JSON.parse(localStorage.getItem('aivex_sig_history')||'[]');}catch(e){}
-  var today=new Date().toDateString();
-  var todayH=h.filter(function(x){return new Date(x.ts||x.time||0).toDateString()===today;});
-  var buy=todayH.filter(function(x){return x.dir==='BUY'||x.signal==='BUY';}).length;
-  var sell=todayH.filter(function(x){return x.dir==='SELL'||x.signal==='SELL';}).length;
-  var accArr=todayH.map(function(x){return parseFloat(x.acc||x.accuracy||0);}).filter(function(x){return x>0;});
-  var avgAcc=accArr.length?Math.round(accArr.reduce(function(a,b){return a+b;},0)/accArr.length):0;
-  var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
-  s('bssSignals',todayH.length);s('bssBuy',buy);s('bssSell',sell);
-  s('bssAcc',avgAcc?avgAcc+'%':'--%');
-  // sync with old stat elements
-  var e=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
-  e('statTodayCount',todayH.length);e('statBuyCount',buy);e('statSellCount',sell);
-  e('statAvgAcc',avgAcc?avgAcc+'%':'--%');
-}
-
 
 runGuard();
 
@@ -2622,13 +2532,13 @@ var TD_KEYS=['bcce6a55c375490ab5b0fcc59daeea52','99122a1f49864312a861b74122ebea4
 var POLYGON_KEYS=['FX7wL38M6Or6pKcubGqvNeG5aCwyzd41','Wu1I0o7X0ujH78UnOYomjCLK9wqYxOPH','zqAzepeEl6y1pi9GOjSIQpY4mPAx0bWC','cEJcmG_0ofV6qyJu4u7sSMVz55wiDmTR'];
 var FH_KEYS=['d741e19r01qno4q02r6gd741e19r01qno4q02r70','d741ed1r01qno4q02sf0d741ed1r01qno4q02sfg','d741ej9r01qno4q02t8gd741ej9r01qno4q02t90','d741ep1r01qno4q02u00d741ep1r01qno4q02u0g'];
 var AV_KEYS=['GSREUCU5UKPTX9DJ','VCR0JQ8VT0AV3R5B','G4L0D32U4U52C48I','H8XZSMTUZ2LPOJYT'];
-var OTC_PAIRS=['EUR/USD OTC','GBP/USD OTC','USD/JPY OTC','AUD/USD OTC','USD/CAD OTC','EUR/GBP OTC','EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/RUB OTC','CAD/JPY OTC','CHF/JPY OTC','EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC'];
-var PAIR_SYMBOL={'EUR/USD OTC':'EUR/USD','GBP/USD OTC':'GBP/USD','USD/JPY OTC':'USD/JPY','AUD/USD OTC':'AUD/USD','USD/CAD OTC':'USD/CAD','EUR/GBP OTC':'EUR/GBP','EUR/JPY OTC':'EUR/JPY','GBP/JPY OTC':'GBP/JPY','AUD/NZD OTC':'AUD/NZD','USD/RUB OTC':'USD/RUB','CAD/JPY OTC':'CAD/JPY','CHF/JPY OTC':'CHF/JPY','EUR/CHF OTC':'EUR/CHF','AUD/CAD OTC':'AUD/CAD','NZD/JPY OTC':'NZD/JPY','AUD/JPY OTC':'AUD/JPY','NZD/USD OTC':'NZD/USD','USD/CHF OTC':'USD/CHF','GBP/CHF OTC':'GBP/CHF','EUR/AUD OTC':'EUR/AUD','EUR/USD':'EUR/USD','GBP/USD':'GBP/USD','USD/JPY':'USD/JPY','USD/CHF':'USD/CHF','AUD/USD':'AUD/USD','USD/CAD':'USD/CAD','NZD/USD':'NZD/USD','XAU/USD':'XAU/USD','XAG/USD':'XAG/USD','WTI/USD':'WTI/USD','BRT/USD':'BRT/USD','BTC/USD':'BTC/USD','ETH/USD':'ETH/USD','LTC/USD':'LTC/USD','XRP/USD':'XRP/USD','SOL/USD':'SOL/USD','BNB/USD':'BNB/USD','ADA/USD':'ADA/USD','DOGE/USD':'DOGE/USD','GBP/JPY':'GBP/JPY','EUR/JPY':'EUR/JPY','AUD/JPY':'AUD/JPY','USD/MXN':'USD/MXN','USD/SGD':'USD/SGD','EUR/CAD':'EUR/CAD','GBP/CAD':'GBP/CAD','EUR/NZD':'EUR/NZD','GBP/NZD':'GBP/NZD','USD/PLN':'USD/PLN','USD/TRY':'USD/TRY','USD/ZAR':'USD/ZAR','GBP/CHF':'GBP/CHF','EUR/CHF':'EUR/CHF','AUD/NZD':'AUD/NZD','CAD/JPY':'CAD/JPY','CHF/JPY':'CHF/JPY','AUD/CAD':'AUD/CAD','NZD/JPY':'NZD/JPY','EUR/AUD':'EUR/AUD','APPLE OTC':'APPLE OTC','TESLA OTC':'TESLA OTC','AMAZON OTC':'AMAZON OTC','GOOGLE OTC':'GOOGLE OTC','META OTC':'META OTC','NVIDIA OTC':'NVIDIA OTC','MICROSOFT OTC':'MICROSOFT OTC'};
+var OTC_PAIRS=['EUR/USD OTC','GBP/USD OTC','USD/JPY OTC','AUD/USD OTC','USD/CAD OTC','EUR/GBP OTC','EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/CHF OTC','CAD/JPY OTC','CHF/JPY OTC','EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC'];
+var PAIR_SYMBOL={'EUR/USD OTC':'EUR/USD','GBP/USD OTC':'GBP/USD','USD/JPY OTC':'USD/JPY','AUD/USD OTC':'AUD/USD','USD/CAD OTC':'USD/CAD','EUR/GBP OTC':'EUR/GBP','EUR/JPY OTC':'EUR/JPY','GBP/JPY OTC':'GBP/JPY','AUD/NZD OTC':'AUD/NZD','USD/RUB OTC':'USD/RUB','CAD/JPY OTC':'CAD/JPY','CHF/JPY OTC':'CHF/JPY','EUR/CHF OTC':'EUR/CHF','AUD/CAD OTC':'AUD/CAD','NZD/JPY OTC':'NZD/JPY','AUD/JPY OTC':'AUD/JPY','NZD/USD OTC':'NZD/USD','USD/CHF OTC':'USD/CHF','GBP/CHF OTC':'GBP/CHF','EUR/AUD OTC':'EUR/AUD','EUR/USD':'EUR/USD','GBP/USD':'GBP/USD','USD/JPY':'USD/JPY','USD/CHF':'USD/CHF','AUD/USD':'AUD/USD','USD/CAD':'USD/CAD','NZD/USD':'NZD/USD','XAU/USD':'XAU/USD','XAG/USD':'XAG/USD','WTI/USD':'WTI/USD','BRT/USD':'BRT/USD','BTC/USD':'BTC/USD','ETH/USD':'ETH/USD','LTC/USD':'LTC/USD','XRP/USD':'XRP/USD','SOL/USD':'SOL/USD','BNB/USD':'BNB/USD','ADA/USD':'ADA/USD','DOGE/USD':'DOGE/USD','GBP/JPY':'GBP/JPY','EUR/JPY':'EUR/JPY','AUD/JPY':'AUD/JPY','USD/MXN':'USD/MXN','USD/SGD':'USD/SGD','EUR/CAD':'EUR/CAD','GBP/CAD':'GBP/CAD','EUR/NZD':'EUR/NZD','GBP/NZD':'GBP/NZD','USD/PLN':'USD/PLN','USD/TRY':'USD/TRY','USD/ZAR':'USD/ZAR','GBP/CHF':'GBP/CHF','EUR/CHF':'EUR/CHF','AUD/NZD':'AUD/NZD','CAD/JPY':'CAD/JPY','CHF/JPY':'CHF/JPY','AUD/CAD':'AUD/CAD','NZD/JPY':'NZD/JPY','EUR/AUD':'EUR/AUD','EUR/GBP':'EUR/GBP','APPLE OTC':'APPLE OTC','TESLA OTC':'TESLA OTC','AMAZON OTC':'AMAZON OTC','GOOGLE OTC':'GOOGLE OTC','META OTC':'META OTC','NVIDIA OTC':'NVIDIA OTC','MICROSOFT OTC':'MICROSOFT OTC'};
 var PAIR_PROFILE={'EUR/USD':{vol:0.35,trend:0.7,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/USD':{vol:0.65,trend:0.6,type:'volatile',minADX:18,rsiOS:25,rsiOB:75,consensusMin:0.60},'USD/JPY':{vol:0.40,trend:0.8,type:'trend',minADX:16,rsiOS:30,rsiOB:70,consensusMin:0.58},'USD/CHF':{vol:0.30,trend:0.7,type:'trend',minADX:14,rsiOS:30,rsiOB:70,consensusMin:0.57},'AUD/USD':{vol:0.45,trend:0.55,type:'range',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/CAD':{vol:0.40,trend:0.6,type:'trend',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.58},'NZD/USD':{vol:0.45,trend:0.5,type:'range',minADX:14,rsiOS:28,rsiOB:72,consensusMin:0.57},'EUR/GBP':{vol:0.25,trend:0.5,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'EUR/JPY':{vol:0.55,trend:0.65,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/JPY':{vol:0.75,trend:0.55,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.62},'AUD/NZD':{vol:0.20,trend:0.45,type:'range',minADX:12,rsiOS:32,rsiOB:68,consensusMin:0.56},'USD/RUB':{vol:0.80,trend:0.5,type:'volatile',minADX:22,rsiOS:25,rsiOB:75,consensusMin:0.63},'CAD/JPY':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'CHF/JPY':{vol:0.50,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'EUR/CHF':{vol:0.20,trend:0.4,type:'range',minADX:12,rsiOS:32,rsiOB:68,consensusMin:0.56},'AUD/CAD':{vol:0.30,trend:0.5,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'NZD/JPY':{vol:0.50,trend:0.55,type:'range',minADX:14,rsiOS:28,rsiOB:72,consensusMin:0.58},'AUD/JPY':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/MXN':{vol:0.70,trend:0.6,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'USD/SGD':{vol:0.25,trend:0.55,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'XAU/USD':{vol:0.70,trend:0.65,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'BTC/USD':{vol:1.0,trend:0.5,type:'volatile',minADX:25,rsiOS:20,rsiOB:80,consensusMin:0.65},'ETH/USD':{vol:0.90,trend:0.5,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63}};
 var PAIR_PROFILE_EXTRA={'GBP/CHF':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.59},'EUR/CAD':{vol:0.45,trend:0.6,type:'trend',minADX:15,rsiOS:29,rsiOB:71,consensusMin:0.58},'GBP/CAD':{vol:0.65,trend:0.55,type:'volatile',minADX:18,rsiOS:26,rsiOB:74,consensusMin:0.60},'EUR/NZD':{vol:0.50,trend:0.55,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/NZD':{vol:0.70,trend:0.50,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.62},'EUR/AUD':{vol:0.50,trend:0.55,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/PLN':{vol:0.65,trend:0.55,type:'volatile',minADX:18,rsiOS:26,rsiOB:74,consensusMin:0.60},'USD/TRY':{vol:0.90,trend:0.70,type:'volatile',minADX:25,rsiOS:22,rsiOB:78,consensusMin:0.65},'USD/ZAR':{vol:0.85,trend:0.60,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.63},'XAG/USD':{vol:0.75,trend:0.60,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'WTI/USD':{vol:0.80,trend:0.65,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.62},'BRT/USD':{vol:0.78,trend:0.65,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.62},'LTC/USD':{vol:0.88,trend:0.50,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63},'XRP/USD':{vol:0.92,trend:0.50,type:'volatile',minADX:24,rsiOS:20,rsiOB:80,consensusMin:0.65},'SOL/USD':{vol:0.95,trend:0.50,type:'volatile',minADX:25,rsiOS:20,rsiOB:80,consensusMin:0.65},'BNB/USD':{vol:0.88,trend:0.50,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63},'ADA/USD':{vol:0.90,trend:0.50,type:'volatile',minADX:24,rsiOS:20,rsiOB:80,consensusMin:0.65},'DOGE/USD':{vol:1.0,trend:0.45,type:'volatile',minADX:26,rsiOS:18,rsiOB:82,consensusMin:0.67},'APPLE OTC':{vol:0.50,trend:0.60,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60},'TESLA OTC':{vol:0.85,trend:0.55,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.65},'AMAZON OTC':{vol:0.55,trend:0.60,type:'trend',minADX:16,rsiOS:27,rsiOB:73,consensusMin:0.60},'GOOGLE OTC':{vol:0.50,trend:0.62,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60},'META OTC':{vol:0.60,trend:0.58,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.61},'NVIDIA OTC':{vol:0.90,trend:0.60,type:'volatile',minADX:24,rsiOS:22,rsiOB:78,consensusMin:0.65},'MICROSOFT OTC':{vol:0.45,trend:0.65,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.59}};
-var OTC_PROFILE={'EUR/USD OTC':{vol:0.40,trend:0.65,type:'mean_revert',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/USD OTC':{vol:0.70,trend:0.55,type:'mean_revert',minADX:20,rsiOS:24,rsiOB:76,consensusMin:0.70},'USD/JPY OTC':{vol:0.45,trend:0.70,type:'trend',minADX:18,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/USD OTC':{vol:0.50,trend:0.50,type:'mean_revert',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/CAD OTC':{vol:0.45,trend:0.55,type:'trend',minADX:17,rsiOS:29,rsiOB:71,consensusMin:0.67},'EUR/GBP OTC':{vol:0.28,trend:0.45,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'EUR/JPY OTC':{vol:0.60,trend:0.60,type:'trend',minADX:19,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/JPY OTC':{vol:0.80,trend:0.50,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.72},'AUD/NZD OTC':{vol:0.25,trend:0.42,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/RUB OTC':{vol:0.85,trend:0.45,type:'volatile',minADX:24,rsiOS:24,rsiOB:76,consensusMin:0.73},'CAD/JPY OTC':{vol:0.58,trend:0.55,type:'trend',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'CHF/JPY OTC':{vol:0.53,trend:0.55,type:'trend',minADX:17,rsiOS:28,rsiOB:72,consensusMin:0.68},'EUR/CHF OTC':{vol:0.22,trend:0.38,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'AUD/CAD OTC':{vol:0.33,trend:0.48,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'NZD/JPY OTC':{vol:0.52,trend:0.52,type:'mean_revert',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.68}};
+var OTC_PROFILE={'EUR/USD OTC':{vol:0.40,trend:0.65,type:'mean_revert',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/USD OTC':{vol:0.70,trend:0.55,type:'mean_revert',minADX:20,rsiOS:24,rsiOB:76,consensusMin:0.70},'USD/JPY OTC':{vol:0.45,trend:0.70,type:'trend',minADX:18,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/USD OTC':{vol:0.50,trend:0.50,type:'mean_revert',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/CAD OTC':{vol:0.45,trend:0.55,type:'trend',minADX:17,rsiOS:29,rsiOB:71,consensusMin:0.67},'EUR/GBP OTC':{vol:0.28,trend:0.45,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'EUR/JPY OTC':{vol:0.60,trend:0.60,type:'trend',minADX:19,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/JPY OTC':{vol:0.80,trend:0.50,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.72},'AUD/NZD OTC':{vol:0.25,trend:0.42,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/RUB OTC':{vol:0.85,trend:0.45,type:'volatile',minADX:24,rsiOS:24,rsiOB:76,consensusMin:0.73},'CAD/JPY OTC':{vol:0.58,trend:0.55,type:'trend',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'CHF/JPY OTC':{vol:0.53,trend:0.55,type:'trend',minADX:17,rsiOS:28,rsiOB:72,consensusMin:0.68},'EUR/CHF OTC':{vol:0.22,trend:0.38,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/CHF OTC':{vol:0.38,trend:0.55,type:'trend',minADX:16,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/CAD OTC':{vol:0.33,trend:0.48,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'NZD/JPY OTC':{vol:0.52,trend:0.52,type:'mean_revert',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.68}};
 function getPairProfile(pair){if(OTC_PROFILE[pair])return OTC_PROFILE[pair];if(PAIR_PROFILE_EXTRA[pair])return PAIR_PROFILE_EXTRA[pair];var sym=PAIR_SYMBOL[pair]||'EUR/USD';return PAIR_PROFILE[sym]||PAIR_PROFILE_EXTRA[sym]||{vol:0.5,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60};}
-var TF_CLASS={'3s':'ultra','5s':'ultra','10s':'ultra','15s':'short','30s':'short','1':'mid','2':'mid','3':'mid','5':'mid','10':'long','15':'long','30':'long','60':'long'};
+var TF_CLASS={'3s':'ultra','5s':'ultra','10s':'ultra','15s':'short','30s':'short','1':'mid','2':'mid','3':'mid','5':'mid','10':'long','15':'long','30':'long','60':'long','120':'long','240':'long'};
 var IND_CFG={'3s':{rsi:5,bb_p:8,bb_m:1.8,stoch_k:5,stoch_d:2,ema_f:2,ema_s:5,ema_f2:3,ema_s2:8,cci:8,wr:5,adx:5,mfi:5,roc:3,atr:5,hull:5,sqz:8,sr:10},'5s':{rsi:6,bb_p:10,bb_m:2.0,stoch_k:5,stoch_d:2,ema_f:3,ema_s:8,ema_f2:5,ema_s2:13,cci:10,wr:6,adx:7,mfi:7,roc:5,atr:6,hull:6,sqz:10,sr:12},'10s':{rsi:7,bb_p:12,bb_m:2.0,stoch_k:7,stoch_d:3,ema_f:3,ema_s:8,ema_f2:5,ema_s2:13,cci:12,wr:7,adx:9,mfi:9,roc:6,atr:7,hull:7,sqz:12,sr:15},'15s':{rsi:8,bb_p:14,bb_m:2.0,stoch_k:9,stoch_d:3,ema_f:5,ema_s:13,ema_f2:7,ema_s2:14,cci:14,wr:9,adx:9,mfi:9,roc:7,atr:9,hull:8,sqz:14,sr:18},'30s':{rsi:9,bb_p:14,bb_m:2.1,stoch_k:9,stoch_d:3,ema_f:5,ema_s:13,ema_f2:8,ema_s2:21,cci:14,wr:9,adx:11,mfi:11,roc:8,atr:9,hull:9,sqz:14,sr:20},'1':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:10,atr:14,hull:14,sqz:20,sr:30},'2':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:10,atr:14,hull:14,sqz:20,sr:30},'3':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:12,atr:14,hull:14,sqz:20,sr:30},'5':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:12,atr:14,hull:14,sqz:20,sr:30},'10':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:40},'15':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:40},'30':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:50},'60':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:50}};
 function tfToInterval(tfv){var m={'3s':'1min','5s':'1min','10s':'1min','15s':'1min','30s':'1min','1':'1min','2':'1min','3':'5min','5':'5min','10':'15min','15':'15min','30':'30min','60':'1h'};return m[tfv]||'1min';}
 var _mem={};
@@ -2986,8 +2896,8 @@ var busy=false,CANDLE_SEC=15,candleRemain=CANDLE_SEC;
 var pairLocks={},pairChartState={},tradeBadgeTimer=null;
 var warnHideTimeout=null,warnCdTimer=null,activePair='EUR/USD OTC',lastResult=null;
 var apiRefreshTimer=null,resizeTimer=null,sessionTimer=null;
-var WAIT_SECS={'3s':3,'5s':5,'10s':10,'15s':15,'30s':20,'1':40,'2':55,'3':75,'5':90,'10':120,'15':150,'30':180,'60':240};
-var TF_SECS={'3s':3,'5s':5,'10s':10,'15s':15,'30s':30,'1':60,'2':120,'3':180,'5':300,'10':600,'15':900,'30':1800,'60':3600};
+var WAIT_SECS={'3s':3,'5s':5,'10s':10,'15s':15,'30s':20,'1':40,'2':55,'3':75,'5':90,'10':120,'15':150,'30':180,'60':240,'120':300,'240':360};
+var TF_SECS={'3s':3,'5s':5,'10s':10,'15s':15,'30s':30,'1':60,'2':120,'3':180,'5':300,'10':600,'15':900,'30':1800,'60':3600,'120':7200,'240':14400};
 var tfLabels={'3s':{ar:'3 ثواني',en:'3 sec'},'5s':{ar:'5 ثواني',en:'5 sec'},'10s':{ar:'10 ثواني',en:'10 sec'},'15s':{ar:'15 ثانية',en:'15 sec'},'30s':{ar:'30 ثانية',en:'30 sec'},'1':{ar:'1 دقيقة',en:'1 min'},'2':{ar:'2 دقيقة',en:'2 min'},'3':{ar:'3 دقائق',en:'3 min'},'5':{ar:'5 دقائق',en:'5 min'},'10':{ar:'10 دقائق',en:'10 min'},'15':{ar:'15 دقيقة',en:'15 min'},'30':{ar:'30 دقيقة',en:'30 min'},'60':{ar:'1 ساعة',en:'1 hr'}};
 function isOTCPair(pair){return OTC_PAIRS.indexOf(pair)!==-1;}
 function isWeekend(){var d=new Date().getUTCDay();return d===0||d===6;}
@@ -3006,7 +2916,7 @@ function filterTimeframes(pair){/* all timeframes available for all pairs */var 
 
 function updateOTCBadge(pair){document.getElementById('otcBadge').classList.toggle('show',isOTCPair(pair));}
 
-function applyWeekendLock(){var weekend=isWeekend(),rg=document.getElementById('og-real'),ps=document.getElementById('s-pair');if(!rg)return;rg.querySelectorAll('option').forEach(function(o){if(weekend){o.disabled=true;o.style.color='rgba(245,238,208,0.22)';}else{o.disabled=false;o.style.color='';}});if(weekend){rg.label=lang==='ar'?'── REAL ── (مغلق 🔒)':'── REAL ── (CLOSED 🔒)';if(!isOTCPair(ps.value)){ps.value='EUR/USD OTC';activePair='EUR/USD OTC';document.getElementById('cbadge').textContent='EUR/USD OTC';filterTimeframes('EUR/USD OTC');}showWeekendBanner();}else{rg.label='── REAL ──';hideWeekendBanner();}}
+function applyWeekendLock(){var weekend=isWeekend(),rg=document.getElementById('og-real'),ps=document.getElementById('s-pair');if(!rg)return;rg.querySelectorAll('option').forEach(function(o){if(weekend){o.disabled=true;o.style.color='rgba(245,238,208,0.22)';}else{o.disabled=false;o.style.color='';}});if(weekend){rg.label=lang==='ar'?'── REAL ── (مغلق 🔒)':'── REAL ── (CLOSED 🔒)';if(!isOTCPair(ps.value)){ps.value='EUR/USD OTC';activePair='EUR/USD OTC';var cb=document.getElementById('cbadge');if(cb)cb.textContent='EUR/USD OTC';filterTimeframes('EUR/USD OTC');}showWeekendBanner();}else{rg.label='── REAL ──';hideWeekendBanner();}}
 
 function showWeekendBanner(){if(document.getElementById('weekendBanner'))return;var b=document.createElement('div');b.id='weekendBanner';b.style.cssText='background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.24);border-radius:10px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;animation:slideDown .4s ease both;';b.innerHTML='<span style="font-size:15px;">🔒</span><div><div style="font-size:11px;font-weight:700;color:#F59E0B;letter-spacing:1px;" id="wkTitle">'+(lang==='ar'?'الأسواق الحقيقية مغلقة':'Real Markets Closed')+'</div><div style="font-size:10px;color:rgba(245,238,208,0.45);letter-spacing:.6px;" id="wkSub">'+(lang==='ar'?'السبت والأحد — استخدم OTC':'Sat & Sun — Use OTC pairs')+'</div></div>';var sb=document.getElementById('statusBar');if(sb&&sb.parentNode)sb.parentNode.insertBefore(b,sb);}
 function hideWeekendBanner(){var b=document.getElementById('weekendBanner');if(b)b.parentNode.removeChild(b);}
@@ -3015,7 +2925,7 @@ function pairChange(){
   var ap=document.getElementById('s-pair').value;
   var flagEl=document.getElementById('activePairFlag');
   if(flagEl)flagEl.textContent=getPairFlag(ap);
-var pair=document.getElementById('s-pair').value;activePair=pair;document.getElementById('cbadge').textContent=pair;filterTimeframes(pair);updateOTCBadge(pair);hideWarnStrip();resetDots();hidePatternStrip();updateIndPanel(null);var lock=pairLocks[pair];if(lock&&lock.sig&&(lock.tfStart+lock.tfSec*1000)>Date.now()){renderSignalCircle(lock.sig,lastResult);resumeTradeBadge(lock);}else{resetSignalCircle();stopTradeBadge();var lbl=document.getElementById('blbl');lbl.dataset.ar='الحصول على إشارة';lbl.dataset.en='Get Signal';lbl.textContent=lang==='ar'?'الحصول على إشارة':'Get Signal';}fetchAndInit();}
+var pair=document.getElementById('s-pair').value;activePair=pair;document.getElementById('cbadge')&&(document.getElementById('cbadge').textContent=pair);filterTimeframes(pair);updateTfGroupForPair(pair);updateOTCBadge(pair);hideWarnStrip();resetDots();hidePatternStrip();updateIndPanel(null);var lock=pairLocks[pair];if(lock&&lock.sig&&(lock.tfStart+lock.tfSec*1000)>Date.now()){renderSignalCircle(lock.sig,lastResult);resumeTradeBadge(lock);}else{resetSignalCircle();stopTradeBadge();var lbl=document.getElementById('blbl');lbl.dataset.ar='الحصول على إشارة';lbl.dataset.en='Get Signal';lbl.textContent=lang==='ar'?'الحصول على إشارة':'Get Signal';}fetchAndInit();}
 
 async function fetchAndInit(){var pair=activePair,tfv=document.getElementById('s-tf').value;setApiUI('loading');var candles=await fetchCandles(pair,tfv);if(candles&&candles.length>=20){cData=candles;if(cSer)try{updateChartData(cData);}catch(e){}}else{if(cData.length<20)cData=makeFallback(pair);if(cSer)try{updateChartData(cData);}catch(e){}}lastResult=computeAll(cData,tfv,pair);updateDots(lastResult);updateIndPanel(lastResult);}
 
@@ -3745,8 +3655,8 @@ function initApp(){
     var saved=loadState();
     if(saved&&saved.pairLocks){var now=Date.now();Object.keys(saved.pairLocks).forEach(function(k){var lock=saved.pairLocks[k];if(lock.tfStart+lock.tfSec*1000>now){pairLocks[k]=lock;var wr=lock.expiry-now;if(wr>0)(function(p){setTimeout(function(){if(pairLocks[p])delete pairLocks[p].expiry;saveState();},wr);})(k);}});}
     var cp=document.getElementById('s-pair').value;
-    activePair=cp;document.getElementById('cbadge').textContent=cp;
-    filterTimeframes(cp);updateOTCBadge(cp);
+    activePair=cp;
+    filterTimeframes(cp);updateTfGroupForPair(cp);updateOTCBadge(cp);
     cData=makeFallback(cp);
     initChart();
     var tfv=document.getElementById('s-tf').value;
