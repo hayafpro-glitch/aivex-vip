@@ -8,6 +8,84 @@
 <style>
 
 
+
+/* ══ ACTIVE PAIR CARD ══ */
+.active-pair-card{display:flex;align-items:center;gap:14px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:16px;padding:14px 16px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
+.active-pair-card:active{background:var(--gold-dim);border-color:var(--gold);}
+.apc-flags{font-size:26px;line-height:1;flex-shrink:0;}
+.apc-info{flex:1;}
+.apc-name{font-size:16px;font-weight:800;color:var(--text);letter-spacing:.5px;}
+.apc-cat{font-size:11px;color:var(--text3);font-weight:500;margin-top:2px;letter-spacing:.8px;}
+.apc-arrow{font-size:18px;color:var(--gold);opacity:.7;}
+
+/* ══ TF GRID ══ */
+.tf-grid{width:100%;}
+.tf-group{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.tf-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:11px 6px;font-family:Cairo,sans-serif;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .18s;letter-spacing:.5px;}
+.tf-btn:active{transform:scale(.95);}
+.tf-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:var(--gold);color:#040301;box-shadow:0 0 14px rgba(245,200,66,0.3);}
+.tf-mode-badge{font-size:10px;font-weight:700;background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border);border-radius:6px;padding:2px 8px;letter-spacing:.8px;}
+
+/* ══ SIGNAL BUTTON PREMIUM ══ */
+.sig-btn-premium{background:linear-gradient(135deg,#F5C842 0%,#C9A227 50%,#F5C842 100%);background-size:200% 100%;border:none;border-radius:18px;padding:17px;font-size:16px;font-weight:900;color:#040301;cursor:pointer;width:100%;font-family:Cairo,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 28px rgba(245,200,66,0.35);transition:all .2s;letter-spacing:.5px;animation:shimmer 3s ease infinite;}
+@keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.sig-btn-premium:active{transform:scale(.97);box-shadow:0 2px 12px rgba(245,200,66,0.2);}
+.sig-btn-premium:disabled{opacity:.5;animation:none;}
+.sig-btn-icon{font-size:18px;}
+
+/* ══ PAIR MODAL ══ */
+.pm-sheet{background:var(--bg2);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
+@keyframes pmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.pm-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px;flex-shrink:0;}
+.pm-title{font-size:17px;font-weight:800;color:var(--text);}
+.pm-close{background:var(--bg4);border:none;border-radius:50%;width:32px;height:32px;font-size:14px;cursor:pointer;color:var(--text2);}
+.pm-search-wrap{display:flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--gold-border);border-radius:14px;padding:11px 14px;margin:0 16px 12px;flex-shrink:0;}
+.pm-search-input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:Cairo,sans-serif;font-size:13px;}
+.pm-search-input::placeholder{color:var(--text3);}
+.pm-search-icon{font-size:15px;opacity:.5;}
+.pm-search-clear{background:transparent;border:none;color:var(--text3);font-size:14px;cursor:pointer;}
+.pm-tabs{display:flex;gap:8px;padding:0 16px 10px;flex-shrink:0;}
+.pm-tab{flex:1;padding:9px;border-radius:12px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.5px;}
+.pm-tab.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
+.pm-list{flex:1;overflow-y:auto;padding:0 12px 20px;}
+.pm-item{display:flex;align-items:center;gap:14px;padding:13px 12px;border-radius:14px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--border);}
+.pm-item:active,.pm-item:hover{background:var(--gold-dim);}
+.pm-item.selected{background:var(--gold-dim);border-color:var(--gold-border2);}
+.pm-item-flags{font-size:22px;line-height:1;flex-shrink:0;}
+.pm-item-info{flex:1;}
+.pm-item-name{font-size:14px;font-weight:700;color:var(--text);}
+.pm-item-sub{font-size:11px;color:var(--text3);margin-top:2px;letter-spacing:.5px;}
+.pm-item-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.pm-item.selected .pm-item-check{background:var(--gold);border-color:var(--gold);}
+.pm-item.selected .pm-item-check::after{content:'✓';font-size:11px;color:#040301;font-weight:900;}
+.pm-no-result{text-align:center;padding:30px;color:var(--text3);font-size:13px;}
+
+/* ══ BOTTOM STATS SECTION ══ */
+.bottom-stats-section{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;display:none;}
+.bottom-stats-section.visible{display:block;}
+.bss-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:14px;}
+.bss-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.bss-card{background:var(--bg3);border-radius:12px;padding:12px 8px;text-align:center;border:1px solid var(--border);}
+.bss-val{font-size:20px;font-weight:900;color:var(--text);line-height:1;}
+.bss-val.buy{color:var(--buy);}
+.bss-val.sell{color:var(--sell);}
+.bss-val.gold{color:var(--gold);}
+.bss-lbl{font-size:10px;color:var(--text3);margin-top:4px;font-weight:600;}
+.bss-popular{background:var(--bg3);border-radius:14px;padding:14px;border:1px solid var(--border);}
+.bss-pop-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:10px;}
+.bss-pop-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);}
+.bss-pop-item:last-child{border-bottom:none;}
+.bss-pop-tf{margin-right:auto;font-size:11px;background:var(--gold-dim);color:var(--gold);padding:2px 8px;border-radius:6px;border:1px solid var(--gold-border);}
+
+/* ══ BOTTOM NAV ══ */
+.bottom-nav{display:flex;background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:6px;gap:6px;margin-bottom:12px;}
+.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;border-radius:12px;border:none;background:transparent;cursor:pointer;transition:all .18s;}
+.bn-btn.active{background:var(--gold-dim);border:1px solid var(--gold-border);}
+.bn-icon{font-size:18px;line-height:1;}
+.bn-lbl{font-size:11px;font-weight:700;color:var(--text3);font-family:Cairo,sans-serif;}
+.bn-btn.active .bn-lbl{color:var(--gold);}
+
+
 /* ══ PREMIUM SELECT STYLING ══ */
 .swrap select{background:var(--bg3);color:var(--text);border:1px solid var(--gold-border);border-radius:12px;padding:11px 14px;font-family:Cairo,sans-serif;font-size:13px;font-weight:600;width:100%;appearance:none;-webkit-appearance:none;outline:none;cursor:pointer;}
 .swrap select optgroup{background:var(--bg4);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.5px;}
@@ -1517,6 +1595,29 @@ option{background:#141929;}
   </div>
 </div>
 
+<!-- PAIR MODAL -->
+<div id="pairModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.92);backdrop-filter:blur(10px);flex-direction:column;">
+  <div class="pm-sheet">
+    <div class="pm-header">
+      <div class="pm-title">اختر الزوج</div>
+      <button class="pm-close" onclick="closePairModal()">✕</button>
+    </div>
+    <!-- Search -->
+    <div class="pm-search-wrap">
+      <span class="pm-search-icon">🔍</span>
+      <input type="text" id="pmSearchInput" class="pm-search-input" placeholder="ابحث... EUR, BTC, Gold" oninput="pmFilter(this.value)" autocomplete="off"/>
+      <button id="pmSearchClear" class="pm-search-clear" onclick="pmClearSearch()" style="display:none;">✕</button>
+    </div>
+    <!-- Category Tabs -->
+    <div class="pm-tabs" id="pmTabs">
+      <button class="pm-tab active" data-cat="OTC" onclick="pmSwitchCat('OTC')">🌙 OTC</button>
+      <button class="pm-tab" data-cat="REAL" onclick="pmSwitchCat('REAL')">💹 Real</button>
+    </div>
+    <!-- Pair List -->
+    <div class="pm-list" id="pmList"></div>
+  </div>
+</div>
+
 <!-- GUARD -->
 <div id="guard">
   <div class="g-ring" id="gRing"></div>
@@ -1678,111 +1779,86 @@ option{background:#141929;}
   <!-- TAB PAGE 1: SIGNALS -->
   <div class="tab-page active" id="tabpage-signals">
 
-  <!-- STATS BAR -->
-  <div class="stats-bar fi d1" id="statsBar">
-    <div class="stat-item">
-      <div class="stat-val" id="statTodayCount">0</div>
-      <div class="stat-lbl" data-ar="إشارات اليوم" data-en="Today">إشارات اليوم</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-val" id="statBuyCount" style="color:var(--buy)">0</div>
-      <div class="stat-lbl" data-ar="شراء" data-en="BUY">شراء</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-val" id="statSellCount" style="color:var(--sell)">0</div>
-      <div class="stat-lbl" data-ar="بيع" data-en="SELL">بيع</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-val" id="statAvgAcc">--%</div>
-      <div class="stat-lbl" data-ar="متوسط الدقة" data-en="Avg Acc">متوسط الدقة</div>
-    </div>
-  </div>
+  <!-- stats bar removed -->
 
 
-  <!-- PAIR SELECT -->
+  <!-- PAIR SELECTOR CARD — NEW DESIGN -->
   <div class="fi d2">
-    <div class="label-row">
-      <label class="flabel" data-ar="اختر الزوج" data-en="Select Pair">اختر الزوج &nbsp;<span id="activePairFlag" style="font-size:16px;">🇪🇺🇺🇸</span></label>
-    </div>
-    <!-- SEARCH BOX -->
-    <div class="pair-search-wrap" id="pairSearchWrap">
-      <div class="pair-search-icon">🔍</div>
-      <input type="text" id="pairSearchInput" class="pair-search-input" 
-        placeholder="ابحث عن زوج... مثال: EUR أو BTC" 
-        oninput="filterPairs(this.value)" autocomplete="off" autocorrect="off" spellcheck="false"/>
-      <button class="pair-search-clear" id="pairSearchClear" onclick="clearPairSearch()" style="display:none;">✕</button>
-    </div>
-    <!-- SEARCH RESULTS -->
-    <div class="pair-search-results" id="pairSearchResults" style="display:none;"></div>
-    <div class="swrap" id="pairSelectWrap">
-      <select id="s-pair" onchange="pairChange()">
-        <optgroup id="og-otc" label="🌙 OTC ──">
-          <option>EUR/USD OTC</option><option>GBP/USD OTC</option><option>USD/JPY OTC</option>
-          <option>AUD/USD OTC</option><option>USD/CAD OTC</option><option>EUR/GBP OTC</option>
-          <option>EUR/JPY OTC</option><option>GBP/JPY OTC</option><option>AUD/NZD OTC</option>
-          <option>USD/RUB OTC</option><option>CAD/JPY OTC</option><option>CHF/JPY OTC</option>
-          <option>EUR/CHF OTC</option><option>AUD/CAD OTC</option><option>NZD/JPY OTC</option>
-          <option>AUD/JPY OTC</option><option>NZD/USD OTC</option><option>USD/CHF OTC</option>
-          <option>GBP/CHF OTC</option><option>EUR/AUD OTC</option>
-        </optgroup>
-        <optgroup id="og-real" label="💹 FOREX ──">
-          <option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option>
-          <option>USD/CHF</option><option>AUD/USD</option><option>USD/CAD</option>
-          <option>NZD/USD</option><option>GBP/JPY</option><option>EUR/JPY</option>
-          <option>AUD/JPY</option><option>EUR/GBP</option><option>GBP/CHF</option>
-          <option>EUR/CHF</option><option>AUD/NZD</option><option>CAD/JPY</option>
-          <option>CHF/JPY</option><option>AUD/CAD</option><option>NZD/JPY</option>
-          <option>USD/MXN</option><option>USD/SGD</option><option>EUR/CAD</option>
-          <option>GBP/CAD</option><option>EUR/NZD</option><option>GBP/NZD</option>
-          <option>USD/PLN</option><option>USD/TRY</option><option>USD/ZAR</option>
-        </optgroup>
-        <optgroup id="og-crypto" label="🪙 CRYPTO ──">
-          <option>BTC/USD</option><option>ETH/USD</option><option>LTC/USD</option>
-          <option>XRP/USD</option><option>SOL/USD</option><option>BNB/USD</option>
-          <option>ADA/USD</option><option>DOGE/USD</option>
-        </optgroup>
-        <optgroup id="og-metals" label="🥇 METALS & ENERGY ──">
-          <option>XAU/USD</option><option>XAG/USD</option><option>WTI/USD</option>
-          <option>BRT/USD</option>
-        </optgroup>
-        <optgroup id="og-stocks" label="📈 STOCKS OTC ──">
-          <option>APPLE OTC</option><option>TESLA OTC</option><option>AMAZON OTC</option>
-          <option>GOOGLE OTC</option><option>META OTC</option><option>NVIDIA OTC</option>
-          <option>MICROSOFT OTC</option>
-        </optgroup>
-      </select>
+    <!-- Active Pair Display -->
+    <div class="active-pair-card" id="activePairCard" onclick="openPairModal()">
+      <div class="apc-flags" id="apcFlags">🇪🇺🇺🇸</div>
+      <div class="apc-info">
+        <div class="apc-name" id="apcName">EUR/USD OTC</div>
+        <div class="apc-cat" id="apcCat">OTC MARKET</div>
+      </div>
+      <div class="apc-arrow">▾</div>
     </div>
     <div class="otc-badge" id="otcBadge">
       <div class="otc-dot"></div>
       <span data-ar="وضع OTC — محرك معزز للتداول الليلي" data-en="OTC Mode — Enhanced night trading engine">وضع OTC — محرك معزز للتداول الليلي</span>
     </div>
+    <!-- hidden select for JS compatibility -->
+    <select id="s-pair" onchange="pairChange()" style="display:none;">
+      <optgroup label="OTC">
+        <option>EUR/USD OTC</option><option>GBP/USD OTC</option><option>USD/JPY OTC</option>
+        <option>AUD/USD OTC</option><option>USD/CAD OTC</option><option>EUR/GBP OTC</option>
+        <option>EUR/JPY OTC</option><option>GBP/JPY OTC</option><option>AUD/NZD OTC</option>
+        <option>USD/RUB OTC</option><option>CAD/JPY OTC</option><option>CHF/JPY OTC</option>
+        <option>EUR/CHF OTC</option><option>AUD/CAD OTC</option><option>NZD/JPY OTC</option>
+        <option>AUD/JPY OTC</option><option>NZD/USD OTC</option><option>USD/CHF OTC</option>
+        <option>GBP/CHF OTC</option><option>EUR/AUD OTC</option>
+      </optgroup>
+      <optgroup label="REAL">
+        <option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option>
+        <option>USD/CHF</option><option>AUD/USD</option><option>USD/CAD</option>
+        <option>NZD/USD</option><option>GBP/JPY</option><option>EUR/JPY</option>
+        <option>AUD/JPY</option><option>EUR/GBP</option><option>XAU/USD</option>
+        <option>BTC/USD</option><option>ETH/USD</option><option>GBP/CHF</option>
+        <option>EUR/CHF</option><option>AUD/NZD</option><option>CAD/JPY</option>
+        <option>CHF/JPY</option><option>AUD/CAD</option>
+      </optgroup>
+    </select>
   </div>
 
-  <!-- TIMEFRAME SELECT -->
+  <!-- TIMEFRAME GRID BUTTONS -->
   <div class="fi d2">
     <div class="label-row">
       <label class="flabel" data-ar="الإطار الزمني" data-en="Timeframe">الإطار الزمني</label>
+      <span class="tf-mode-badge" id="tfModeBadge">OTC</span>
     </div>
-    <div class="swrap">
-      <select id="s-tf" onchange="onTfChange()">
-        <option value="3s"  data-ar="3 ثواني"  data-en="3 sec">3 ثواني</option>
-        <option value="5s"  data-ar="5 ثواني"  data-en="5 sec">5 ثواني</option>
-        <option value="10s" data-ar="10 ثواني" data-en="10 sec">10 ثواني</option>
-        <option value="15s" data-ar="15 ثانية" data-en="15 sec">15 ثانية</option>
-        <option value="30s" data-ar="30 ثانية" data-en="30 sec">30 ثانية</option>
-        <option value="1"   data-ar="1 دقيقة"  data-en="1 min">1 دقيقة</option>
-        <option value="2"   data-ar="2 دقيقة"  data-en="2 min">2 دقيقة</option>
-        <option value="3"   data-ar="3 دقائق"  data-en="3 min">3 دقائق</option>
-        <option value="5"   data-ar="5 دقائق"  data-en="5 min" selected>5 دقائق</option>
-        <option value="10"  data-ar="10 دقائق" data-en="10 min">10 دقائق</option>
-        <option value="15"  data-ar="15 دقيقة" data-en="15 min">15 دقيقة</option>
-        <option value="30"  data-ar="30 دقيقة" data-en="30 min">30 دقيقة</option>
-        <option value="60"  data-ar="1 ساعة"   data-en="1 hr">1 ساعة</option>
-      </select>
+    <div class="tf-grid" id="tfGrid">
+      <!-- OTC timeframes (shown for OTC pairs) -->
+      <div class="tf-group" id="tfGroupOTC">
+        <button class="tf-btn" data-tf="3s" onclick="selectTf('3s')">S3</button>
+        <button class="tf-btn" data-tf="5s" onclick="selectTf('5s')">S5</button>
+        <button class="tf-btn" data-tf="15s" onclick="selectTf('15s')">S15</button>
+        <button class="tf-btn" data-tf="30s" onclick="selectTf('30s')">S30</button>
+        <button class="tf-btn" data-tf="1" onclick="selectTf('1')">M1</button>
+        <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
+        <button class="tf-btn active" data-tf="5" onclick="selectTf('5')">M5</button>
+        <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
+      </div>
+      <!-- Real timeframes (shown for real pairs, min 1min) -->
+      <div class="tf-group" id="tfGroupReal" style="display:none;">
+        <button class="tf-btn active" data-tf="1" onclick="selectTf('1')">M1</button>
+        <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
+        <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
+        <button class="tf-btn" data-tf="5" onclick="selectTf('5')">M5</button>
+        <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
+        <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
+        <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
+        <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
+      </div>
     </div>
+    <!-- hidden select for JS compatibility -->
+    <select id="s-tf" onchange="onTfChange()" style="display:none;">
+      <option value="3s">3s</option><option value="5s">5s</option>
+      <option value="15s">15s</option><option value="30s">30s</option>
+      <option value="1">1</option><option value="2">2</option>
+      <option value="3">3</option><option value="5" selected>5</option>
+      <option value="10">10</option><option value="15">15</option>
+      <option value="30">30</option><option value="60">60</option>
+    </select>
   </div>
 
   <!-- STATUS BAR -->
@@ -1803,8 +1879,7 @@ option{background:#141929;}
     <div class="ps-dir" id="psDir">BUY</div>
   </div>
 
-  <!-- SIGNAL DOTS -->
-  <div class="sig-dots-wrap" id="sigDotsWrap"></div>
+  <div class="sig-dots-wrap" id="sigDotsWrap" style="display:none;"></div>
 
   <!-- WARN STRIP -->
   <div class="warn-strip" id="warnStrip">
@@ -1818,7 +1893,8 @@ option{background:#141929;}
 
   <!-- SIGNAL BUTTON -->
   <div class="fi d3">
-    <button class="sig-btn" id="sbtn" onclick="doSignal()">
+    <button class="sig-btn sig-btn-premium" id="sbtn" onclick="doSignal()">
+      <span class="sig-btn-icon">⚡</span>
       <span id="blbl" data-ar="الحصول على إشارة" data-en="Get Signal">الحصول على إشارة</span>
     </button>
   </div>
@@ -2090,6 +2166,49 @@ option{background:#141929;}
 
   </div><!-- /tabpage-ai -->
 
+  <!-- BOTTOM NAV STATS -->
+  <div class="bottom-stats-section fi" id="bottomStats">
+    <div class="bss-title">📊 إحصائيات اليوم</div>
+    <div class="bss-grid">
+      <div class="bss-card">
+        <div class="bss-val" id="bssSignals">0</div>
+        <div class="bss-lbl">إشارات</div>
+      </div>
+      <div class="bss-card">
+        <div class="bss-val buy" id="bssBuy">0</div>
+        <div class="bss-lbl">شراء</div>
+      </div>
+      <div class="bss-card">
+        <div class="bss-val sell" id="bssSell">0</div>
+        <div class="bss-lbl">بيع</div>
+      </div>
+      <div class="bss-card">
+        <div class="bss-val gold" id="bssAcc">--%</div>
+        <div class="bss-lbl">الدقة</div>
+      </div>
+    </div>
+    <div class="bss-popular">
+      <div class="bss-pop-title">🔥 أكثر الأزواج استخداماً</div>
+      <div class="bss-pop-list" id="bssPopList">
+        <div class="bss-pop-item"><span>🇪🇺🇺🇸</span><span>EUR/USD OTC</span><span class="bss-pop-tf">M5</span></div>
+        <div class="bss-pop-item"><span>🇬🇧🇺🇸</span><span>GBP/USD OTC</span><span class="bss-pop-tf">M1</span></div>
+        <div class="bss-pop-item"><span>🇺🇸🇯🇵</span><span>USD/JPY OTC</span><span class="bss-pop-tf">M3</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV BAR -->
+  <div class="bottom-nav">
+    <button class="bn-btn active" id="bn-signals" onclick="bnSwitch('signals')">
+      <span class="bn-icon">📊</span>
+      <span class="bn-lbl">إشارات</span>
+    </button>
+    <button class="bn-btn" id="bn-stats" onclick="bnSwitch('stats')">
+      <span class="bn-icon">📈</span>
+      <span class="bn-lbl">إحصائيات</span>
+    </button>
+  </div>
+
   <!-- SOCIAL -->
   <div class="social-section fi">
     <div class="social-label" id="socialLabel">تابعنا على</div>
@@ -2312,6 +2431,189 @@ function clearPairSearch(){
   document.getElementById('pairSearchInput').value='';
   filterPairs('');
 }
+
+
+/* ══ PAIR MODAL SYSTEM ══ */
+var OTC_PAIRS_LIST=[
+  {p:'EUR/USD OTC',f:'🇪🇺🇺🇸',s:'OTC MARKET'},
+  {p:'GBP/USD OTC',f:'🇬🇧🇺🇸',s:'OTC MARKET'},
+  {p:'USD/JPY OTC',f:'🇺🇸🇯🇵',s:'OTC MARKET'},
+  {p:'AUD/USD OTC',f:'🇦🇺🇺🇸',s:'OTC MARKET'},
+  {p:'USD/CAD OTC',f:'🇺🇸🇨🇦',s:'OTC MARKET'},
+  {p:'EUR/GBP OTC',f:'🇪🇺🇬🇧',s:'OTC MARKET'},
+  {p:'EUR/JPY OTC',f:'🇪🇺🇯🇵',s:'OTC MARKET'},
+  {p:'GBP/JPY OTC',f:'🇬🇧🇯🇵',s:'OTC MARKET'},
+  {p:'AUD/NZD OTC',f:'🇦🇺🇳🇿',s:'OTC MARKET'},
+  {p:'USD/RUB OTC',f:'🇺🇸🇷🇺',s:'OTC MARKET'},
+  {p:'CAD/JPY OTC',f:'🇨🇦🇯🇵',s:'OTC MARKET'},
+  {p:'CHF/JPY OTC',f:'🇨🇭🇯🇵',s:'OTC MARKET'},
+  {p:'EUR/CHF OTC',f:'🇪🇺🇨🇭',s:'OTC MARKET'},
+  {p:'AUD/CAD OTC',f:'🇦🇺🇨🇦',s:'OTC MARKET'},
+  {p:'NZD/JPY OTC',f:'🇳🇿🇯🇵',s:'OTC MARKET'},
+  {p:'AUD/JPY OTC',f:'🇦🇺🇯🇵',s:'OTC MARKET'},
+  {p:'NZD/USD OTC',f:'🇳🇿🇺🇸',s:'OTC MARKET'},
+  {p:'USD/CHF OTC',f:'🇺🇸🇨🇭',s:'OTC MARKET'},
+  {p:'GBP/CHF OTC',f:'🇬🇧🇨🇭',s:'OTC MARKET'},
+  {p:'EUR/AUD OTC',f:'🇪🇺🇦🇺',s:'OTC MARKET'}
+];
+var REAL_PAIRS_LIST=[
+  {p:'EUR/USD',f:'🇪🇺🇺🇸',s:'REAL MARKET'},
+  {p:'GBP/USD',f:'🇬🇧🇺🇸',s:'REAL MARKET'},
+  {p:'USD/JPY',f:'🇺🇸🇯🇵',s:'REAL MARKET'},
+  {p:'USD/CHF',f:'🇺🇸🇨🇭',s:'REAL MARKET'},
+  {p:'AUD/USD',f:'🇦🇺🇺🇸',s:'REAL MARKET'},
+  {p:'USD/CAD',f:'🇺🇸🇨🇦',s:'REAL MARKET'},
+  {p:'NZD/USD',f:'🇳🇿🇺🇸',s:'REAL MARKET'},
+  {p:'GBP/JPY',f:'🇬🇧🇯🇵',s:'REAL MARKET'},
+  {p:'EUR/JPY',f:'🇪🇺🇯🇵',s:'REAL MARKET'},
+  {p:'AUD/JPY',f:'🇦🇺🇯🇵',s:'REAL MARKET'},
+  {p:'EUR/GBP',f:'🇪🇺🇬🇧',s:'REAL MARKET'},
+  {p:'XAU/USD',f:'🥇',s:'REAL MARKET'},
+  {p:'BTC/USD',f:'₿',s:'REAL MARKET'},
+  {p:'ETH/USD',f:'⟠',s:'REAL MARKET'},
+  {p:'GBP/CHF',f:'🇬🇧🇨🇭',s:'REAL MARKET'},
+  {p:'EUR/CHF',f:'🇪🇺🇨🇭',s:'REAL MARKET'},
+  {p:'AUD/NZD',f:'🇦🇺🇳🇿',s:'REAL MARKET'},
+  {p:'CAD/JPY',f:'🇨🇦🇯🇵',s:'REAL MARKET'},
+  {p:'CHF/JPY',f:'🇨🇭🇯🇵',s:'REAL MARKET'},
+  {p:'AUD/CAD',f:'🇦🇺🇨🇦',s:'REAL MARKET'}
+];
+var pmCurrentCat='OTC';
+var pmSearchQ='';
+
+function getPairInfo(pair){
+  var all=OTC_PAIRS_LIST.concat(REAL_PAIRS_LIST);
+  for(var i=0;i<all.length;i++){if(all[i].p===pair)return all[i];}
+  return {p:pair,f:'💱',s:'MARKET'};
+}
+
+function openPairModal(){
+  var m=document.getElementById('pairModal');
+  m.style.display='flex';
+  pmRenderList();
+  setTimeout(function(){document.getElementById('pmSearchInput').focus();},300);
+}
+
+function closePairModal(){
+  document.getElementById('pairModal').style.display='none';
+  document.getElementById('pmSearchInput').value='';
+  pmSearchQ='';
+}
+
+function pmSwitchCat(cat){
+  pmCurrentCat=cat;
+  pmSearchQ='';
+  document.getElementById('pmSearchInput').value='';
+  document.getElementById('pmSearchClear').style.display='none';
+  document.querySelectorAll('.pm-tab').forEach(function(t){
+    t.classList.toggle('active',t.dataset.cat===cat);
+  });
+  pmRenderList();
+}
+
+function pmFilter(q){
+  pmSearchQ=q.trim().toUpperCase();
+  document.getElementById('pmSearchClear').style.display=q?'':'none';
+  pmRenderList();
+}
+
+function pmClearSearch(){
+  document.getElementById('pmSearchInput').value='';
+  pmFilter('');
+}
+
+function pmRenderList(){
+  var list=pmCurrentCat==='OTC'?OTC_PAIRS_LIST:REAL_PAIRS_LIST;
+  var current=document.getElementById('s-pair').value;
+  if(pmSearchQ){
+    list=OTC_PAIRS_LIST.concat(REAL_PAIRS_LIST).filter(function(x){
+      return x.p.toUpperCase().includes(pmSearchQ);
+    });
+  }
+  var el=document.getElementById('pmList');
+  if(!list.length){
+    el.innerHTML='<div class="pm-no-result">لا نتائج لـ "'+document.getElementById('pmSearchInput').value+'"</div>';
+    return;
+  }
+  el.innerHTML=list.map(function(x){
+    var sel=x.p===current?' selected':'';
+    return '<div class="pm-item'+sel+'" onclick="pmSelectPair(this.dataset.p)" data-p="'+x.p+'">'+
+      '<div class="pm-item-flags">'+x.f+'</div>'+
+      '<div class="pm-item-info"><div class="pm-item-name">'+x.p+'</div><div class="pm-item-sub">'+x.s+'</div></div>'+
+      '<div class="pm-item-check"></div>'+
+    '</div>';
+  }).join('');
+}
+
+function pmSelectPair(pair){
+  var sel=document.getElementById('s-pair');
+  for(var i=0;i<sel.options.length;i++){
+    if(sel.options[i].value===pair||sel.options[i].text===pair){sel.selectedIndex=i;break;}
+  }
+  var info=getPairInfo(pair);
+  document.getElementById('apcFlags').textContent=info.f;
+  document.getElementById('apcName').textContent=pair;
+  document.getElementById('apcCat').textContent=info.s;
+  closePairModal();
+  pairChange();
+}
+
+/* ══ TF GRID SYSTEM ══ */
+function selectTf(val){
+  var sel=document.getElementById('s-tf');
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===val){sel.selectedIndex=i;break;}}
+  document.querySelectorAll('.tf-btn').forEach(function(b){
+    b.classList.toggle('active',b.dataset.tf===val);
+  });
+  onTfChange();
+}
+
+function updateTfGroupForPair(pair){
+  var isOTC=pair.includes('OTC');
+  var otcG=document.getElementById('tfGroupOTC');
+  var realG=document.getElementById('tfGroupReal');
+  var badge=document.getElementById('tfModeBadge');
+  if(otcG)otcG.style.display=isOTC?'':'none';
+  if(realG)realG.style.display=isOTC?'none':'';
+  if(badge)badge.textContent=isOTC?'OTC':'REAL';
+  if(!isOTC){
+    // للأزواج الحقيقية: ابدأ من M1
+    var currentTf=document.getElementById('s-tf').value;
+    var shortTfs=['3s','5s','10s','15s','30s'];
+    if(shortTfs.indexOf(currentTf)>-1){selectTf('1');}
+  }
+}
+
+/* ══ BOTTOM NAV ══ */
+function bnSwitch(tab){
+  document.querySelectorAll('.bn-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('bn-'+tab).classList.add('active');
+  var statsSection=document.getElementById('bottomStats');
+  if(tab==='stats'){
+    statsSection.classList.add('visible');
+    updateBottomStats();
+  } else {
+    statsSection.classList.remove('visible');
+  }
+}
+
+function updateBottomStats(){
+  var h=[];try{h=JSON.parse(localStorage.getItem('aivex_sig_history')||'[]');}catch(e){}
+  var today=new Date().toDateString();
+  var todayH=h.filter(function(x){return new Date(x.ts||x.time||0).toDateString()===today;});
+  var buy=todayH.filter(function(x){return x.dir==='BUY'||x.signal==='BUY';}).length;
+  var sell=todayH.filter(function(x){return x.dir==='SELL'||x.signal==='SELL';}).length;
+  var accArr=todayH.map(function(x){return parseFloat(x.acc||x.accuracy||0);}).filter(function(x){return x>0;});
+  var avgAcc=accArr.length?Math.round(accArr.reduce(function(a,b){return a+b;},0)/accArr.length):0;
+  var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
+  s('bssSignals',todayH.length);s('bssBuy',buy);s('bssSell',sell);
+  s('bssAcc',avgAcc?avgAcc+'%':'--%');
+  // sync with old stat elements
+  var e=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
+  e('statTodayCount',todayH.length);e('statBuyCount',buy);e('statSellCount',sell);
+  e('statAvgAcc',avgAcc?avgAcc+'%':'--%');
+}
+
 
 runGuard();
 
