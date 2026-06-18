@@ -46,7 +46,7 @@
 .tf-step-col{display:flex;flex-direction:column;gap:6px;align-items:stretch;}
 .tf-step-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;color:var(--text2);font-size:16px;font-weight:700;padding:9px 0;cursor:pointer;transition:all .15s;user-select:none;}
 .tf-step-btn:active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
-.tf-step-val{text-align:center;font-size:26px;font-weight:900;color:var(--text);font-family:'Orbitron',sans-serif;}
+.tf-step-val{text-align:center;font-size:26px;font-weight:900;color:var(--text);font-family:'Cairo',sans-serif;}
 .tf-step-sep{font-size:22px;font-weight:900;color:var(--text3);}
 .tf-stepper-confirm{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,rgba(180,130,10,0.9),rgba(245,200,66,0.85));color:#0D0A02;font-family:Cairo,sans-serif;font-size:14px;font-weight:800;cursor:pointer;}
 .tf-stepper-confirm:active{transform:scale(.98);}
@@ -1579,9 +1579,9 @@ option{background:#141929;}
   </div>
 </div>
 
-<!-- PAIR MODAL -->
-<div id="pairModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.92);backdrop-filter:blur(10px);flex-direction:column;">
-  <div class="pm-sheet">
+<!-- PAIR MODAL — small floating overlay -->
+<div id="pairModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
+  <div style="width:100%;max-width:400px;max-height:82vh;display:flex;flex-direction:column;background:var(--bg2);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.75);animation:pmSlideUp .25s ease;">
     <div class="pm-header">
       <div class="pm-title">اختر الزوج</div>
       <button class="pm-close" onclick="closePairModal()">✕</button>
@@ -1822,33 +1822,16 @@ option{background:#141929;}
     </select>
   </div>
 
-  <!-- TIMEFRAME MODAL (popup, same grid as before) -->
-  <div id="tfModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.92);backdrop-filter:blur(10px);flex-direction:column;">
-    <div class="tfm-sheet">
+  <!-- TIMEFRAME MODAL — small floating overlay -->
+  <div id="tfModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
+    <div style="width:100%;max-width:400px;max-height:80vh;display:flex;flex-direction:column;background:var(--bg2);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.75);animation:pmSlideUp .25s ease;">
       <div class="tfm-header">
         <div class="tfm-title" data-ar="اختر الإطار الزمني" data-en="Select Timeframe">اختر الإطار الزمني</div>
         <button class="tfm-close" onclick="closeTfModal()">✕</button>
       </div>
-      <div class="tfm-body">
-        <!-- Quick-pick chips (all existing timeframes in order; short ones hidden for Real pairs via JS) -->
-        <div class="tf-chips-row" id="tfChipsRow">
-          <button class="tf-chip" data-tf="3s" data-short="1" onclick="selectTf('3s')">S3</button>
-          <button class="tf-chip" data-tf="5s" data-short="1" onclick="selectTf('5s')">S5</button>
-          <button class="tf-chip" data-tf="15s" data-short="1" onclick="selectTf('15s')">S15</button>
-          <button class="tf-chip" data-tf="30s" data-short="1" onclick="selectTf('30s')">S30</button>
-          <button class="tf-chip active" data-tf="1" onclick="selectTf('1')">M1</button>
-          <button class="tf-chip" data-tf="2" onclick="selectTf('2')">M2</button>
-          <button class="tf-chip" data-tf="3" onclick="selectTf('3')">M3</button>
-          <button class="tf-chip" data-tf="5" onclick="selectTf('5')">M5</button>
-          <button class="tf-chip" data-tf="10" onclick="selectTf('10')">M10</button>
-          <button class="tf-chip" data-tf="15" onclick="selectTf('15')">M15</button>
-          <button class="tf-chip" data-tf="30" onclick="selectTf('30')">M30</button>
-          <button class="tf-chip" data-tf="60" onclick="selectTf('60')">H1</button>
-          <button class="tf-chip" data-tf="120" onclick="selectTf('120')">H2</button>
-          <button class="tf-chip" data-tf="240" onclick="selectTf('240')">H4</button>
-        </div>
-        <div class="tf-stepper-label" data-ar="أو حدّد وقتاً مخصصاً" data-en="Or set a custom duration">أو حدّد وقتاً مخصصاً</div>
-        <!-- Custom HH:MM:SS stepper -->
+      <div class="tfm-body" style="overflow-y:auto;">
+        <!-- Custom HH:MM:SS stepper — FIRST -->
+        <div class="tf-stepper-label" data-ar="حدّد وقتاً مخصصاً" data-en="Set a custom duration">حدّد وقتاً مخصصاً</div>
         <div class="tf-stepper">
           <div class="tf-step-col">
             <button class="tf-step-btn" onclick="tfStep('h',1)">+</button>
@@ -1869,6 +1852,24 @@ option{background:#141929;}
           </div>
         </div>
         <button class="tf-stepper-confirm" onclick="confirmCustomTf()" data-ar="تأكيد الوقت" data-en="Confirm Duration">تأكيد الوقت</button>
+        <!-- Quick-pick chips — BELOW stepper -->
+        <div class="tf-stepper-label" style="margin-top:16px;" data-ar="أو اختر إطاراً جاهزاً" data-en="Or pick a preset">أو اختر إطاراً جاهزاً</div>
+        <div class="tf-chips-row" id="tfChipsRow">
+          <button class="tf-chip" data-tf="3s" data-short="1" onclick="selectTf('3s')">S3</button>
+          <button class="tf-chip" data-tf="5s" data-short="1" onclick="selectTf('5s')">S5</button>
+          <button class="tf-chip" data-tf="15s" data-short="1" onclick="selectTf('15s')">S15</button>
+          <button class="tf-chip" data-tf="30s" data-short="1" onclick="selectTf('30s')">S30</button>
+          <button class="tf-chip active" data-tf="1" onclick="selectTf('1')">M1</button>
+          <button class="tf-chip" data-tf="2" onclick="selectTf('2')">M2</button>
+          <button class="tf-chip" data-tf="3" onclick="selectTf('3')">M3</button>
+          <button class="tf-chip" data-tf="5" onclick="selectTf('5')">M5</button>
+          <button class="tf-chip" data-tf="10" onclick="selectTf('10')">M10</button>
+          <button class="tf-chip" data-tf="15" onclick="selectTf('15')">M15</button>
+          <button class="tf-chip" data-tf="30" onclick="selectTf('30')">M30</button>
+          <button class="tf-chip" data-tf="60" onclick="selectTf('60')">H1</button>
+          <button class="tf-chip" data-tf="120" onclick="selectTf('120')">H2</button>
+          <button class="tf-chip" data-tf="240" onclick="selectTf('240')">H4</button>
+        </div>
       </div>
     </div>
   </div>
