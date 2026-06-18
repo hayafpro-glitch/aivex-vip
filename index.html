@@ -10,7 +10,7 @@
 
 
 /* ══ ACTIVE PAIR CARD (compact) ══ */
-.active-pair-card{display:flex;align-items:center;gap:9px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
+.active-pair-card{display:flex;align-items:center;gap:9px;background:var(--bg3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
 .active-pair-card:active{background:var(--gold-dim);border-color:var(--gold);}
 .apc-flags{font-size:17px;line-height:1;flex-shrink:0;}
 .apc-info{flex:1;}
@@ -19,7 +19,7 @@
 .apc-arrow{font-size:14px;color:var(--gold);opacity:.7;}
 
 /* ══ ACTIVE TIMEFRAME CARD (compact, mirrors active-pair-card) ══ */
-.active-tf-card{display:flex;align-items:center;gap:9px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;}
+.active-tf-card{display:flex;align-items:center;gap:9px;background:var(--bg3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;}
 .active-tf-card:active{background:var(--gold-dim);border-color:var(--gold);}
 .atf-icon{font-size:17px;line-height:1;flex-shrink:0;}
 .atf-info{flex:1;}
@@ -28,7 +28,7 @@
 .atf-arrow{font-size:14px;color:var(--gold);opacity:.7;}
 
 /* ══ TF MODAL (mirrors pm-sheet but simpler, no search) ══ */
-.tfm-sheet{background:var(--bg2);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
+.tfm-sheet{background:rgba(8,6,1,0.97);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
 .tfm-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px;flex-shrink:0;}
 .tfm-title{font-size:15px;font-weight:800;color:var(--text);}
 .tfm-close{background:var(--bg4);border:none;border-radius:50%;width:32px;height:32px;font-size:14px;cursor:pointer;color:var(--text2);}
@@ -50,6 +50,7 @@
 .tf-step-btn:active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);transform:scale(.95);}
 .tf-step-val{text-align:center;font-size:28px;font-weight:900;color:var(--text);font-family:'Cairo',sans-serif;letter-spacing:2px;}
 .tf-step-sep{font-size:24px;font-weight:900;color:var(--gold);opacity:0.6;}
+.tf-step-unit-lbl{font-size:10px;font-weight:700;color:var(--gold);opacity:0.7;text-align:center;letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase;}
 .tf-stepper-confirm{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#040301;font-family:Cairo,sans-serif;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(245,200,66,0.25);}
 .tf-stepper-confirm:hover{box-shadow:0 6px 22px rgba(245,200,66,0.40);}
 .tf-stepper-confirm:active{transform:scale(.98);}
@@ -70,7 +71,7 @@
 .sig-btn-icon{font-size:18px;}
 
 /* ══ PAIR MODAL ══ */
-.pm-sheet{background:var(--bg2);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
+.pm-sheet{background:rgba(8,6,1,0.97);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
 @keyframes pmSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .pm-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px;flex-shrink:0;}
 .pm-title{font-size:17px;font-weight:800;color:var(--text);}
@@ -138,12 +139,12 @@
 
 /* ══ DESIGN TOKENS — AIVEX GOLD IDENTITY (DARK MODE DEFAULT) ══ */
 :root{
-  --bg:#040301;
-  --bg2:#080601;
-  --bg3:#0D0A02;
-  --bg4:#121004;
-  --surface:rgba(245,200,66,0.02);
-  --surface2:rgba(245,200,66,0.04);
+  --bg:rgba(4,3,1,0.0);
+  --bg2:rgba(8,6,1,0.80);
+  --bg3:rgba(13,10,2,0.82);
+  --bg4:rgba(18,16,4,0.88);
+  --surface:rgba(245,200,66,0.03);
+  --surface2:rgba(245,200,66,0.06);
 
   --buy:#00E5A0;
   --buy-dim:rgba(0,229,160,0.07);
@@ -218,11 +219,8 @@ body.light-mode{
 body.light-mode{background:var(--bg);}
 body.light-mode::before{
   background:
-    linear-gradient(rgba(200,216,236,0.022) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,216,236,0.022) 1px,transparent 1px),
-    radial-gradient(ellipse 65% 45% at 85% 0%,rgba(120,150,200,0.14) 0%,transparent 60%),
-    radial-gradient(ellipse 45% 50% at 0% 100%,rgba(90,120,170,0.10) 0%,transparent 55%);
-  background-size:52px 52px,52px 52px,100% 100%,100% 100%;
+    linear-gradient(rgba(20,23,29,0.60),rgba(20,23,29,0.70)),
+    url('https://i.postimg.cc/N0n7kCT0/20260617-105459.jpg') center center / cover no-repeat;
 }
 body.light-mode select{background:var(--bg3);color:var(--text);}
 body.light-mode option{background:#22262E;color:#E4EDF8;}
@@ -237,7 +235,7 @@ body.light-mode .ao-box{background:var(--bg3);}
 body.light-mode .ai-analyzer-section{background:rgba(28,32,40,0.60);}
 body.light-mode .ind-panel{background:var(--bg2);}
 body.light-mode .vip-lock-overlay-inner{background:linear-gradient(160deg,var(--bg2),var(--bg3));}
-body.light-mode .hdr{background:rgba(20,23,29,0.94);}
+body.light-mode .hdr{background:rgba(20,23,29,0.92);backdrop-filter:blur(20px);}
 body.light-mode .stats-bar{background:var(--bg2);}
 
 /* ══ THEME TOGGLE BUTTON ══ */
@@ -293,7 +291,7 @@ body.light-mode .stats-bar{background:var(--bg2);}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  background:var(--bg);
+  background:transparent;
   font-family:'Cairo',sans-serif;
   color:var(--text);
   min-height:100vh;
@@ -308,12 +306,8 @@ body::before{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   transition:opacity .4s ease;
   background:
-    linear-gradient(rgba(245,200,66,0.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(245,200,66,0.018) 1px,transparent 1px),
-    radial-gradient(ellipse 75% 55% at 85% -5%,rgba(245,200,66,0.14) 0%,transparent 60%),
-    radial-gradient(ellipse 50% 55% at -5% 105%,rgba(201,162,39,0.10) 0%,transparent 55%),
-    radial-gradient(ellipse 35% 30% at 50% 50%,rgba(245,200,66,0.04) 0%,transparent 70%);
-  background-size:52px 52px,52px 52px,100% 100%,100% 100%,100% 100%;
+    linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.65)),
+    url('https://i.postimg.cc/N0n7kCT0/20260617-105459.jpg') center center / cover no-repeat;
 }
 
 .page{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 14px 72px;display:none;}
@@ -324,7 +318,7 @@ body::before{
   padding:20px 0 16px;
   border-bottom:1px solid var(--border);
   margin-bottom:20px;
-}
+;backdrop-filter:blur(20px);}
 .logo{display:flex;align-items:center;gap:12px;}
 .logo-box{
   width:52px;height:52px;border-radius:14px;
@@ -1584,7 +1578,7 @@ option{background:#141929;}
 
 <!-- PAIR MODAL — small floating overlay -->
 <div id="pairModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
-  <div style="width:100%;max-width:400px;max-height:82vh;display:flex;flex-direction:column;background:var(--bg2);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.75);animation:pmSlideUp .25s ease;">
+  <div style="width:100%;max-width:400px;max-height:82vh;display:flex;flex-direction:column;background:rgba(8,6,1,0.97);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.85);animation:pmSlideUp .25s ease;">
     <div class="pm-header">
       <div class="pm-title">اختر الزوج</div>
       <button class="pm-close" onclick="closePairModal()">✕</button>
@@ -1837,7 +1831,7 @@ option{background:#141929;}
 
   <!-- TIMEFRAME MODAL — small floating overlay -->
   <div id="tfModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
-    <div style="width:100%;max-width:400px;max-height:80vh;display:flex;flex-direction:column;background:var(--bg2);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.75);animation:pmSlideUp .25s ease;">
+    <div style="width:100%;max-width:400px;max-height:80vh;display:flex;flex-direction:column;background:rgba(8,6,1,0.97);border:1.5px solid var(--gold-border2);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.85);animation:pmSlideUp .25s ease;">
       <div class="tfm-header">
         <div class="tfm-title" data-ar="اختر الإطار الزمني" data-en="Select Timeframe">اختر الإطار الزمني</div>
         <button class="tfm-close" onclick="closeTfModal()">✕</button>
@@ -1845,22 +1839,26 @@ option{background:#141929;}
       <div class="tfm-body" style="overflow-y:auto;">
         <!-- Custom HH:MM:SS stepper — FIRST -->
         <div class="tf-stepper-label" data-ar="حدّد وقتاً مخصصاً" data-en="Set a custom duration">حدّد وقتاً مخصصاً</div>
-        <div class="tf-stepper">
+        <div class="tf-stepper" dir="ltr">
+          <!-- RTL: right=seconds, center=minutes, left=hours -->
           <div class="tf-step-col">
+            <div class="tf-step-unit-lbl">س</div>
             <button class="tf-step-btn" onclick="tfStep('h',1)">+</button>
             <div class="tf-step-val" id="tfStepH">00</div>
             <button class="tf-step-btn" onclick="tfStep('h',-1)">−</button>
           </div>
           <div class="tf-step-sep">:</div>
           <div class="tf-step-col">
+            <div class="tf-step-unit-lbl">د</div>
             <button class="tf-step-btn" onclick="tfStep('m',1)">+</button>
             <div class="tf-step-val" id="tfStepM">01</div>
             <button class="tf-step-btn" onclick="tfStep('m',-1)">−</button>
           </div>
           <div class="tf-step-sep">:</div>
           <div class="tf-step-col">
+            <div class="tf-step-unit-lbl">ث</div>
             <button class="tf-step-btn" onclick="tfStep('s',1)">+</button>
-            <div class="tf-step-val" id="tfStepS">00</div>
+            <div class="tf-step-val" id="tfStepS">03</div>
             <button class="tf-step-btn" onclick="tfStep('s',-1)">−</button>
           </div>
         </div>
