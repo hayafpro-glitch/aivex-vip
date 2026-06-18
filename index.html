@@ -38,17 +38,20 @@
 .tf-chips-row{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 14px;-webkit-overflow-scrolling:touch;}
 .tf-chips-row::-webkit-scrollbar{display:none;}
 .tf-chip{flex-shrink:0;padding:9px 14px;border-radius:11px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);font-family:Cairo,sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;}
-.tf-chip.active{background:linear-gradient(135deg,rgba(180,130,10,0.85),rgba(245,200,66,0.75));color:#0D0A02;border-color:var(--gold);}
+.tf-chip:hover{border-color:var(--gold-border2);color:var(--text);background:var(--bg4);}
+.tf-chip.active{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#040301;border-color:var(--gold);box-shadow:0 0 10px rgba(245,200,66,0.25);font-weight:800;}
 
 /* ══ CUSTOM DURATION STEPPER (HH:MM:SS) ══ */
-.tf-stepper-label{font-size:11px;color:var(--text3);font-weight:600;margin:4px 0 10px;letter-spacing:.4px;}
+.tf-stepper-label{font-size:11px;color:var(--gold);font-weight:700;margin:4px 0 10px;letter-spacing:.6px;opacity:0.75;text-transform:uppercase;}
 .tf-stepper{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:6px;margin-bottom:16px;}
 .tf-step-col{display:flex;flex-direction:column;gap:6px;align-items:stretch;}
-.tf-step-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;color:var(--text2);font-size:16px;font-weight:700;padding:9px 0;cursor:pointer;transition:all .15s;user-select:none;}
-.tf-step-btn:active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
-.tf-step-val{text-align:center;font-size:26px;font-weight:900;color:var(--text);font-family:'Cairo',sans-serif;}
-.tf-step-sep{font-size:22px;font-weight:900;color:var(--text3);}
-.tf-stepper-confirm{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,rgba(180,130,10,0.9),rgba(245,200,66,0.85));color:#0D0A02;font-family:Cairo,sans-serif;font-size:14px;font-weight:800;cursor:pointer;}
+.tf-step-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;color:var(--gold);font-size:20px;font-weight:700;padding:10px 0;cursor:pointer;transition:all .15s;user-select:none;}
+.tf-step-btn:hover{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
+.tf-step-btn:active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);transform:scale(.95);}
+.tf-step-val{text-align:center;font-size:28px;font-weight:900;color:var(--text);font-family:'Cairo',sans-serif;letter-spacing:2px;}
+.tf-step-sep{font-size:24px;font-weight:900;color:var(--gold);opacity:0.6;}
+.tf-stepper-confirm{width:100%;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#040301;font-family:Cairo,sans-serif;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(245,200,66,0.25);}
+.tf-stepper-confirm:hover{box-shadow:0 6px 22px rgba(245,200,66,0.40);}
 .tf-stepper-confirm:active{transform:scale(.98);}
 
 /* ══ TF GRID ══ */
@@ -1780,6 +1783,16 @@ option{background:#141929;}
         <option>EUR/JPY OTC</option><option>GBP/JPY OTC</option><option>AUD/NZD OTC</option>
         <option>USD/CHF OTC</option><option>CAD/JPY OTC</option><option>CHF/JPY OTC</option>
         <option>EUR/CHF OTC</option><option>AUD/CAD OTC</option><option>NZD/JPY OTC</option>
+        <option>AUD/JPY OTC</option><option>NZD/USD OTC</option><option>GBP/CHF OTC</option>
+        <option>EUR/AUD OTC</option><option>EUR/CAD OTC</option><option>GBP/CAD OTC</option>
+        <option>EUR/NZD OTC</option><option>GBP/NZD OTC</option><option>AUD/CHF OTC</option>
+        <option>NZD/CHF OTC</option><option>CAD/CHF OTC</option><option>USD/RUB OTC</option>
+        <option>USD/BRL OTC</option><option>USD/INR OTC</option><option>USD/MXN OTC</option>
+        <option>USD/ZAR OTC</option><option>USD/TRY OTC</option><option>USD/SGD OTC</option>
+        <option>USD/NOK OTC</option><option>USD/SEK OTC</option><option>USD/DKK OTC</option>
+        <option>APPLE OTC</option><option>TESLA OTC</option><option>AMAZON OTC</option>
+        <option>GOOGLE OTC</option><option>META OTC</option><option>NVIDIA OTC</option>
+        <option>MICROSOFT OTC</option>
       </optgroup>
       <optgroup label="REAL" id="og-real">
         <option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option>
@@ -2414,7 +2427,35 @@ var OTC_PAIRS_LIST=[
   {p:'CHF/JPY OTC',f:'🇨🇭🇯🇵',s:'OTC MARKET'},
   {p:'EUR/CHF OTC',f:'🇪🇺🇨🇭',s:'OTC MARKET'},
   {p:'AUD/CAD OTC',f:'🇦🇺🇨🇦',s:'OTC MARKET'},
-  {p:'NZD/JPY OTC',f:'🇳🇿🇯🇵',s:'OTC MARKET'}
+  {p:'NZD/JPY OTC',f:'🇳🇿🇯🇵',s:'OTC MARKET'},
+  {p:'AUD/JPY OTC',f:'🇦🇺🇯🇵',s:'OTC MARKET'},
+  {p:'NZD/USD OTC',f:'🇳🇿🇺🇸',s:'OTC MARKET'},
+  {p:'GBP/CHF OTC',f:'🇬🇧🇨🇭',s:'OTC MARKET'},
+  {p:'EUR/AUD OTC',f:'🇪🇺🇦🇺',s:'OTC MARKET'},
+  {p:'EUR/CAD OTC',f:'🇪🇺🇨🇦',s:'OTC MARKET'},
+  {p:'GBP/CAD OTC',f:'🇬🇧🇨🇦',s:'OTC MARKET'},
+  {p:'EUR/NZD OTC',f:'🇪🇺🇳🇿',s:'OTC MARKET'},
+  {p:'GBP/NZD OTC',f:'🇬🇧🇳🇿',s:'OTC MARKET'},
+  {p:'AUD/CHF OTC',f:'🇦🇺🇨🇭',s:'OTC MARKET'},
+  {p:'NZD/CHF OTC',f:'🇳🇿🇨🇭',s:'OTC MARKET'},
+  {p:'CAD/CHF OTC',f:'🇨🇦🇨🇭',s:'OTC MARKET'},
+  {p:'USD/RUB OTC',f:'🇺🇸🇷🇺',s:'OTC MARKET'},
+  {p:'USD/BRL OTC',f:'🇺🇸🇧🇷',s:'OTC MARKET'},
+  {p:'USD/INR OTC',f:'🇺🇸🇮🇳',s:'OTC MARKET'},
+  {p:'USD/MXN OTC',f:'🇺🇸🇲🇽',s:'OTC MARKET'},
+  {p:'USD/ZAR OTC',f:'🇺🇸🇿🇦',s:'OTC MARKET'},
+  {p:'USD/TRY OTC',f:'🇺🇸🇹🇷',s:'OTC MARKET'},
+  {p:'USD/SGD OTC',f:'🇺🇸🇸🇬',s:'OTC MARKET'},
+  {p:'USD/NOK OTC',f:'🇺🇸🇳🇴',s:'OTC MARKET'},
+  {p:'USD/SEK OTC',f:'🇺🇸🇸🇪',s:'OTC MARKET'},
+  {p:'USD/DKK OTC',f:'🇺🇸🇩🇰',s:'OTC MARKET'},
+  {p:'APPLE OTC',f:'🍎',s:'STOCKS OTC'},
+  {p:'TESLA OTC',f:'⚡',s:'STOCKS OTC'},
+  {p:'AMAZON OTC',f:'📦',s:'STOCKS OTC'},
+  {p:'GOOGLE OTC',f:'🔵',s:'STOCKS OTC'},
+  {p:'META OTC',f:'🌐',s:'STOCKS OTC'},
+  {p:'NVIDIA OTC',f:'🟢',s:'STOCKS OTC'},
+  {p:'MICROSOFT OTC',f:'🪟',s:'STOCKS OTC'}
 ];
 var REAL_PAIRS_LIST=[
   {p:'EUR/USD',f:'🇪🇺🇺🇸',s:'REAL MARKET'},
@@ -2464,6 +2505,10 @@ function openPairModal(){
   pushModalState('pairModal');
   setTimeout(function(){document.getElementById('pmSearchInput').focus();},300);
 }
+// click outside to close pair modal
+document.getElementById('pairModal').addEventListener('click',function(e){
+  if(e.target===this)closePairModal();
+});
 
 function closePairModal(){
   closeTopModal('pairModal');
@@ -2474,6 +2519,10 @@ function openTfModal(){
   document.getElementById('tfModal').style.display='flex';
   pushModalState('tfModal');
 }
+// click outside to close TF modal
+document.getElementById('tfModal').addEventListener('click',function(e){
+  if(e.target===this)closeTfModal();
+});
 
 function closeTfModal(){
   closeTopModal('tfModal');
@@ -2585,9 +2634,9 @@ var tfStepper={h:0,m:1,s:0};
 function tfStep(unit,dir){
   var max=unit==='h'?23:59;
   tfStepper[unit]=Math.max(0,Math.min(max,tfStepper[unit]+dir));
-  // إجمالي الثواني يجب ألا يكون صفر
+  // الحد الأدنى 3 ثواني
   var totalSec=tfStepper.h*3600+tfStepper.m*60+tfStepper.s;
-  if(totalSec<1){tfStepper.s=1;}
+  if(totalSec<3){tfStepper.h=0;tfStepper.m=0;tfStepper.s=3;}
   renderStepper();
 }
 
@@ -2619,7 +2668,7 @@ function registerCustomTf(key,totalSec){
 
 function confirmCustomTf(){
   var totalSec=tfStepper.h*3600+tfStepper.m*60+tfStepper.s;
-  if(totalSec<1)return;
+  if(totalSec<3){tfStepper.h=0;tfStepper.m=0;tfStepper.s=3;renderStepper();totalSec=3;}
   var isOTC=activePair&&activePair.includes('OTC');
   if(!isOTC&&totalSec<60){
     // الأزواج الحقيقية تبدأ من دقيقة واحدة كحد أدنى
@@ -2675,11 +2724,11 @@ var TD_KEYS=['bcce6a55c375490ab5b0fcc59daeea52','99122a1f49864312a861b74122ebea4
 var POLYGON_KEYS=['FX7wL38M6Or6pKcubGqvNeG5aCwyzd41','Wu1I0o7X0ujH78UnOYomjCLK9wqYxOPH','zqAzepeEl6y1pi9GOjSIQpY4mPAx0bWC','cEJcmG_0ofV6qyJu4u7sSMVz55wiDmTR'];
 var FH_KEYS=['d741e19r01qno4q02r6gd741e19r01qno4q02r70','d741ed1r01qno4q02sf0d741ed1r01qno4q02sfg','d741ej9r01qno4q02t8gd741ej9r01qno4q02t90','d741ep1r01qno4q02u00d741ep1r01qno4q02u0g'];
 var AV_KEYS=['GSREUCU5UKPTX9DJ','VCR0JQ8VT0AV3R5B','G4L0D32U4U52C48I','H8XZSMTUZ2LPOJYT'];
-var OTC_PAIRS=['EUR/USD OTC','GBP/USD OTC','USD/JPY OTC','AUD/USD OTC','USD/CAD OTC','EUR/GBP OTC','EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/CHF OTC','CAD/JPY OTC','CHF/JPY OTC','EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC'];
-var PAIR_SYMBOL={'EUR/USD OTC':'EUR/USD','GBP/USD OTC':'GBP/USD','USD/JPY OTC':'USD/JPY','AUD/USD OTC':'AUD/USD','USD/CAD OTC':'USD/CAD','EUR/GBP OTC':'EUR/GBP','EUR/JPY OTC':'EUR/JPY','GBP/JPY OTC':'GBP/JPY','AUD/NZD OTC':'AUD/NZD','USD/RUB OTC':'USD/RUB','CAD/JPY OTC':'CAD/JPY','CHF/JPY OTC':'CHF/JPY','EUR/CHF OTC':'EUR/CHF','AUD/CAD OTC':'AUD/CAD','NZD/JPY OTC':'NZD/JPY','AUD/JPY OTC':'AUD/JPY','NZD/USD OTC':'NZD/USD','USD/CHF OTC':'USD/CHF','GBP/CHF OTC':'GBP/CHF','EUR/AUD OTC':'EUR/AUD','EUR/USD':'EUR/USD','GBP/USD':'GBP/USD','USD/JPY':'USD/JPY','USD/CHF':'USD/CHF','AUD/USD':'AUD/USD','USD/CAD':'USD/CAD','NZD/USD':'NZD/USD','XAU/USD':'XAU/USD','XAG/USD':'XAG/USD','WTI/USD':'WTI/USD','BRT/USD':'BRT/USD','BTC/USD':'BTC/USD','ETH/USD':'ETH/USD','LTC/USD':'LTC/USD','XRP/USD':'XRP/USD','SOL/USD':'SOL/USD','BNB/USD':'BNB/USD','ADA/USD':'ADA/USD','DOGE/USD':'DOGE/USD','GBP/JPY':'GBP/JPY','EUR/JPY':'EUR/JPY','AUD/JPY':'AUD/JPY','USD/MXN':'USD/MXN','USD/SGD':'USD/SGD','EUR/CAD':'EUR/CAD','GBP/CAD':'GBP/CAD','EUR/NZD':'EUR/NZD','GBP/NZD':'GBP/NZD','USD/PLN':'USD/PLN','USD/TRY':'USD/TRY','USD/ZAR':'USD/ZAR','GBP/CHF':'GBP/CHF','EUR/CHF':'EUR/CHF','AUD/NZD':'AUD/NZD','CAD/JPY':'CAD/JPY','CHF/JPY':'CHF/JPY','AUD/CAD':'AUD/CAD','NZD/JPY':'NZD/JPY','EUR/AUD':'EUR/AUD','EUR/GBP':'EUR/GBP','APPLE OTC':'APPLE OTC','TESLA OTC':'TESLA OTC','AMAZON OTC':'AMAZON OTC','GOOGLE OTC':'GOOGLE OTC','META OTC':'META OTC','NVIDIA OTC':'NVIDIA OTC','MICROSOFT OTC':'MICROSOFT OTC'};
+var OTC_PAIRS=['EUR/USD OTC','GBP/USD OTC','USD/JPY OTC','AUD/USD OTC','USD/CAD OTC','EUR/GBP OTC','EUR/JPY OTC','GBP/JPY OTC','AUD/NZD OTC','USD/CHF OTC','CAD/JPY OTC','CHF/JPY OTC','EUR/CHF OTC','AUD/CAD OTC','NZD/JPY OTC','AUD/JPY OTC','NZD/USD OTC','GBP/CHF OTC','EUR/AUD OTC','EUR/CAD OTC','GBP/CAD OTC','EUR/NZD OTC','GBP/NZD OTC','AUD/CHF OTC','NZD/CHF OTC','CAD/CHF OTC','USD/RUB OTC','USD/BRL OTC','USD/INR OTC','USD/MXN OTC','USD/ZAR OTC','USD/TRY OTC','USD/SGD OTC','USD/NOK OTC','USD/SEK OTC','USD/DKK OTC','APPLE OTC','TESLA OTC','AMAZON OTC','GOOGLE OTC','META OTC','NVIDIA OTC','MICROSOFT OTC'];
+var PAIR_SYMBOL={'EUR/USD OTC':'EUR/USD','GBP/USD OTC':'GBP/USD','USD/JPY OTC':'USD/JPY','AUD/USD OTC':'AUD/USD','USD/CAD OTC':'USD/CAD','EUR/GBP OTC':'EUR/GBP','EUR/JPY OTC':'EUR/JPY','GBP/JPY OTC':'GBP/JPY','AUD/NZD OTC':'AUD/NZD','USD/RUB OTC':'USD/RUB','CAD/JPY OTC':'CAD/JPY','CHF/JPY OTC':'CHF/JPY','EUR/CHF OTC':'EUR/CHF','AUD/CAD OTC':'AUD/CAD','NZD/JPY OTC':'NZD/JPY','AUD/JPY OTC':'AUD/JPY','NZD/USD OTC':'NZD/USD','USD/CHF OTC':'USD/CHF','GBP/CHF OTC':'GBP/CHF','EUR/AUD OTC':'EUR/AUD','EUR/USD':'EUR/USD','GBP/USD':'GBP/USD','USD/JPY':'USD/JPY','USD/CHF':'USD/CHF','AUD/USD':'AUD/USD','USD/CAD':'USD/CAD','NZD/USD':'NZD/USD','XAU/USD':'XAU/USD','XAG/USD':'XAG/USD','WTI/USD':'WTI/USD','BRT/USD':'BRT/USD','BTC/USD':'BTC/USD','ETH/USD':'ETH/USD','LTC/USD':'LTC/USD','XRP/USD':'XRP/USD','SOL/USD':'SOL/USD','BNB/USD':'BNB/USD','ADA/USD':'ADA/USD','DOGE/USD':'DOGE/USD','GBP/JPY':'GBP/JPY','EUR/JPY':'EUR/JPY','AUD/JPY':'AUD/JPY','USD/MXN':'USD/MXN','USD/SGD':'USD/SGD','EUR/CAD':'EUR/CAD','GBP/CAD':'GBP/CAD','EUR/NZD':'EUR/NZD','GBP/NZD':'GBP/NZD','USD/PLN':'USD/PLN','USD/TRY':'USD/TRY','USD/ZAR':'USD/ZAR','GBP/CHF':'GBP/CHF','EUR/CHF':'EUR/CHF','AUD/NZD':'AUD/NZD','CAD/JPY':'CAD/JPY','CHF/JPY':'CHF/JPY','AUD/CAD':'AUD/CAD','NZD/JPY':'NZD/JPY','EUR/AUD':'EUR/AUD','EUR/GBP':'EUR/GBP','APPLE OTC':'APPLE OTC','TESLA OTC':'TESLA OTC','AMAZON OTC':'AMAZON OTC','GOOGLE OTC':'GOOGLE OTC','META OTC':'META OTC','NVIDIA OTC':'NVIDIA OTC','MICROSOFT OTC':'MICROSOFT OTC','AUD/JPY OTC':'AUD/JPY','NZD/USD OTC':'NZD/USD','GBP/CHF OTC':'GBP/CHF','EUR/AUD OTC':'EUR/AUD','EUR/CAD OTC':'EUR/CAD','GBP/CAD OTC':'GBP/CAD','EUR/NZD OTC':'EUR/NZD','GBP/NZD OTC':'GBP/NZD','AUD/CHF OTC':'AUD/CHF','NZD/CHF OTC':'NZD/CHF','CAD/CHF OTC':'CAD/CHF','USD/BRL OTC':'USD/BRL','USD/INR OTC':'USD/INR','USD/MXN OTC':'USD/MXN','USD/ZAR OTC':'USD/ZAR','USD/TRY OTC':'USD/TRY','USD/SGD OTC':'USD/SGD','USD/NOK OTC':'USD/NOK','USD/SEK OTC':'USD/SEK','USD/DKK OTC':'USD/DKK'};
 var PAIR_PROFILE={'EUR/USD':{vol:0.35,trend:0.7,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/USD':{vol:0.65,trend:0.6,type:'volatile',minADX:18,rsiOS:25,rsiOB:75,consensusMin:0.60},'USD/JPY':{vol:0.40,trend:0.8,type:'trend',minADX:16,rsiOS:30,rsiOB:70,consensusMin:0.58},'USD/CHF':{vol:0.30,trend:0.7,type:'trend',minADX:14,rsiOS:30,rsiOB:70,consensusMin:0.57},'AUD/USD':{vol:0.45,trend:0.55,type:'range',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/CAD':{vol:0.40,trend:0.6,type:'trend',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.58},'NZD/USD':{vol:0.45,trend:0.5,type:'range',minADX:14,rsiOS:28,rsiOB:72,consensusMin:0.57},'EUR/GBP':{vol:0.25,trend:0.5,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'EUR/JPY':{vol:0.55,trend:0.65,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/JPY':{vol:0.75,trend:0.55,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.62},'AUD/NZD':{vol:0.20,trend:0.45,type:'range',minADX:12,rsiOS:32,rsiOB:68,consensusMin:0.56},'USD/RUB':{vol:0.80,trend:0.5,type:'volatile',minADX:22,rsiOS:25,rsiOB:75,consensusMin:0.63},'CAD/JPY':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'CHF/JPY':{vol:0.50,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'EUR/CHF':{vol:0.20,trend:0.4,type:'range',minADX:12,rsiOS:32,rsiOB:68,consensusMin:0.56},'AUD/CAD':{vol:0.30,trend:0.5,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'NZD/JPY':{vol:0.50,trend:0.55,type:'range',minADX:14,rsiOS:28,rsiOB:72,consensusMin:0.58},'AUD/JPY':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/MXN':{vol:0.70,trend:0.6,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'USD/SGD':{vol:0.25,trend:0.55,type:'range',minADX:13,rsiOS:30,rsiOB:70,consensusMin:0.57},'XAU/USD':{vol:0.70,trend:0.65,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'BTC/USD':{vol:1.0,trend:0.5,type:'volatile',minADX:25,rsiOS:20,rsiOB:80,consensusMin:0.65},'ETH/USD':{vol:0.90,trend:0.5,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63}};
 var PAIR_PROFILE_EXTRA={'GBP/CHF':{vol:0.55,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.59},'EUR/CAD':{vol:0.45,trend:0.6,type:'trend',minADX:15,rsiOS:29,rsiOB:71,consensusMin:0.58},'GBP/CAD':{vol:0.65,trend:0.55,type:'volatile',minADX:18,rsiOS:26,rsiOB:74,consensusMin:0.60},'EUR/NZD':{vol:0.50,trend:0.55,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'GBP/NZD':{vol:0.70,trend:0.50,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.62},'EUR/AUD':{vol:0.50,trend:0.55,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.58},'USD/PLN':{vol:0.65,trend:0.55,type:'volatile',minADX:18,rsiOS:26,rsiOB:74,consensusMin:0.60},'USD/TRY':{vol:0.90,trend:0.70,type:'volatile',minADX:25,rsiOS:22,rsiOB:78,consensusMin:0.65},'USD/ZAR':{vol:0.85,trend:0.60,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.63},'XAG/USD':{vol:0.75,trend:0.60,type:'volatile',minADX:20,rsiOS:25,rsiOB:75,consensusMin:0.61},'WTI/USD':{vol:0.80,trend:0.65,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.62},'BRT/USD':{vol:0.78,trend:0.65,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.62},'LTC/USD':{vol:0.88,trend:0.50,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63},'XRP/USD':{vol:0.92,trend:0.50,type:'volatile',minADX:24,rsiOS:20,rsiOB:80,consensusMin:0.65},'SOL/USD':{vol:0.95,trend:0.50,type:'volatile',minADX:25,rsiOS:20,rsiOB:80,consensusMin:0.65},'BNB/USD':{vol:0.88,trend:0.50,type:'volatile',minADX:22,rsiOS:22,rsiOB:78,consensusMin:0.63},'ADA/USD':{vol:0.90,trend:0.50,type:'volatile',minADX:24,rsiOS:20,rsiOB:80,consensusMin:0.65},'DOGE/USD':{vol:1.0,trend:0.45,type:'volatile',minADX:26,rsiOS:18,rsiOB:82,consensusMin:0.67},'APPLE OTC':{vol:0.50,trend:0.60,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60},'TESLA OTC':{vol:0.85,trend:0.55,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.65},'AMAZON OTC':{vol:0.55,trend:0.60,type:'trend',minADX:16,rsiOS:27,rsiOB:73,consensusMin:0.60},'GOOGLE OTC':{vol:0.50,trend:0.62,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60},'META OTC':{vol:0.60,trend:0.58,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.61},'NVIDIA OTC':{vol:0.90,trend:0.60,type:'volatile',minADX:24,rsiOS:22,rsiOB:78,consensusMin:0.65},'MICROSOFT OTC':{vol:0.45,trend:0.65,type:'trend',minADX:15,rsiOS:28,rsiOB:72,consensusMin:0.59}};
-var OTC_PROFILE={'EUR/USD OTC':{vol:0.40,trend:0.65,type:'mean_revert',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/USD OTC':{vol:0.70,trend:0.55,type:'mean_revert',minADX:20,rsiOS:24,rsiOB:76,consensusMin:0.70},'USD/JPY OTC':{vol:0.45,trend:0.70,type:'trend',minADX:18,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/USD OTC':{vol:0.50,trend:0.50,type:'mean_revert',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/CAD OTC':{vol:0.45,trend:0.55,type:'trend',minADX:17,rsiOS:29,rsiOB:71,consensusMin:0.67},'EUR/GBP OTC':{vol:0.28,trend:0.45,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'EUR/JPY OTC':{vol:0.60,trend:0.60,type:'trend',minADX:19,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/JPY OTC':{vol:0.80,trend:0.50,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.72},'AUD/NZD OTC':{vol:0.25,trend:0.42,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/RUB OTC':{vol:0.85,trend:0.45,type:'volatile',minADX:24,rsiOS:24,rsiOB:76,consensusMin:0.73},'CAD/JPY OTC':{vol:0.58,trend:0.55,type:'trend',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'CHF/JPY OTC':{vol:0.53,trend:0.55,type:'trend',minADX:17,rsiOS:28,rsiOB:72,consensusMin:0.68},'EUR/CHF OTC':{vol:0.22,trend:0.38,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/CHF OTC':{vol:0.38,trend:0.55,type:'trend',minADX:16,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/CAD OTC':{vol:0.33,trend:0.48,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'NZD/JPY OTC':{vol:0.52,trend:0.52,type:'mean_revert',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.68}};
+var OTC_PROFILE={'EUR/USD OTC':{vol:0.40,trend:0.65,type:'mean_revert',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/USD OTC':{vol:0.70,trend:0.55,type:'mean_revert',minADX:20,rsiOS:24,rsiOB:76,consensusMin:0.70},'USD/JPY OTC':{vol:0.45,trend:0.70,type:'trend',minADX:18,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/USD OTC':{vol:0.50,trend:0.50,type:'mean_revert',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/CAD OTC':{vol:0.45,trend:0.55,type:'trend',minADX:17,rsiOS:29,rsiOB:71,consensusMin:0.67},'EUR/GBP OTC':{vol:0.28,trend:0.45,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'EUR/JPY OTC':{vol:0.60,trend:0.60,type:'trend',minADX:19,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/JPY OTC':{vol:0.80,trend:0.50,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.72},'AUD/NZD OTC':{vol:0.25,trend:0.42,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/RUB OTC':{vol:0.85,trend:0.45,type:'volatile',minADX:24,rsiOS:24,rsiOB:76,consensusMin:0.73},'CAD/JPY OTC':{vol:0.58,trend:0.55,type:'trend',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'CHF/JPY OTC':{vol:0.53,trend:0.55,type:'trend',minADX:17,rsiOS:28,rsiOB:72,consensusMin:0.68},'EUR/CHF OTC':{vol:0.22,trend:0.38,type:'mean_revert',minADX:14,rsiOS:31,rsiOB:69,consensusMin:0.67},'USD/CHF OTC':{vol:0.38,trend:0.55,type:'trend',minADX:16,rsiOS:29,rsiOB:71,consensusMin:0.67},'AUD/CAD OTC':{vol:0.33,trend:0.48,type:'mean_revert',minADX:15,rsiOS:30,rsiOB:70,consensusMin:0.67},'NZD/JPY OTC':{vol:0.52,trend:0.52,type:'mean_revert',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.68},'AUD/JPY OTC':{vol:0.58,trend:0.58,type:'trend',minADX:18,rsiOS:27,rsiOB:73,consensusMin:0.68},'NZD/USD OTC':{vol:0.42,trend:0.50,type:'mean_revert',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.67},'GBP/CHF OTC':{vol:0.60,trend:0.58,type:'trend',minADX:19,rsiOS:26,rsiOB:74,consensusMin:0.69},'EUR/AUD OTC':{vol:0.52,trend:0.55,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'EUR/CAD OTC':{vol:0.48,trend:0.58,type:'trend',minADX:17,rsiOS:28,rsiOB:72,consensusMin:0.68},'GBP/CAD OTC':{vol:0.68,trend:0.52,type:'volatile',minADX:20,rsiOS:24,rsiOB:76,consensusMin:0.70},'EUR/NZD OTC':{vol:0.52,trend:0.55,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'GBP/NZD OTC':{vol:0.72,trend:0.48,type:'volatile',minADX:22,rsiOS:23,rsiOB:77,consensusMin:0.71},'AUD/CHF OTC':{vol:0.38,trend:0.50,type:'mean_revert',minADX:15,rsiOS:29,rsiOB:71,consensusMin:0.67},'NZD/CHF OTC':{vol:0.35,trend:0.48,type:'mean_revert',minADX:14,rsiOS:30,rsiOB:70,consensusMin:0.67},'CAD/CHF OTC':{vol:0.30,trend:0.50,type:'mean_revert',minADX:14,rsiOS:30,rsiOB:70,consensusMin:0.67},'USD/BRL OTC':{vol:0.78,trend:0.60,type:'volatile',minADX:22,rsiOS:24,rsiOB:76,consensusMin:0.72},'USD/INR OTC':{vol:0.40,trend:0.70,type:'trend',minADX:16,rsiOS:29,rsiOB:71,consensusMin:0.67},'USD/MXN OTC':{vol:0.72,trend:0.58,type:'volatile',minADX:21,rsiOS:24,rsiOB:76,consensusMin:0.71},'USD/ZAR OTC':{vol:0.88,trend:0.58,type:'volatile',minADX:24,rsiOS:23,rsiOB:77,consensusMin:0.73},'USD/TRY OTC':{vol:0.92,trend:0.68,type:'volatile',minADX:26,rsiOS:22,rsiOB:78,consensusMin:0.74},'USD/SGD OTC':{vol:0.28,trend:0.55,type:'mean_revert',minADX:14,rsiOS:30,rsiOB:70,consensusMin:0.67},'USD/NOK OTC':{vol:0.55,trend:0.55,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/SEK OTC':{vol:0.52,trend:0.55,type:'trend',minADX:17,rsiOS:27,rsiOB:73,consensusMin:0.68},'USD/DKK OTC':{vol:0.32,trend:0.60,type:'trend',minADX:15,rsiOS:29,rsiOB:71,consensusMin:0.67}};
 function getPairProfile(pair){if(OTC_PROFILE[pair])return OTC_PROFILE[pair];if(PAIR_PROFILE_EXTRA[pair])return PAIR_PROFILE_EXTRA[pair];var sym=PAIR_SYMBOL[pair]||'EUR/USD';return PAIR_PROFILE[sym]||PAIR_PROFILE_EXTRA[sym]||{vol:0.5,trend:0.6,type:'trend',minADX:16,rsiOS:28,rsiOB:72,consensusMin:0.60};}
 var TF_CLASS={'3s':'ultra','5s':'ultra','10s':'ultra','15s':'short','30s':'short','1':'mid','2':'mid','3':'mid','5':'mid','10':'long','15':'long','30':'long','60':'long','120':'long','240':'long'};
 var IND_CFG={'3s':{rsi:5,bb_p:8,bb_m:1.8,stoch_k:5,stoch_d:2,ema_f:2,ema_s:5,ema_f2:3,ema_s2:8,cci:8,wr:5,adx:5,mfi:5,roc:3,atr:5,hull:5,sqz:8,sr:10},'5s':{rsi:6,bb_p:10,bb_m:2.0,stoch_k:5,stoch_d:2,ema_f:3,ema_s:8,ema_f2:5,ema_s2:13,cci:10,wr:6,adx:7,mfi:7,roc:5,atr:6,hull:6,sqz:10,sr:12},'10s':{rsi:7,bb_p:12,bb_m:2.0,stoch_k:7,stoch_d:3,ema_f:3,ema_s:8,ema_f2:5,ema_s2:13,cci:12,wr:7,adx:9,mfi:9,roc:6,atr:7,hull:7,sqz:12,sr:15},'15s':{rsi:8,bb_p:14,bb_m:2.0,stoch_k:9,stoch_d:3,ema_f:5,ema_s:13,ema_f2:7,ema_s2:14,cci:14,wr:9,adx:9,mfi:9,roc:7,atr:9,hull:8,sqz:14,sr:18},'30s':{rsi:9,bb_p:14,bb_m:2.1,stoch_k:9,stoch_d:3,ema_f:5,ema_s:13,ema_f2:8,ema_s2:21,cci:14,wr:9,adx:11,mfi:11,roc:8,atr:9,hull:9,sqz:14,sr:20},'1':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:10,atr:14,hull:14,sqz:20,sr:30},'2':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:10,atr:14,hull:14,sqz:20,sr:30},'3':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:12,atr:14,hull:14,sqz:20,sr:30},'5':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:9,ema_s:21,ema_f2:12,ema_s2:26,cci:20,wr:14,adx:14,mfi:14,roc:12,atr:14,hull:14,sqz:20,sr:30},'10':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:40},'15':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:40},'30':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:50},'60':{rsi:14,bb_p:20,bb_m:2.0,stoch_k:14,stoch_d:3,ema_f:12,ema_s:26,ema_f2:9,ema_s2:21,cci:20,wr:14,adx:14,mfi:14,roc:14,atr:14,hull:16,sqz:20,sr:50}};
@@ -2688,7 +2737,7 @@ var _mem={};
 var safeStorage={set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}_mem[k]=v;},get:function(k){try{var v=localStorage.getItem(k);if(v!==null)return v;}catch(e){}return _mem[k]||null;},remove:function(k){try{localStorage.removeItem(k);}catch(e){}delete _mem[k];}};
 var apiCache={};var CACHE_TTL={'3s':15000,'5s':20000,'10s':25000,'15s':30000,'30s':40000,'1':50000,'2':60000,'3':90000,'5':120000,'10':180000,'15':240000,'30':480000,'60':900000};
 var tdKI=0,pgKI=0,fhKI=0,avKI=0,apiMode='loading';
-var P={'EUR/USD OTC':1.08432,'GBP/USD OTC':1.27134,'USD/JPY OTC':149.842,'AUD/USD OTC':0.64821,'USD/CAD OTC':1.36541,'EUR/GBP OTC':0.85521,'EUR/JPY OTC':163.42,'GBP/JPY OTC':191.85,'AUD/NZD OTC':1.0832,'USD/RUB OTC':92.5,'CAD/JPY OTC':110.42,'CHF/JPY OTC':167.32,'EUR/CHF OTC':0.9621,'AUD/CAD OTC':0.9015,'NZD/JPY OTC':91.32,'EUR/USD':1.08432,'GBP/USD':1.27134,'USD/JPY':149.842,'USD/CHF':0.91234,'AUD/USD':0.64821,'USD/CAD':1.36541,'NZD/USD':0.59821,'XAU/USD':2034.5,'BTC/USD':67432.5,'ETH/USD':3241.8,'GBP/JPY':191.85,'EUR/JPY':163.42,'AUD/JPY':98.45,'USD/MXN':17.12,'USD/SGD':1.3421};
+var P={'EUR/USD OTC':1.08432,'GBP/USD OTC':1.27134,'USD/JPY OTC':149.842,'AUD/USD OTC':0.64821,'USD/CAD OTC':1.36541,'EUR/GBP OTC':0.85521,'EUR/JPY OTC':163.42,'GBP/JPY OTC':191.85,'AUD/NZD OTC':1.0832,'USD/RUB OTC':92.5,'CAD/JPY OTC':110.42,'CHF/JPY OTC':167.32,'EUR/CHF OTC':0.9621,'AUD/CAD OTC':0.9015,'NZD/JPY OTC':91.32,'EUR/USD':1.08432,'GBP/USD':1.27134,'USD/JPY':149.842,'USD/CHF':0.91234,'AUD/USD':0.64821,'USD/CAD':1.36541,'NZD/USD':0.59821,'XAU/USD':2034.5,'BTC/USD':67432.5,'ETH/USD':3241.8,'GBP/JPY':191.85,'EUR/JPY':163.42,'AUD/JPY':98.45,'USD/MXN':17.12,'USD/SGD':1.3421,'AUD/JPY OTC':98.45,'NZD/USD OTC':0.5982,'GBP/CHF OTC':1.1321,'EUR/AUD OTC':1.6542,'EUR/CAD OTC':1.4821,'GBP/CAD OTC':1.7312,'EUR/NZD OTC':1.8032,'GBP/NZD OTC':2.1245,'AUD/CHF OTC':0.5742,'NZD/CHF OTC':0.5321,'CAD/CHF OTC':0.6712,'USD/BRL OTC':4.9821,'USD/INR OTC':83.421,'USD/MXN OTC':17.121,'USD/ZAR OTC':18.921,'USD/TRY OTC':32.421,'USD/SGD OTC':1.3421,'USD/NOK OTC':10.721,'USD/SEK OTC':10.521,'USD/DKK OTC':6.8921};
 
 /* ══ DATA FETCH ══ */
 function fetchWithTimeout(url,ms){return new Promise(function(res,rej){var t=setTimeout(function(){rej(new Error('timeout'));},ms);fetch(url).then(function(r){clearTimeout(t);res(r);}).catch(function(e){clearTimeout(t);rej(e);});});}
