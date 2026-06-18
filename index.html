@@ -18,6 +18,22 @@
 .apc-cat{font-size:9px;color:var(--text3);font-weight:500;margin-top:1px;letter-spacing:.6px;}
 .apc-arrow{font-size:14px;color:var(--gold);opacity:.7;}
 
+/* ══ ACTIVE TIMEFRAME CARD (compact, mirrors active-pair-card) ══ */
+.active-tf-card{display:flex;align-items:center;gap:9px;background:var(--bg3);border:1.5px solid var(--gold-border2);border-radius:12px;padding:9px 12px;cursor:pointer;transition:all .2s;}
+.active-tf-card:active{background:var(--gold-dim);border-color:var(--gold);}
+.atf-icon{font-size:17px;line-height:1;flex-shrink:0;}
+.atf-info{flex:1;}
+.atf-name{font-size:13px;font-weight:800;color:var(--text);letter-spacing:.3px;}
+.atf-cat{font-size:9px;color:var(--text3);font-weight:500;margin-top:1px;letter-spacing:.6px;}
+.atf-arrow{font-size:14px;color:var(--gold);opacity:.7;}
+
+/* ══ TF MODAL (mirrors pm-sheet but simpler, no search) ══ */
+.tfm-sheet{background:var(--bg2);border-radius:24px 24px 0 0;position:absolute;bottom:0;left:0;right:0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;animation:pmSlideUp .28s ease;}
+.tfm-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px;flex-shrink:0;}
+.tfm-title{font-size:15px;font-weight:800;color:var(--text);}
+.tfm-close{background:var(--bg4);border:none;border-radius:50%;width:32px;height:32px;font-size:14px;cursor:pointer;color:var(--text2);}
+.tfm-body{padding:4px 16px 22px;overflow-y:auto;}
+
 /* ══ TF GRID ══ */
 .tf-grid{width:100%;}
 .tf-group{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
@@ -190,7 +206,6 @@ body.light-mode::before{
 }
 body.light-mode select{background:var(--bg3);color:var(--text);}
 body.light-mode option{background:#22262E;color:#E4EDF8;}
-body.light-mode .tab-btn{background:var(--bg2);}
 body.light-mode .sig-display,body.light-mode .sig-card-idle{background:rgba(28,32,40,0.85);}
 body.light-mode .consensus-card{background:linear-gradient(160deg,rgba(28,32,40,0.95),rgba(34,38,46,0.90));}
 body.light-mode .disc-modal-box,body.light-mode #termsModal .tm-inner{background:linear-gradient(180deg,#1C2028,#22262E);}
@@ -1171,29 +1186,6 @@ option{background:#141929;}
 .tm-accept-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(245,200,66,0.40);}
 .tm-accept-btn:active{transform:translateY(0);}
 
-/* ══ TAB NAVIGATION ══ */
-.tab-nav{
-  display:flex;gap:8px;
-  padding:14px 0 4px;
-  margin-bottom:4px;
-}
-.tab-btn{
-  flex:1;padding:11px 8px;
-  border-radius:12px;border:1px solid var(--border);
-  background:var(--bg2);
-  color:var(--text2);
-  font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;
-  letter-spacing:.5px;cursor:pointer;
-  transition:all .25s;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-}
-.tab-btn.active{
-  background:linear-gradient(135deg,rgba(180,130,10,0.85),rgba(245,200,66,0.75));
-  color:#0D0A02;border-color:var(--gold);
-  box-shadow:0 2px 14px rgba(245,200,66,0.20);
-}
-.tab-btn:not(.active):hover{border-color:var(--gold-border);color:var(--gold);}
-.tab-icon{font-size:15px;}
 .tab-page{display:none;}
 .tab-page.active{display:block;}
 
@@ -1678,15 +1670,6 @@ option{background:#141929;}
     </div>
   </header>
 
-  <!-- TAB NAVIGATION -->
-  <div class="tab-nav">
-    <button class="tab-btn active" id="tab-signals" onclick="switchTab('signals')">
-      <span class="tab-icon">📊</span>
-      <span data-ar="إشارات الأزواج" data-en="Pair Signals">إشارات الأزواج</span>
-    </button>
-
-  </div>
-
   <!-- SIGNAL HISTORY MODAL -->
   <div id="historyModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(4,3,1,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;">
     <div style="width:100%;max-width:420px;max-height:78vh;display:flex;flex-direction:column;background:var(--bg3);border:1px solid var(--gold-border2);border-radius:18px;overflow:hidden;box-shadow:0 16px 60px rgba(0,0,0,.70);">
@@ -1796,41 +1779,19 @@ option{background:#141929;}
     </select>
   </div>
 
-  <!-- TIMEFRAME GRID BUTTONS -->
+  <!-- TIMEFRAME SELECTOR CARD — COMPACT (mirrors pair card) -->
   <div class="fi d2">
     <div class="label-row">
       <label class="flabel" data-ar="الإطار الزمني" data-en="Timeframe">الإطار الزمني</label>
       <span class="tf-mode-badge" id="tfModeBadge">OTC</span>
     </div>
-    <div class="tf-grid" id="tfGrid">
-      <!-- OTC timeframes (shown for OTC pairs) -->
-      <div class="tf-group" id="tfGroupOTC">
-        <button class="tf-btn" data-tf="3s" onclick="selectTf('3s')">S3</button>
-        <button class="tf-btn" data-tf="5s" onclick="selectTf('5s')">S5</button>
-        <button class="tf-btn" data-tf="15s" onclick="selectTf('15s')">S15</button>
-        <button class="tf-btn" data-tf="30s" onclick="selectTf('30s')">S30</button>
-        <button class="tf-btn" data-tf="1" onclick="selectTf('1')">M1</button>
-        <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
-        <button class="tf-btn active" data-tf="5" onclick="selectTf('5')">M5</button>
-        <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
-        <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
-        <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
-        <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
-        <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
+    <div class="active-tf-card" id="activeTfCard" onclick="openTfModal()">
+      <div class="atf-icon">⏱️</div>
+      <div class="atf-info">
+        <div class="atf-name" id="atfName">M5</div>
+        <div class="atf-cat" id="atfCat">OTC MARKET</div>
       </div>
-      <!-- Real timeframes (shown for real pairs, min 1min) -->
-      <div class="tf-group" id="tfGroupReal" style="display:none;">
-        <button class="tf-btn active" data-tf="1" onclick="selectTf('1')">M1</button>
-        <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
-        <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
-        <button class="tf-btn" data-tf="5" onclick="selectTf('5')">M5</button>
-        <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
-        <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
-        <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
-        <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
-        <button class="tf-btn" data-tf="120" onclick="selectTf('120')">H2</button>
-        <button class="tf-btn" data-tf="240" onclick="selectTf('240')">H4</button>
-      </div>
+      <div class="atf-arrow">▾</div>
     </div>
     <!-- hidden select for JS compatibility -->
     <select id="s-tf" onchange="onTfChange()" style="display:none;">
@@ -1842,6 +1803,48 @@ option{background:#141929;}
       <option value="30">30</option><option value="60">60</option>
       <option value="120">120</option><option value="240">240</option>
     </select>
+  </div>
+
+  <!-- TIMEFRAME MODAL (popup, same grid as before) -->
+  <div id="tfModal" style="display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,1,0.92);backdrop-filter:blur(10px);flex-direction:column;">
+    <div class="tfm-sheet">
+      <div class="tfm-header">
+        <div class="tfm-title" data-ar="اختر الإطار الزمني" data-en="Select Timeframe">اختر الإطار الزمني</div>
+        <button class="tfm-close" onclick="closeTfModal()">✕</button>
+      </div>
+      <div class="tfm-body">
+        <div class="tf-grid" id="tfGrid">
+          <!-- OTC timeframes (shown for OTC pairs) -->
+          <div class="tf-group" id="tfGroupOTC">
+            <button class="tf-btn" data-tf="3s" onclick="selectTf('3s')">S3</button>
+            <button class="tf-btn" data-tf="5s" onclick="selectTf('5s')">S5</button>
+            <button class="tf-btn" data-tf="15s" onclick="selectTf('15s')">S15</button>
+            <button class="tf-btn" data-tf="30s" onclick="selectTf('30s')">S30</button>
+            <button class="tf-btn" data-tf="1" onclick="selectTf('1')">M1</button>
+            <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
+            <button class="tf-btn active" data-tf="5" onclick="selectTf('5')">M5</button>
+            <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
+            <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
+            <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
+            <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
+            <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
+          </div>
+          <!-- Real timeframes (shown for real pairs, min 1min) -->
+          <div class="tf-group" id="tfGroupReal" style="display:none;">
+            <button class="tf-btn active" data-tf="1" onclick="selectTf('1')">M1</button>
+            <button class="tf-btn" data-tf="2" onclick="selectTf('2')">M2</button>
+            <button class="tf-btn" data-tf="3" onclick="selectTf('3')">M3</button>
+            <button class="tf-btn" data-tf="5" onclick="selectTf('5')">M5</button>
+            <button class="tf-btn" data-tf="10" onclick="selectTf('10')">M10</button>
+            <button class="tf-btn" data-tf="15" onclick="selectTf('15')">M15</button>
+            <button class="tf-btn" data-tf="30" onclick="selectTf('30')">M30</button>
+            <button class="tf-btn" data-tf="60" onclick="selectTf('60')">H1</button>
+            <button class="tf-btn" data-tf="120" onclick="selectTf('120')">H2</button>
+            <button class="tf-btn" data-tf="240" onclick="selectTf('240')">H4</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- STATUS BAR -->
@@ -2440,6 +2443,14 @@ function closePairModal(){
   pmSearchQ='';
 }
 
+function openTfModal(){
+  document.getElementById('tfModal').style.display='flex';
+}
+
+function closeTfModal(){
+  document.getElementById('tfModal').style.display='none';
+}
+
 function pmSwitchCat(cat){
   pmCurrentCat=cat;
   pmSearchQ='';
@@ -2499,12 +2510,27 @@ function pmSelectPair(pair){
 }
 
 /* ══ TF GRID SYSTEM ══ */
+var TF_LABELS={'3s':'S3','5s':'S5','15s':'S15','30s':'S30','1':'M1','2':'M2','3':'M3','5':'M5','10':'M10','15':'M15','30':'M30','60':'H1','120':'H2','240':'H4'};
+
+function updateActiveTfCard(){
+  var val=document.getElementById('s-tf').value;
+  var nameEl=document.getElementById('atfName');
+  if(nameEl)nameEl.textContent=TF_LABELS[val]||val;
+  var catEl=document.getElementById('atfCat');
+  if(catEl){
+    var isOTC=activePair&&activePair.includes('OTC');
+    catEl.textContent=isOTC?(lang==='ar'?'سوق OTC':'OTC MARKET'):(lang==='ar'?'سوق حقيقي':'REAL MARKET');
+  }
+}
+
 function selectTf(val){
   var sel=document.getElementById('s-tf');
   for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===val){sel.selectedIndex=i;break;}}
   document.querySelectorAll('.tf-btn').forEach(function(b){
     b.classList.toggle('active',b.dataset.tf===val);
   });
+  updateActiveTfCard();
+  closeTfModal();
   onTfChange();
 }
 
@@ -2522,6 +2548,7 @@ function updateTfGroupForPair(pair){
     var shortTfs=['3s','5s','10s','15s','30s'];
     if(shortTfs.indexOf(currentTf)>-1){selectTf('1');}
   }
+  updateActiveTfCard();
 }
 
 
@@ -2910,7 +2937,7 @@ function onTfChange(){if(lastResult)updateDots(lastResult);fetchAndInit();}
 function saveState(){try{var now=Date.now(),cl={};Object.keys(pairLocks).forEach(function(k){var l=pairLocks[k];if(l.tfStart+l.tfSec*1000>now)cl[k]=l;});safeStorage.set('aivex_v13',JSON.stringify({pairLocks:cl,savedAt:now}));}catch(e){}}
 function loadState(){try{var s=safeStorage.get('aivex_v13');return s?JSON.parse(s):null;}catch(e){return null;}}
 
-function setLang(l){lang=l;document.body.dir=l==='ar'?'rtl':'ltr';document.documentElement.lang=l;document.getElementById('l-ar').classList.toggle('active',l==='ar');document.getElementById('l-en').classList.toggle('active',l==='en');document.querySelectorAll('[data-ar][data-en]').forEach(function(e){if(e.id!=='blbl')e.textContent=e.dataset[l];});document.querySelectorAll('.label-badge span[data-ar][data-en]').forEach(function(e){e.textContent=e.dataset[l];});document.querySelectorAll('#s-tf option').forEach(function(o){o.textContent=o.dataset[l]||o.textContent;});document.getElementById('socialLabel').textContent=l==='ar'?'تابعنا على':'Follow us';setApiUI(apiMode);updateSessionUI();if(lastResult)updateIndPanel(lastResult);var cp=document.getElementById('s-pair').value;var lock=pairLocks[cp];if(lock&&lock.sig){renderSignalCircle(lock.sig,lastResult);}var wkT=document.getElementById('wkTitle'),wkS=document.getElementById('wkSub');if(wkT)wkT.textContent=l==='ar'?'الأسواق الحقيقية مغلقة':'Real Markets Closed';if(wkS)wkS.textContent=l==='ar'?'السبت والأحد — استخدم OTC':'Sat & Sun — Use OTC pairs';var rg=document.getElementById('og-real');if(rg&&isWeekend())rg.label=l==='ar'?'── REAL ── (مغلق 🔒)':'── REAL ── (CLOSED 🔒)';}
+function setLang(l){lang=l;document.body.dir=l==='ar'?'rtl':'ltr';document.documentElement.lang=l;document.getElementById('l-ar').classList.toggle('active',l==='ar');document.getElementById('l-en').classList.toggle('active',l==='en');document.querySelectorAll('[data-ar][data-en]').forEach(function(e){if(e.id!=='blbl')e.textContent=e.dataset[l];});document.querySelectorAll('.label-badge span[data-ar][data-en]').forEach(function(e){e.textContent=e.dataset[l];});document.querySelectorAll('#s-tf option').forEach(function(o){o.textContent=o.dataset[l]||o.textContent;});document.getElementById('socialLabel').textContent=l==='ar'?'تابعنا على':'Follow us';setApiUI(apiMode);updateSessionUI();if(lastResult)updateIndPanel(lastResult);var cp=document.getElementById('s-pair').value;var lock=pairLocks[cp];if(lock&&lock.sig){renderSignalCircle(lock.sig,lastResult);}var wkT=document.getElementById('wkTitle'),wkS=document.getElementById('wkSub');if(wkT)wkT.textContent=l==='ar'?'الأسواق الحقيقية مغلقة':'Real Markets Closed';if(wkS)wkS.textContent=l==='ar'?'السبت والأحد — استخدم OTC':'Sat & Sun — Use OTC pairs';var rg=document.getElementById('og-real');if(rg&&isWeekend())rg.label=l==='ar'?'── REAL ── (مغلق 🔒)':'── REAL ── (CLOSED 🔒)';updateActiveTfCard();}
 
 function filterTimeframes(pair){/* all timeframes available for all pairs */var tfSel=document.getElementById('s-tf'),opts=tfSel.querySelectorAll('option');opts.forEach(function(o){o.style.display='';o.disabled=false;});}
 
@@ -2994,8 +3021,8 @@ function startAutoRefresh(){if(apiRefreshTimer)clearInterval(apiRefreshTimer);ap
 function switchTab(tab){
   document.querySelectorAll('.tab-page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('tabpage-'+tab).classList.add('active');
-  document.getElementById('tab-'+tab).classList.add('active');
+  var pg=document.getElementById('tabpage-'+tab);if(pg)pg.classList.add('active');
+  var btn=document.getElementById('tab-'+tab);if(btn)btn.classList.add('active');
   /* Reset AI state whenever switching tabs */
   resetAiTab();
 }
